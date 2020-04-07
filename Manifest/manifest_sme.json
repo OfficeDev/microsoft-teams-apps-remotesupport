@@ -18,7 +18,7 @@
     "short": "Remote Support-Expert"
   },
   "description": {
-    "short": "Acknowledge and work with expert team on user requests.",
+    "short": "Expert team bot to handle user requests and set on call experts.",
     "full": "Manage support request and set up on call experts in team. Search Urgent, assigned and unassigned requests right from expert team."
   },
   "accentColor": "#64A2CC",
