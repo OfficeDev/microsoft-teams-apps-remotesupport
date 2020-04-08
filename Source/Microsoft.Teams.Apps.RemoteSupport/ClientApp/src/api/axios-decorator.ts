@@ -25,8 +25,7 @@ export class AxiosJWTDecorator {
 
             return await axios.post(url, data, config);
         } catch (error) {
-            this.handleError(error);
-            throw error;
+			return error.response;
         }                                                                                                                                                                                               
 	}
 
@@ -47,8 +46,7 @@ export class AxiosJWTDecorator {
 
 			return await axios.put(url, data, config);
 		} catch (error) {
-			this.handleError(error);
-			throw error;
+			return error.response;
 		}
 	}
 
@@ -69,27 +67,7 @@ export class AxiosJWTDecorator {
             }
             return await axios.get(url, config);
 		} catch (error) {
-			this.handleError(error);
-			throw error;
-		}
-	}
-
-	/**
-	* Handle error occurred during API call.
-	* @param  {Object} error Error response object
-	*/
-	private handleError(error: any): void {
-		if (error.hasOwnProperty("response")) {
-			const errorStatus = error.response.status;
-			if (errorStatus === 403) {
-				window.location.href = "/error/403";
-			} else if (errorStatus === 401) {
-				window.location.href = "/error/401";
-			} else {
-				window.location.href = "/error";
-			}
-		} else {
-			window.location.href = "/error";
+			return error.response;
 		}
 	}
 }

@@ -74,3 +74,12 @@
 .common-padding{
     padding: 1rem;
 }
+
+.team-link {
+    margin-left: -18rem;
+    margin-top: 0.3rem;
+}
+
+.team-textbox-width {
+    width: 30rem;
+}

@@ -88,7 +88,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Something went wrong saving your request. Try again in a few minutes..
+        ///   Looks up a localized string similar to Something went wrong while saving your request. Please try again in few minutes..
         /// </summary>
         public static string AzureStorageErrorText {
             get {
@@ -169,7 +169,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datetime.
+        ///   Looks up a localized string similar to Last updated on.
         /// </summary>
         public static string DatetimeTitleText {
             get {
@@ -232,15 +232,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello , I don&apos;t support  your command .Here is a new request button where you can raise an request to expert team..
-        /// </summary>
-        public static string EndUserCustomMessage {
-            get {
-                return ResourceManager.GetString("EndUserCustomMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The support team has received your request #{0}..
         /// </summary>
         public static string EndUserNotificationText {
@@ -268,7 +259,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * Expert List.
+        ///   Looks up a localized string similar to * Hit **Current on-call team** button to set up on call experts from this team..
         /// </summary>
         public static string ExperListBulletPoint {
             get {
@@ -277,7 +268,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type here....
+        ///   Looks up a localized string similar to Enter one or more names or emails.
         /// </summary>
         public static string ExpertListPlaceHolderText {
             get {
@@ -322,7 +313,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request No {0}- AttentionRequired.
+        ///   Looks up a localized string similar to Request no {0}- attention required.
         /// </summary>
         public static string GroupName {
             get {
@@ -376,7 +367,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hi Team, I need immediate support for request #{0}. Can you help me?.
+        ///   Looks up a localized string similar to Hi Team, I need immediate support for request created by {0}. Can you help?.
         /// </summary>
         public static string MessageContent {
             get {
@@ -475,6 +466,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The on-call experts list is modified..
+        /// </summary>
+        public static string OnCallListUpdateMessage {
+            get {
+                return ResourceManager.GetString("OnCallListUpdateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Here&apos;s the current on-call team. Click **Manage** to change which specialists are on the team..
         /// </summary>
         public static string OnCallSMEDetailCardText {
@@ -511,7 +511,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The support team changed the severity level on your request.
+        ///   Looks up a localized string similar to The support team changed the severity level on your request #{0}..
         /// </summary>
         public static string RequestActionTicketUserNotification {
             get {
@@ -538,7 +538,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For your reference, here&apos;s what i shared with the on-call team..
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string RequestStatusText {
+            get {
+                return ResourceManager.GetString("RequestStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For reference, here&apos;s what I shared with the on-call team..
         /// </summary>
         public static string RequestSubmittedContent {
             get {
@@ -601,7 +610,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Severity.
+        ///   Looks up a localized string similar to Change severity.
         /// </summary>
         public static string SeverityButtonText {
             get {
@@ -610,7 +619,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This request is now assigned to you.
+        ///   Looks up a localized string similar to This request is now assigned to {0}..
         /// </summary>
         public static string SmeAssignedStatus {
             get {
@@ -628,7 +637,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This request has been edited by the user..
+        ///   Looks up a localized string similar to This request is modified by {0}..
         /// </summary>
         public static string SmeEditNotificationText {
             get {
@@ -664,7 +673,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have raised a request with TicketId {0}.
+        ///   Looks up a localized string similar to RE : Support request {0}..
         /// </summary>
         public static string SmeUserChatMessage {
             get {
@@ -673,7 +682,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This request has been withdrawn by the user..
+        ///   Looks up a localized string similar to This request is withdrawn by {0}..
         /// </summary>
         public static string SmeWithdrawNotificationText {
             get {
@@ -691,11 +700,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to get started? Expert List!.
+        ///   Looks up a localized string similar to * To check requests assignements, click the small version of my icon near your message formatting options..
         /// </summary>
-        public static string TeamContentText {
+        public static string TeamRequestBulletPoint {
             get {
-                return ResourceManager.GetString("TeamContentText", resourceCulture);
+                return ResourceManager.GetString("TeamRequestBulletPoint", resourceCulture);
             }
         }
         
@@ -709,7 +718,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Category.
+        ///   Looks up a localized string similar to What is it about?.
         /// </summary>
         public static string TitleDisplayText {
             get {
@@ -750,15 +759,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string UnauthorizedAccess {
             get {
                 return ResourceManager.GetString("UnauthorizedAccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hello , I don&apos;t support any  bot command in team. You can try only Expert list command here..
-        /// </summary>
-        public static string UnRecognisedTeamInputMessage {
-            get {
-                return ResourceManager.GetString("UnRecognisedTeamInputMessage", resourceCulture);
             }
         }
         
@@ -817,7 +817,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello, I am Remote Assistant, a bot that allows you to manage on-call experts for the problems facing at work..
+        ///   Looks up a localized string similar to Hello, I can help you provide support to people who interact with me and need more assistance..
         /// </summary>
         public static string WelcomeTeamCardContent {
             get {

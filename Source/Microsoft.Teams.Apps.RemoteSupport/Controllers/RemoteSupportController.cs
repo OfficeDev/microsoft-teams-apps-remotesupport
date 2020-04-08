@@ -36,11 +36,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
         private readonly string appId;
 
         /// <summary>
-        /// SME Team Id in which BOT is installed..
-        /// </summary>
-        private readonly string teamId;
-
-        /// <summary>
         /// Sends logs to the Application Insights service.
         /// </summary>
         private readonly ILogger logger;
@@ -66,6 +61,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
         private readonly IOnCallSupportDetailStorageProvider onCallSupportDetailStorageProvider;
 
         /// <summary>
+        /// Provider to store card configuration details in Azure Table Storage.
+        /// </summary>
+        private readonly ICardConfigurationStorageProvider cardConfigurationStorageProvider;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RemoteSupportController"/> class.
         /// </summary>
         /// <param name="logger">Instance to send logs to the Application Insights service.</param>
@@ -74,22 +74,24 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
         /// <param name="options">A set of key/value application configuration properties.</param>
         /// <param name="onCallSupportDetailSearchService">Provider to search on call support details in Azure Table Storage.</param>
         /// <param name="onCallSupportDetailStorageProvider">Provider to store on call support details in Azure Table Storage.</param>
+        /// <param name="cardConfigurationStorageProvider">Provider to store card configuration details in Azure Table Storage.</param>
         public RemoteSupportController(
             ILogger<RemoteSupportController> logger,
             BotFrameworkAdapter botAdapter,
             MicrosoftAppCredentials microsoftAppCredentials,
             IOptions<RemoteSupportActivityHandlerOptions> options,
             IOnCallSupportDetailSearchService onCallSupportDetailSearchService,
-            IOnCallSupportDetailStorageProvider onCallSupportDetailStorageProvider)
+            IOnCallSupportDetailStorageProvider onCallSupportDetailStorageProvider,
+            ICardConfigurationStorageProvider cardConfigurationStorageProvider)
             : base()
         {
             this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.teamId = this.options.Value.TeamId;
             this.logger = logger;
             this.botAdapter = botAdapter;
             this.appId = microsoftAppCredentials != null ? microsoftAppCredentials.MicrosoftAppId : throw new ArgumentNullException(nameof(microsoftAppCredentials));
             this.onCallSupportDetailSearchService = onCallSupportDetailSearchService;
             this.onCallSupportDetailStorageProvider = onCallSupportDetailStorageProvider;
+            this.cardConfigurationStorageProvider = cardConfigurationStorageProvider;
         }
 
         /// <summary>
@@ -101,17 +103,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
         {
             try
             {
-                if (this.teamId == null)
-                {
-                    return this.BadRequest(new { message = "Team ID cannot be empty." });
-                }
+                var cardConfigurationEntity = await this.cardConfigurationStorageProvider?.GetConfigurationAsync();
+                string teamId = (cardConfigurationEntity != null) ? cardConfigurationEntity.TeamId : this.options.Value.TeamId;
 
                 var userClaims = this.GetUserClaims();
 
                 IEnumerable<TeamsChannelAccount> teamsChannelAccounts = new List<TeamsChannelAccount>();
                 var conversationReference = new ConversationReference
                 {
-                    ChannelId = this.teamId,
+                    ChannelId = teamId,
                     ServiceUrl = userClaims.ApplicationBasePath,
                 };
 
@@ -120,7 +120,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
                     conversationReference,
                     async (context, token) =>
                     {
-                        teamsChannelAccounts = await TeamsInfo.GetTeamMembersAsync(context, this.teamId, CancellationToken.None);
+                        teamsChannelAccounts = await TeamsInfo.GetTeamMembersAsync(context, teamId, CancellationToken.None);
                     },
                     default);
 
@@ -164,7 +164,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
             #pragma warning restore CA1031 // Do not catch general exception types
             {
                 this.logger.LogError(ex, "Error while getting on call experts list.");
-                return this.GetErrorResponse(StatusCodes.Status500InternalServerError, ex.Message);
+                throw;
             }
         }
 
@@ -204,7 +204,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
             #pragma warning restore CA1031 // Do not catch general exception types
             {
                 this.logger.LogError(ex, "Error while saving on call support details.");
-                return this.GetErrorResponse(StatusCodes.Status500InternalServerError, ex.Message);
+                throw;
             }
         }
     }

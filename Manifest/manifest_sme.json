@@ -15,11 +15,11 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Remote Support-Expert"
+    "short": "Remote Support - Expert"
   },
   "description": {
     "short": "Expert team bot to handle user requests and set on call experts.",
-    "full": "Manage support request and set up on call experts in team. Search Urgent, assigned and unassigned requests right from expert team."
+    "full": "Manage support request and set up on call experts in team. Search urgent, assigned and unassigned requests right from expert team."
   },
   "accentColor": "#64A2CC",
   "bots": [
@@ -36,7 +36,7 @@
           "commands": [
             {
               "title": "Expert list",
-              "description": "List of experts"
+              "description": "List of on call experts"
             }
           ]
         }
@@ -112,7 +112,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "token.botframework.com",
-    "*.azurewebsites.net"
+    "<<valid domains>>"
   ]
 }

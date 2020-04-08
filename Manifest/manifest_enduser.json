@@ -18,8 +18,8 @@
     "short": "Remote Support"
   },
   "description": {
-    "short": "Manage support request and collaborate with support team to help resolve",
-    "full": "Raise and manage support request and collaborate with support team. Search requests and escalate to on call experts via group chat for urgent requests."
+    "short": "Helps request support and connect with experts quickly",
+    "full": "Request remote support quickly. Search requests and escalate to on call experts via group chat for urgent requests."
   },
   "accentColor": "#64A2CC",
   "bots": [
@@ -94,7 +94,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "token.botframework.com",
-    "*.azurewebsites.net"
+    "<<valid domains>>"
   ]
 }

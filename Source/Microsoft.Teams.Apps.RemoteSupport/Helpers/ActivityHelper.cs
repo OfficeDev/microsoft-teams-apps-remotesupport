@@ -97,7 +97,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                 default:
                     logger.LogInformation("Unrecognized input in channel.");
-                    await turnContext.SendActivityAsync(MessageFactory.Text(localizer.GetString("UnRecognisedTeamInputMessage")));
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(WelcomeTeamCard.GetCard(appBaseUrl, localizer)));
                     break;
             }
         }
@@ -254,7 +254,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             {
                 case Constants.NewRequestAction:
                     logger.LogInformation("New request action called.");
-                    CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationsAsync();
+                    CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
                     IMessageActivity newTicketActivity = MessageFactory.Attachment(TicketCard.GetNewTicketCard(environment, cardTemplateJson, localizer));
                     await turnContext.SendActivityAsync(newTicketActivity);
                     break;
@@ -267,7 +267,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     {
                         // In case of ME when user clicks on closed or active requests the bot posts adaptive card of request details we don't have to consider this as invalid command.
                         logger.LogInformation("Unrecognized input in End User.");
-                        await turnContext.SendActivityAsync(MessageFactory.Attachment(UnrecognizedEndUserInputCard.GetCard(localizer)));
+                        await turnContext.SendActivityAsync(MessageFactory.Attachment(WelcomeCard.GetCard(appBaseUrl, localizer)));
                     }
 
                     break;
@@ -337,7 +337,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     {
                         // Update card with validation message.
                         var additionalProperties = message.Value?.ToString();
-                        CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationsAsync();
+                        CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
                         endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetNewTicketCard(environment: environment, cardConfiuration: cardTemplateJson, localizer: localizer, showValidationMessage: true, ticketDetail: newTicketDetail, ticketAdditionalDetails: additionalProperties));
                         await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
                     }
@@ -368,7 +368,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     }
 
                     logger.LogInformation("Withdrawn the ticket:" + ticketDetail.TicketId);
-                    IMessageActivity smeWithdrawNotification = MessageFactory.Text(localizer.GetString("SmeWithdrawNotificationText"));
+                    IMessageActivity smeWithdrawNotification = MessageFactory.Text(localizer.GetString("SmeWithdrawNotificationText", ticketDetail.RequesterName));
                     await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeWithdrawNotification, appBaseUrl, localizer, cancellationToken);
                     await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
                     break;
@@ -474,7 +474,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 }
 
                 logger.LogInformation("Send message with names mentioned in team channel.");
-                var replyActivity = MessageFactory.Text(localizer.GetString("OnCallExpertMentionText", mentionText.ToString()));
+                var replyActivity = string.IsNullOrEmpty(mentionText.ToString()) ? MessageFactory.Text(localizer.GetString("OnCallListUpdateMessage")) : MessageFactory.Text(localizer.GetString("OnCallExpertMentionText", mentionText.ToString()));
                 replyActivity.Entities = entities;
                 await turnContext.SendActivityAsync(replyActivity, cancellationToken);
                 return null;

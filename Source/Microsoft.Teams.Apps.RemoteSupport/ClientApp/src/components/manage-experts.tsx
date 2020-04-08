@@ -10,7 +10,7 @@ import { ReactPlugin, withAITracking } from "@microsoft/applicationinsights-reac
 import * as microsoftTeams from "@microsoft/teams-js";
 import { createBrowserHistory } from "history";
 import { Dropdown, Button, Loader, Flex, Text, List, Provider, themes } from "@fluentui/react";
-import { getResourceStrings, saveOnCallSupportDetails, getMembersInTeam, getOnCallExpertsInTeam } from "../api/remote-support-api";
+import { getResourceStrings, saveOnCallSupportDetails, getMembersInTeam, getOnCallExpertsInTeam, handleError } from "../api/remote-support-api";
 import { OnCallSupportDetail } from "../models/on-call-support-detail"
 import Constants from "../constants/constants";
 import "../styles/site.css";
@@ -155,7 +155,7 @@ class ManageExperts extends React.Component<{}, IState>
                 this.setState({ resourceStrings: resourceStringsResponse.data });
             }
             else {
-                this.appInsights.trackTrace({ message: `'getResourceStrings' - Request failed:${resourceStringsResponse.status}`, severityLevel: SeverityLevel.Error, properties: { User: this.userObjectId, Code: resourceStringsResponse.status } });
+                handleError(resourceStringsResponse, this.customAPIAuthenticationToken);
             }
         }
     }
@@ -173,7 +173,7 @@ class ManageExperts extends React.Component<{}, IState>
                 this.getOnCallExpertsInTeam();
             }
             else {
-                this.appInsights.trackTrace({ message: `'getMembersInTeam' - Request failed:${teamMemberResponse.status}`, severityLevel: SeverityLevel.Error, properties: { Code: teamMemberResponse.status } });
+                handleError(teamMemberResponse, this.customAPIAuthenticationToken);
             }
         }
         this.setState({ loading: false });
@@ -218,7 +218,7 @@ class ManageExperts extends React.Component<{}, IState>
                 this.setState({ teamMembers: this.state.allMembers });
             }
             else {
-                this.appInsights.trackTrace({ message: `'getOnCallExpertsInTeam' - Request failed:${onCallExpertsResponse.status}`, severityLevel: SeverityLevel.Error, properties: { Code: onCallExpertsResponse.status } });
+                handleError(onCallExpertsResponse, this.customAPIAuthenticationToken);
             }
         }
         this.setState({ loading: false });
@@ -282,16 +282,7 @@ class ManageExperts extends React.Component<{}, IState>
 
         this.appInsights.trackTrace({ message: `'submitExpertList' - Request initiated`, severityLevel: SeverityLevel.Information, properties: { UserEmail: this.userEmail } });
         const expertListResponse = await saveOnCallSupportDetails(onCallSupportDetail, this.customAPIAuthenticationToken!);
-        if (expertListResponse.status === 401) {
-            if (expertListResponse.data) {
-                this.appInsights.trackEvent({ name: "Unauthorized request" }, { UserEmail: this.userEmail, Code: expertListResponse.data.code });
-                window.history.pushState({}, "", "/error?code=" + expertListResponse.data.code + "&token=" + this.customAPIAuthenticationToken);
-            }
-
-            this.appInsights.trackEvent({ name: "Unauthorized request" }, { Code: "InvalidRequest", UserEmail: this.userEmail });
-            window.history.pushState({}, "", "/error?token=" + this.customAPIAuthenticationToken);
-        }
-        else if (expertListResponse.status === 200) {
+        if (expertListResponse.status === 200) {
 
             let allMembers = this.state.allMembers;
             let OnCallExpertsList: Array<any> = [];
@@ -308,7 +299,7 @@ class ManageExperts extends React.Component<{}, IState>
         }
         else {
             this.setState({ isSubmitExpertListLoading: false, errorMessage: this.state.resourceStrings.errorMessage });
-            this.appInsights.trackTrace({ message: `'submitExpertList' - Request failed`, severityLevel: SeverityLevel.Error, properties: { UserEmail: this.userEmail, Code: expertListResponse.status } });
+            handleError(expertListResponse, this.customAPIAuthenticationToken);
         }
     }
 

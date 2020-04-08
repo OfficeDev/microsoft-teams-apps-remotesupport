@@ -80,10 +80,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             this.cloudTableClient = storageAccount.CreateCloudTableClient();
             this.cloudTableClient.DefaultRequestOptions = exponentialRetryPolicy;
             this.CloudTable = this.cloudTableClient.GetTableReference(this.tableName);
-            if (!await this.CloudTable.ExistsAsync())
-            {
-                await this.CloudTable.CreateIfNotExistsAsync();
-            }
+
+            await this.CloudTable.CreateIfNotExistsAsync();
 
             return this.CloudTable;
         }

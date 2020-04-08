@@ -34,16 +34,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         private const string Ellipsis = "...";
 
         /// <summary>
-        ///  Urgent command to define status of ticket.
-        /// </summary>
-        private const string UrgentString = "Urgent";
-
-        /// <summary>
-        ///  Normal command to define status of ticket.
-        /// </summary>
-        private const string NormalString = "Normal";
-
-        /// <summary>
         /// Search text parameter name defined in the application manifest file.
         /// </summary>
         private const string SearchTextParameterName = "searchText";
@@ -175,15 +165,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                                 Url = new Uri(CreateGroupChat(onCallSMEUsers, ticket.TicketId, ticket.RequesterName, localizer)),
                             });
                     }
-                    else if (commandId == Constants.ClosedCommandId && ticket.RequesterTicketActivityId != null)
-                    {
-                        commandIdCard.Actions.Add(
-                            new AdaptiveOpenUrlAction
-                            {
-                                Title = localizer.GetString("GoToOriginalThreadButtonText"),
-                                Url = new Uri($"{GoToOriginalThreadUrl}{ticket.RequesterConversationId}/{ticket.RequesterTicketActivityId}"),
-                            });
-                    }
                     else if ((commandId == Constants.UrgentCommandId || commandId == Constants.AssignedCommandId || commandId == Constants.UnassignedCommandId) && ticket.SmeConversationId != null)
                     {
                         commandIdCard.Actions.Add(
@@ -196,7 +177,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                     ThumbnailCard previewCard = new ThumbnailCard
                     {
-                        Title = $"<b>{HttpUtility.HtmlEncode(ticket.Title)} | {HttpUtility.HtmlEncode(ticket.Severity == (int)TicketSeverity.Urgent ? UrgentString : NormalString)}</b>",
+                        Title = $"<b>{HttpUtility.HtmlEncode(ticket.Title)} | {HttpUtility.HtmlEncode(ticket.Severity == (int)TicketSeverity.Urgent ? localizer.GetString("Urgent") : localizer.GetString("NormalText"))}</b>",
                         Subtitle = ticket.Description.Length <= TruncateDescriptionLength ? HttpUtility.HtmlEncode(ticket.Description) : HttpUtility.HtmlEncode(ticket.Description.Substring(0, 45)) + Ellipsis,
                         Text = ticket.RequesterName,
                     };
@@ -229,14 +210,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// </summary>
         /// <param name="onCallSMENames">The on-call SME users which are supported for group chat.</param>
         /// <param name="ticketId">Ticket id of the request.</param>
-        /// <param name="requestorName">Requestor name of the ticket.</param>
+        /// <param name="requesterName">Requester name of the ticket.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <returns>Group chat Uri.</returns>
-        private static string CreateGroupChat(string onCallSMENames, string ticketId, string requestorName, IStringLocalizer<Strings> localizer)
+        private static string CreateGroupChat(string onCallSMENames, string ticketId, string requesterName, IStringLocalizer<Strings> localizer)
         {
             var groupNameText = localizer.GetString("GroupName", ticketId);
-            var messageToSend = localizer.GetString("MessageContent", requestorName, ticketId);
-            return $"https://teams.microsoft.com/_#/l/chat/0/0?users={Uri.UnescapeDataString(onCallSMENames)}&topicName={Uri.EscapeDataString(groupNameText)}&message={Uri.EscapeDataString(messageToSend)}";
+            var messageToSend = localizer.GetString("MessageContent", requesterName);
+            return $"https://teams.microsoft.com/l/chat/0/0?users={Uri.UnescapeDataString(onCallSMENames)}&topicName={Uri.EscapeDataString(groupNameText)}&message={Uri.EscapeDataString(messageToSend)}";
         }
     }
 }

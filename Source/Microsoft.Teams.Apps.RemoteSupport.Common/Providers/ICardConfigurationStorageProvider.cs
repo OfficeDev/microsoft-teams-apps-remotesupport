@@ -23,7 +23,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
         /// Returns the latest card template present in the Azure table storage.
         /// </summary>
         /// <returns>configuration details.</returns>
-        Task<CardConfigurationEntity> GetConfigurationsAsync();
+        Task<CardConfigurationEntity> GetConfigurationAsync();
 
         /// <summary>
         /// Returns the latest card template present in the Azure table storage by CardId

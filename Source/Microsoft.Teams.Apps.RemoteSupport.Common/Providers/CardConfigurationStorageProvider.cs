@@ -27,7 +27,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
         public CardConfigurationStorageProvider(IConfiguration configuration, IOptionsMonitor<StorageOptions> storageOptions)
                         : base(storageOptions, Constants.CardConfigurationTable)
         {
-            _ = this.EnsureInitializedAsync();
             _ = this.InitializeDefaultCardTemplateAsync(configuration);
         }
 
@@ -35,7 +34,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
         /// This method returns the latest Card template present in the Azure table storage.
         /// </summary>
         /// <returns>configuration details.</returns>
-        public async Task<CardConfigurationEntity> GetConfigurationsAsync()
+        public async Task<CardConfigurationEntity> GetConfigurationAsync()
         {
             await this.EnsureInitializedAsync();
             string filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, Constants.CardConfigurationPartitionKey);
@@ -62,7 +61,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
         public async Task<CardConfigurationEntity> GetConfigurationsByCardIdAsync(string cardId)
         {
             await this.EnsureInitializedAsync();
-            string filter = TableQuery.GenerateFilterCondition("CardId", QueryComparisons.Equal, cardId);
+            string partitionFilterCondition = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, Constants.CardConfigurationPartitionKey);
+            string rowFilterCondition = TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, cardId);
+            string filter = TableQuery.CombineFilters(partitionFilterCondition, TableOperators.And, rowFilterCondition);
             var query = new TableQuery<CardConfigurationEntity>().Where(filter);
             TableContinuationToken continuationToken = null;
             var configurations = new List<CardConfigurationEntity>();
@@ -97,7 +98,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
         /// <param name="configuration">Application configuration properties.</param>
         private async Task InitializeDefaultCardTemplateAsync(IConfiguration configuration)
         {
-            var card = await this.GetConfigurationsAsync();
+            await this.EnsureInitializedAsync();
+            var card = await this.GetConfigurationAsync();
             if (card == null)
             {
                 await this.StoreOrUpdateEntityAsync(new CardConfigurationEntity()

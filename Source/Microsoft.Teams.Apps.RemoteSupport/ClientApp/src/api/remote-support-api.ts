@@ -18,12 +18,7 @@ export const getMembersInTeam = async (token: string): Promise<any> => {
 
     let url = baseAxiosUrl + "/api/remotesupport/teammembers";
     let teamMemberResponse = await axios.get(url, token);
-    if (teamMemberResponse.status === 401) {
-        redirectToErrorPage(teamMemberResponse, token);
-    }
-    else {
-        return teamMemberResponse;
-    }
+    return teamMemberResponse;
 }
 
 /**
@@ -33,12 +28,7 @@ export const getOnCallExpertsInTeam = async (token: string): Promise<any> => {
 
     let url = baseAxiosUrl + "/api/remotesupport/oncallexperts";
     let onCallSupportResponse = await axios.get(url, token);
-    if (onCallSupportResponse.status === 401) {
-        redirectToErrorPage(onCallSupportResponse, token);
-    }
-    else {
-        return onCallSupportResponse;
-    }
+    return onCallSupportResponse;
 }
 
 /**
@@ -48,12 +38,7 @@ export const getResourceStrings = async (token: string, locale?: string | null):
 
     let url = baseAxiosUrl + "/api/resource/resourcestrings";
     let resourceStringsResponse = await axios.get(url, token, locale);
-    if (resourceStringsResponse.status === 401) {
-        redirectToErrorPage(resourceStringsResponse, token);
-    }
-    else {
-        return resourceStringsResponse;
-    }
+    return resourceStringsResponse;
 }
 
 /**
@@ -65,19 +50,22 @@ export const saveOnCallSupportDetails = async (onCallSupportDetails: any, token:
 
     let url = baseAxiosUrl + "/api/remotesupport/saveoncallsupportdetails";
     let saveOnCallSupportResponse = await axios.post(url, onCallSupportDetails, token);
-    if (saveOnCallSupportResponse.status === 401) {
-        redirectToErrorPage(saveOnCallSupportResponse, token);
-    }
-    else {
-        return saveOnCallSupportResponse;
-    }
+    return saveOnCallSupportResponse;
 }
 
-const redirectToErrorPage = (response: AxiosResponse<any>, token: string) => {
-    if (response.data) {
-        window.location.href = "/error?code=" + response.data.code + "&token=" + token;
+/**
+* Handle error occurred during API call.
+* @param  {Object} error Error response object
+*/
+export const handleError = (error: any, token: any): any => {
+	const errorStatus = error.status;
+	if (errorStatus === 403) {
+        window.location.href = "/error?code=403&token=" + token;
+    }
+    else if (errorStatus === 401) {
+        window.location.href = "/error?code=401&token=" + token;
     }
     else {
         window.location.href = "/error?token=" + token;
-    }
+	}
 }

@@ -38,8 +38,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
             string showTitleValidation = "false";
             string showDescriptionValidation = "false";
             string showDateValidation = "false";
-            string issueTitle = string.Empty;
-            string issueDescription = string.Empty;
             string issueDateString = DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
             var editCardJsonFilePath = Path.Combine(environment?.ContentRootPath, ".\\Cards\\EditTicket.json");
@@ -53,18 +51,10 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                 {
                     showTitleValidation = "true";
                 }
-                else
-                {
-                    issueTitle = ticketDetail.Title;
-                }
 
                 if (string.IsNullOrWhiteSpace(ticketDetail.Description))
                 {
                     showDescriptionValidation = "true";
-                }
-                else
-                {
-                    issueDescription = ticketDetail.Description;
                 }
 
                 if (DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture)))

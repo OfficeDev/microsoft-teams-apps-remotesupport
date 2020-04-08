@@ -9,6 +9,8 @@
 //------------------------------------------------------------------------------
 
 namespace Microsoft.Teams.Apps.RemoteSupport.Configuration {
+    using System;
+    
     
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -176,7 +178,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Configuration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Build Form.
+        ///   Looks up a localized string similar to Build form.
         /// </summary>
         public static string headerTitle {
             get {
@@ -419,7 +421,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Configuration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Team Link.
+        ///   Looks up a localized string similar to Team link.
         /// </summary>
         public static string teamLink {
             get {

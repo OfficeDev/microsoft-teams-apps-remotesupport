@@ -90,9 +90,9 @@ export default class ErrorPage extends React.Component<{}, errorPageState> {
     }
 
     render() {
-        let message = this.state.resourceStrings.ErrorMessage;
-        if (this.code === "signinRequired") {
-            message = `${this.state.resourceStrings.SessionExpired}`;
+        let message = this.state.resourceStrings.errorMessage;
+        if (this.code === "401") {
+            message = `${this.state.resourceStrings.unauthorizedAccess}`;
         }
         return (
             <Provider theme={this.state.themeStyle}>
@@ -112,8 +112,7 @@ export default class ErrorPage extends React.Component<{}, errorPageState> {
                             <Flex.Item grow>
                                 <Flex column gap="gap.small" vAlign="stretch">
                                     <div>
-                                        <Text weight="bold" error content={this.state.resourceStrings.UnauthorizedAccess} /><br />
-                                        <Text size="medium" content={message} />
+                                        <Text weight="bold" error content={message} /><br />
                                     </div>
                                 </Flex>
                             </Flex.Item>

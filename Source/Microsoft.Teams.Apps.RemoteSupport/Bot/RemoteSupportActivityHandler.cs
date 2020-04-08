@@ -362,7 +362,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
 
                         // Send update audit trail message and request details card in personal chat and SME team.
                         this.logger.LogInformation($"Edited the ticket:{ticketDetail.TicketId}");
-                        IMessageActivity smeEditNotification = MessageFactory.Text(string.Format(CultureInfo.InvariantCulture, this.localizer.GetString("SmeEditNotificationText")));
+                        IMessageActivity smeEditNotification = MessageFactory.Text(string.Format(CultureInfo.InvariantCulture, this.localizer.GetString("SmeEditNotificationText"), ticketDetail.LastModifiedByName));
                         IMessageActivity ticketDetailActivity = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(ticketDetail, this.localizer, true));
                         ticketDetailActivity.Conversation = turnContext.Activity.Conversation;
                         ticketDetailActivity.Id = ticketDetail.RequesterTicketActivityId;

@@ -146,7 +146,7 @@
     <comment>Text to show on the radio button when selected normal.</comment>
   </data>
   <data name="RequestSubmittedContent" xml:space="preserve">
-    <value>For your reference, here's what i shared with the on-call team.</value>
+    <value>For reference, here's what I shared with the on-call team.</value>
     <comment>Text to show on request submitted card.</comment>
   </data>
   <data name="RequestSubmittedText" xml:space="preserve">
@@ -234,7 +234,7 @@
     <comment>Text to show in Request details card for Expert Team</comment>
   </data>
   <data name="SeverityButtonText" xml:space="preserve">
-    <value>Change Severity</value>
+    <value>Change severity</value>
     <comment>Text to show severity on button in request details card.</comment>
   </data>
   <data name="SmeRequestDetailText" xml:space="preserve">
@@ -242,7 +242,7 @@
     <comment>Text to show under request submitted card to SME.</comment>
   </data>
   <data name="SmeUserChatMessage" xml:space="preserve">
-    <value>You have raised a request with TicketId {0}</value>
+    <value>RE : Support request {0}.</value>
     <comment>Text to show when SME user try to chat with Enduser.</comment>
   </data>
   <data name="UnassignActionChoiceTitle" xml:space="preserve">
@@ -254,7 +254,7 @@
     <comment>Text to show EndUser notification when request is submitted.</comment>
   </data>
   <data name="SmeAssignedStatus" xml:space="preserve">
-    <value>This request is now assigned to you</value>
+    <value>This request is now assigned to {0}.</value>
     <comment>Text to show notification as assigned request is closed to SME Users.</comment>
   </data>
   <data name="SmeClosedStatus" xml:space="preserve">
@@ -282,7 +282,7 @@
     <comment>Text to show on button</comment>
   </data>
   <data name="DatetimeTitleText" xml:space="preserve">
-    <value>Datetime</value>
+    <value>Last updated on</value>
     <comment>Text to show on update history card title</comment>
   </data>
   <data name="NameTitleText" xml:space="preserve">
@@ -322,7 +322,7 @@
     <comment>Text to show user when status of ticket is reopened by Expert team member.</comment>
   </data>
   <data name="RequestActionTicketUserNotification" xml:space="preserve">
-    <value>The support team changed the severity level on your request</value>
+    <value>The support team changed the severity level on your request #{0}.</value>
     <comment>Text to show user when severity of ticket is changed by Expert team member.</comment>
   </data>
   <data name="DateValidationText" xml:space="preserve">
@@ -338,11 +338,11 @@
     <comment>Text to show if title field is empty.</comment>
   </data>
   <data name="GroupName" xml:space="preserve">
-    <value>Request No {0}- AttentionRequired</value>
+    <value>Request no {0}- attention required</value>
     <comment>Text to use as a group name when group is created.</comment>
   </data>
   <data name="MessageContent" xml:space="preserve">
-    <value>Hi Team, I need immediate support for request #{0}. Can you help me?</value>
+    <value>Hi Team, I need immediate support for request created by {0}. Can you help?</value>
     <comment>Text to show when user clicks on chat button.</comment>
   </data>
   <data name="InvalidTeamText" xml:space="preserve">
@@ -358,7 +358,7 @@
     <comment>Text to show on add button.</comment>
   </data>
   <data name="ExpertListPlaceHolderText" xml:space="preserve">
-    <value>Type here...</value>
+    <value>Enter one or more names or emails</value>
     <comment>Text to show in expert list dropdown placeholder.</comment>
   </data>
   <data name="ExpertListTitle" xml:space="preserve">
@@ -381,36 +381,24 @@
     <value>A maximum of 15 people can be added to the list with a min of 0</value>
     <comment>Text to show for validation message when on call experts selected are more than 15.</comment>
   </data>
-  <data name="EndUserCustomMessage" xml:space="preserve">
-    <value>Hello , I don't support  your command .Here is a new request button where you can raise an request to expert team.</value>
-    <comment>Text to show when enduser raised an un recognised command to bot.</comment>
-  </data>
   <data name="ExperListBulletPoint" xml:space="preserve">
-    <value>* Expert List</value>
+    <value>* Hit **Current on-call team** button to set up on call experts from this team.</value>
     <comment>Text to show command in a welcome Team card.</comment>
   </data>
-  <data name="UnRecognisedTeamInputMessage" xml:space="preserve">
-    <value>Hello , I don't support any  bot command in team. You can try only Expert list command here.</value>
-    <comment>Text to show when team user  raised an un recognised command to bot.</comment>
-  </data>
   <data name="SmeEditNotificationText" xml:space="preserve">
-    <value>This request has been edited by the user.</value>
+    <value>This request is modified by {0}.</value>
     <comment>Text to show when user edits the request.</comment>
   </data>
   <data name="SmeWithdrawNotificationText" xml:space="preserve">
-    <value>This request has been withdrawn by the user.</value>
+    <value>This request is withdrawn by {0}.</value>
     <comment>Text to show for SME user when withdrawn.</comment>
   </data>
   <data name="RequestUpdatedText" xml:space="preserve">
     <value>Request updated</value>
     <comment>Text to show as title of ticket edited card send in 1:1 chat with bot.</comment>
   </data>
-  <data name="TeamContentText" xml:space="preserve">
-    <value>Ready to get started? Expert List!</value>
-    <comment>Text to show in Team welcome card.</comment>
-  </data>
   <data name="WelcomeTeamCardContent" xml:space="preserve">
-    <value>Hello, I am Remote Assistant, a bot that allows you to manage on-call experts for the problems facing at work.</value>
+    <value>Hello, I can help you provide support to people who interact with me and need more assistance.</value>
     <comment>Text to show bot description in welcome card for Sme.</comment>
   </data>
   <data name="ClosedErrorMessage" xml:space="preserve">
@@ -430,7 +418,7 @@
     <comment>Text to show request type in request submitted card.</comment>
   </data>
   <data name="TitleDisplayText" xml:space="preserve">
-    <value>Category</value>
+    <value>What is it about?</value>
     <comment>Text to show as title text in new request card.</comment>
   </data>
   <data name="WithdrawErrorMessage" xml:space="preserve">
@@ -442,7 +430,7 @@
     <comment>Text to show in welcome card for know user how this bot hepls.</comment>
   </data>
   <data name="AzureStorageErrorText" xml:space="preserve">
-    <value>Something went wrong saving your request. Try again in a few minutes.</value>
+    <value>Something went wrong while saving your request. Please try again in few minutes.</value>
     <comment>Text to show error when the request is not save in the azure storage.</comment>
   </data>
   <data name="CancelButtonText" xml:space="preserve">
@@ -476,5 +464,16 @@
   <data name="UnauthorizedAccess" xml:space="preserve">
     <value>Unauthorized access</value>
     <comment>Text to show when user is not authenticated.</comment>
+  </data>
+  <data name="OnCallListUpdateMessage" xml:space="preserve">
+    <value>The on-call experts list is modified.</value>
+  </data>
+  <data name="RequestStatusText" xml:space="preserve">
+    <value>Status</value>
+    <comment>Text to show ticket current status.</comment>
+  </data>
+  <data name="TeamRequestBulletPoint" xml:space="preserve">
+    <value>* To check requests assignements, click the small version of my icon near your message formatting options.</value>
+    <comment>Text to show as a bullet point in team welcome card.</comment>
   </data>
 </root>

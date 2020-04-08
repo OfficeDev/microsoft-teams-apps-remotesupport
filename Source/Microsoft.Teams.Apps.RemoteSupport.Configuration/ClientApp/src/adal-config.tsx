@@ -5,6 +5,10 @@
 */
 
 import { AuthenticationContext, adalFetch, withAdalLogin, AdalConfig } from 'react-adal';
+import { getAzureActiveDirectorySettings } from "./api/incident-api";
+
+getAzureActiveDirectorySettings();
+
 export const adalConfig: AdalConfig = {
     tenant: localStorage.getItem("TenantId")!,
     clientId: localStorage.getItem("ClientId")!,

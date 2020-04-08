@@ -221,7 +221,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
             TaskCompletionSource<ConversationResourceResponse> taskCompletionSource = new TaskCompletionSource<ConversationResourceResponse>();
             await ((BotFrameworkAdapter)turnContext.Adapter).CreateConversationAsync(
-                null,       // If we set channel = "msteams", there is an error as preinstalled middle-ware expects ChannelData to be present.
+                null, // If we set channel = "msteams", there is an error as preinstalled middle-ware expects ChannelData to be present.
                 turnContext.Activity.ServiceUrl,
                 microsoftAppCredentials,
                 conversationParameters,
@@ -490,7 +490,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         {
             if (ticketDetails != null && ticketDetails.ContainsKey(key))
             {
-                return ticketDetails[key];
+                return EscapeCharactersInString(ticketDetails[key]);
             }
             else
             {
@@ -579,6 +579,22 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     },
                 },
             };
+        }
+
+        /// <summary>
+        /// Replace double quotes and escape characters in string.
+        /// </summary>
+        /// <param name="inputString">Input string which needs to be validated.</param>
+        /// <returns>Returns valid string after escaping characters.</returns>
+        private static string EscapeCharactersInString(string inputString)
+        {
+            if (!string.IsNullOrEmpty(inputString))
+            {
+                inputString = inputString.Replace(@"\", @"\\", StringComparison.OrdinalIgnoreCase)
+                    .Replace(@"""", @"\""", StringComparison.OrdinalIgnoreCase);
+            }
+
+            return inputString;
         }
     }
 }

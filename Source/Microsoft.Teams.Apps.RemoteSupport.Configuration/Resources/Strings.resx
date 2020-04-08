@@ -157,7 +157,7 @@
     <value>Something went wrong!</value>
   </data>
   <data name="headerTitle" xml:space="preserve">
-    <value>Build Form</value>
+    <value>Build form</value>
   </data>
   <data name="inputDate" xml:space="preserve">
     <value>Input Date</value>
@@ -238,7 +238,7 @@
     <value>Data saved successfully</value>
   </data>
   <data name="teamLink" xml:space="preserve">
-    <value>Team Link</value>
+    <value>Team link</value>
   </data>
   <data name="uniqueDisplayName" xml:space="preserve">
     <value>Display name should be unique</value>

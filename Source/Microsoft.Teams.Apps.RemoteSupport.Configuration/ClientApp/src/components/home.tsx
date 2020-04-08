@@ -106,11 +106,11 @@ class Home extends React.Component<{}, IState>
                     <div className="container-div">
 
                         <Flex gap="gap.small" padding="padding.medium">
-                            <Flex.Item size="size.half">
-                                <Text align="end" content={this.state.resourceStrings.common.teamLink + "* "} />
+                            <Flex.Item size="size.half" >
+                                <Text align="end" content={this.state.resourceStrings.common.teamLink + "* "} className="team-link" />
                             </Flex.Item>
-                            <Flex.Item size="size.half">
-                                <Input placeholder={this.state.resourceStrings.common.teamLink}
+                            <Flex.Item size="size.half" className="team-textbox-width" >
+                                <Input fluid placeholder={this.state.resourceStrings.common.teamLink}
                                     value={this.state.TeamId}
                                     onChange={(e: any) => { this.setState({ TeamId: e.target.value }) }} />
                             </Flex.Item>

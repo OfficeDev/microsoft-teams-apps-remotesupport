@@ -75,12 +75,19 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = localizer.GetString("ExperListBulletPoint"),
+                        Text = localizer.GetString("TeamRequestBulletPoint"),
                         Spacing = AdaptiveSpacing.None,
+                        Wrap = true,
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = localizer.GetString("TeamContentText"),
+                        Text = localizer.GetString("ExperListBulletPoint"),
+                        Spacing = AdaptiveSpacing.None,
+                        Wrap = true,
+                    },
+                    new AdaptiveTextBlock
+                    {
+                        Text = localizer.GetString("ContentText"),
                         Spacing = AdaptiveSpacing.Small,
                     },
                 },

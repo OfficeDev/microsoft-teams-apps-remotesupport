@@ -40,6 +40,7 @@ export const getAzureActiveDirectorySettingsAsync = async (): Promise<any> => {
         localStorage.setItem("ClientId", settingsResponse.data.ClientId);
         localStorage.setItem("TokenEndpoint", settingsResponse.data.TokenEndpoint);
     }
+    return true;
 }
 
 /**
@@ -53,3 +54,7 @@ export const saveConfigurationsAsync = async (configurationDetails: any, token: 
     let saveConfigurationsResult = await axios.post(url, configurationDetails, token);
     return saveConfigurationsResult;
 }
+
+export const getAzureActiveDirectorySettings = async () => {
+    await getAzureActiveDirectorySettingsAsync();
+};

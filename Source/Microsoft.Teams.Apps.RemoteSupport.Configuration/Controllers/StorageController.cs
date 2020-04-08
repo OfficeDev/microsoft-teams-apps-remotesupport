@@ -99,7 +99,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Configuration
                 }
 
                 this.logger.LogInformation("Get configurations " + this.GetId());
-                var result = await this.configurationStorageProvider.GetConfigurationsAsync();
+                var result = await this.configurationStorageProvider.GetConfigurationAsync();
                 return this.Ok(result);
             }
             catch (Exception ex)
