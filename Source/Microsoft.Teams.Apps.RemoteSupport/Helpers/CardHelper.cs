@@ -8,6 +8,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Threading.Tasks;
     using AdaptiveCards;
@@ -270,9 +271,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                 return onCallSMEUsers;
             }
-            #pragma warning disable CA1031 // Do not catch general exception types
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
-            #pragma warning restore CA1031 // Do not catch general exception types
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 logger.LogError(ex, "Error in getting the oncallSMEUsers list.");
             }
@@ -387,9 +388,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     {
                         keyValuePair.Add(item.Key, TicketHelper.ConvertToDateTimeoffset(DateTime.Parse(item.Value, CultureInfo.InvariantCulture), timeSpan).ToString(CultureInfo.InvariantCulture));
                     }
-                    #pragma warning disable CA1031 // Do not catch general exception types
+#pragma warning disable CA1031 // Do not catch general exception types
                     catch
-                    #pragma warning restore CA1031 // Do not catch general exception types
+#pragma warning restore CA1031 // Do not catch general exception types
                     {
                         keyValuePair.Add(item.Key, item.Value);
                     }
@@ -472,9 +473,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             {
                 return "{{DATE(" + DateTime.Parse(inputText, CultureInfo.InvariantCulture).ToUniversalTime().ToString(Constants.Rfc3339DateTimeFormat, CultureInfo.InvariantCulture) + ", SHORT)}}";
             }
-            #pragma warning disable CA1031 // Do not catch general exception types
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
-            #pragma warning restore CA1031 // Do not catch general exception types
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 return inputText;
             }
@@ -588,13 +589,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <returns>Returns valid string after escaping characters.</returns>
         private static string EscapeCharactersInString(string inputString)
         {
-            if (!string.IsNullOrEmpty(inputString))
+            if (string.IsNullOrWhiteSpace(inputString))
             {
-                inputString = inputString.Replace(@"\", @"\\", StringComparison.OrdinalIgnoreCase)
-                    .Replace(@"""", @"\""", StringComparison.OrdinalIgnoreCase);
+                return string.Empty;
             }
 
-            return inputString;
+            inputString = JsonConvert.SerializeObject(inputString);
+            var match = Regex.Match(inputString, "^[\"](.*)\"");
+            return match.Success ? match.Groups[1].Value : string.Empty;
         }
     }
 }
