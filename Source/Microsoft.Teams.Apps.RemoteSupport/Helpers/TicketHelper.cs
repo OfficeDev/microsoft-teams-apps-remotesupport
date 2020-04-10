@@ -103,6 +103,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             ticketDetail.Severity = (int)(TicketSeverity)Enum.Parse(typeof(TicketSeverity), ticketDetail.RequestType ?? TicketSeverity.Normal.ToString());
             ticketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(ticketAdditionalDetails, turnContext.Activity.LocalTimestamp.Value.Offset);
             ticketDetail.CardId = cardId;
+            ticketDetail.AssignedToName = string.Empty;
+            ticketDetail.AssignedToObjectId = string.Empty;
 
             return ticketDetail;
         }

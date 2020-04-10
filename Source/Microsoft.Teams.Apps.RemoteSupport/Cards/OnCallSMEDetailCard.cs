@@ -143,7 +143,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
             {
                 container.Items.Add(new AdaptiveTextBlock
                 {
-                    Text = localizer.GetString("UpdateHistoryText"),
+                    Text = localizer.GetString("NoUpdateHistoryText"),
                     Weight = AdaptiveTextWeight.Bolder,
                     Size = AdaptiveTextSize.Medium,
                 });

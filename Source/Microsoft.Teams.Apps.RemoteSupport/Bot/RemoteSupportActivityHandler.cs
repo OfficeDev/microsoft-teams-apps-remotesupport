@@ -366,8 +366,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                         IMessageActivity ticketDetailActivity = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(ticketDetail, this.localizer, true));
                         ticketDetailActivity.Conversation = turnContext.Activity.Conversation;
                         ticketDetailActivity.Id = ticketDetail.RequesterTicketActivityId;
+                        await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeEditNotification, this.appBaseUrl, this.localizer, this.logger, cancellationToken);
                         await turnContext.UpdateActivityAsync(ticketDetailActivity);
-                        await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeEditNotification, this.appBaseUrl, this.localizer, cancellationToken);
                     }
                     else
                     {

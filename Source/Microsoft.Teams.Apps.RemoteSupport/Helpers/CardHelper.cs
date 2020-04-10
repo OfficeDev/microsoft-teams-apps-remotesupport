@@ -332,23 +332,38 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="messageActivity">Message activity of bot.</param>
         /// <param name="applicationBasePath"> Represents the Application base Uri.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
+        /// <param name="logger">application logger.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>task that updates card.</returns>
-        public static async Task UpdateSMECardAsync(ITurnContext turnContext, TicketDetail ticketDetail, IMessageActivity messageActivity, string applicationBasePath, IStringLocalizer<Strings> localizer, CancellationToken cancellationToken)
+        public static async Task UpdateSMECardAsync(ITurnContext turnContext, TicketDetail ticketDetail, IMessageActivity messageActivity, string applicationBasePath, IStringLocalizer<Strings> localizer, ILogger<RemoteSupportActivityHandler> logger, CancellationToken cancellationToken)
         {
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
             messageActivity = messageActivity ?? throw new ArgumentNullException(nameof(messageActivity));
-
-            // Update the card in the SME team.
-            var updateCardActivity = new Activity(ActivityTypes.Message)
+            try
             {
-                Id = ticketDetail?.SmeTicketActivityId,
-                Conversation = new ConversationAccount { Id = ticketDetail.SmeConversationId },
-                Attachments = new List<Attachment> { new SmeTicketCard(ticketDetail).GetTicketDetailsForSMEChatCard(ticketDetail, applicationBasePath, localizer) },
-            };
-            await turnContext.Adapter.UpdateActivityAsync(turnContext, updateCardActivity, cancellationToken);
-            messageActivity.Conversation = new ConversationAccount { Id = ticketDetail.SmeConversationId };
-            await turnContext.Adapter.SendActivitiesAsync(turnContext, new Activity[] { (Activity)messageActivity }, cancellationToken);
+                // Update the card in the SME team.
+                var updateCardActivity = new Activity(ActivityTypes.Message)
+                {
+                    Id = ticketDetail?.SmeTicketActivityId,
+                    Conversation = new ConversationAccount { Id = ticketDetail.SmeConversationId },
+                    Attachments = new List<Attachment> { new SmeTicketCard(ticketDetail).GetTicketDetailsForSMEChatCard(ticketDetail, applicationBasePath, localizer) },
+                };
+
+                messageActivity.Conversation = new ConversationAccount { Id = ticketDetail.SmeConversationId };
+
+                await turnContext.Adapter.UpdateActivityAsync(turnContext, updateCardActivity, cancellationToken);
+                await turnContext.Adapter.SendActivitiesAsync(turnContext, new Activity[] { (Activity)messageActivity }, cancellationToken);
+            }
+            catch (ErrorResponseException ex)
+            {
+                if (ex.Body.Error.Code == "ConversationNotFound")
+                {
+                    // exception could also be thrown by bot adapter if updated activity is same as current
+                    logger.LogError(ex, $"failed to update activity due to conversation id not found {nameof(UpdateSMECardAsync)}");
+                }
+
+                logger.LogError(ex, $"error occured in {nameof(UpdateSMECardAsync)}");
+            }
         }
 
         /// <summary>

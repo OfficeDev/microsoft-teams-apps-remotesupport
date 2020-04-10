@@ -369,7 +369,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                     logger.LogInformation("Withdrawn the ticket:" + ticketDetail.TicketId);
                     IMessageActivity smeWithdrawNotification = MessageFactory.Text(localizer.GetString("SmeWithdrawNotificationText", ticketDetail.RequesterName));
-                    await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeWithdrawNotification, appBaseUrl, localizer, cancellationToken);
+                    await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeWithdrawNotification, appBaseUrl, localizer, logger, cancellationToken);
                     await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
                     break;
             }

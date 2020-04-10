@@ -119,7 +119,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             searchParameters.Top = count ?? DefaultSearchResultCount;
             searchParameters.Skip = skip ?? 0;
             searchParameters.IncludeTotalResultCount = false;
-            searchParameters.Select = new[] { "AssignedOn", "Title", "TicketStatus", "AssignedToName", "AssignedToObjectId", "CreatedOn", "RequesterName", "CreatedByUserPrincipalName", "Description", "RequesterName", "SmeConversationId", "SmeTicketActivityId", "AssignedOn", "ClosedOn", "ClosedByName", "LastModifiedByName", "Severity", "RequesterConversationId", "RequesterTicketActivityId", "TicketId", "RequestType", "CreatedByObjectId" };
+            searchParameters.Select = new[] { "Title", "TicketStatus", "AssignedToName", "AssignedToObjectId", "CreatedOn", "RequesterName", "CreatedByUserPrincipalName", "Description", "RequesterName", "SmeConversationId", "SmeTicketActivityId", "ClosedOn", "ClosedByName", "LastModifiedByName", "Severity", "RequesterConversationId", "RequesterTicketActivityId", "TicketId", "RequestType", "CreatedByObjectId" };
 
             var docs = await this.searchIndexClient.Documents.SearchAsync<TicketDetail>(searchQuery, searchParameters);
 

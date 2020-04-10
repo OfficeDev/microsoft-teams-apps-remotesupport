@@ -214,7 +214,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Request.
+        ///   Looks up a localized string similar to Edit request.
         /// </summary>
         public static string EditRequestTitle {
             get {
@@ -313,7 +313,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request no {0}- attention required.
+        ///   Looks up a localized string similar to Request no {0} - attention required.
         /// </summary>
         public static string GroupName {
             get {
@@ -448,7 +448,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On-call history is not available. Try again later..
+        ///   Looks up a localized string similar to On-call history is not available..
         /// </summary>
         public static string NoUpdateHistoryText {
             get {
