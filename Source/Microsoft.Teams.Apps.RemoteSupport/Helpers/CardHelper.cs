@@ -8,7 +8,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Threading.Tasks;
     using AdaptiveCards;
@@ -610,8 +609,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             }
 
             inputString = JsonConvert.SerializeObject(inputString);
-            var match = Regex.Match(inputString, "^[\"](.*)\"");
-            return match.Success ? match.Groups[1].Value : string.Empty;
+            return inputString.Substring(1, inputString.Length - 2);
         }
     }
 }
