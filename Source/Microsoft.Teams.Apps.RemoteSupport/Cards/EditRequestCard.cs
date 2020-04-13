@@ -7,14 +7,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;
     using AdaptiveCards;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Bot.Schema;
     using Microsoft.Extensions.Localization;
     using Microsoft.Teams.Apps.RemoteSupport.Common;
     using Microsoft.Teams.Apps.RemoteSupport.Common.Models;
     using Microsoft.Teams.Apps.RemoteSupport.Helpers;
+    using Microsoft.Teams.Apps.RemoteSupport.Models;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -25,86 +24,157 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
         /// <summary>
         /// Gets Edit card for task module.
         /// </summary>
-        /// <param name="environment">Current environment.</param>
         /// <param name="ticketDetail">Ticket details from user.</param>
-        /// <param name="cardConfiuration">Card configuration.</param>
+        /// <param name="cardConfiguration">Card configuration.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
-        /// <param name="showValidationMessage">show ValidationMessage.</param>
         /// <param name="existingTicketDetail">Existing ticket details.</param>
         /// <returns>Returns an attachment of edit card.</returns>
-        public static Attachment GetEditRequestCard(IHostingEnvironment environment, TicketDetail ticketDetail, CardConfigurationEntity cardConfiuration, IStringLocalizer<Strings> localizer, bool showValidationMessage = false, TicketDetail existingTicketDetail = null)
+        public static Attachment GetEditRequestCard(TicketDetail ticketDetail, CardConfigurationEntity cardConfiguration, IStringLocalizer<Strings> localizer, TicketDetail existingTicketDetail = null)
         {
+            cardConfiguration = cardConfiguration ?? throw new ArgumentNullException(nameof(cardConfiguration));
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
-            string showTitleValidation = "false";
-            string showDescriptionValidation = "false";
-            string showDateValidation = "false";
-            string issueDateString = DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
-            var editCardJsonFilePath = Path.Combine(environment?.ContentRootPath, ".\\Cards\\EditTicket.json");
-            var cardPayload = File.ReadAllText(editCardJsonFilePath);
-            var ticketAdditionalDetails = JsonConvert.DeserializeObject<Dictionary<string, string>>(ticketDetail.AdditionalProperties);
-            string dynamicTemplate = CardHelper.ConvertToAdaptiveCardEditItemElement(cardConfiuration?.CardTemplate, ticketAdditionalDetails);
+            string issueTitle = string.Empty;
+            string issueDescription = string.Empty;
+            var dynamicElements = new List<AdaptiveElement>();
+            var ticketAdditionalFields = new List<AdaptiveElement>();
+            bool showTitleValidation = false;
+            bool showDescriptionValidation = false;
+            bool showDateValidation = false;
 
-            if (showValidationMessage)
+            if (string.IsNullOrWhiteSpace(ticketDetail.Title))
             {
-                if (string.IsNullOrWhiteSpace(ticketDetail.Title))
-                {
-                    showTitleValidation = "true";
-                }
-
-                if (string.IsNullOrWhiteSpace(ticketDetail.Description))
-                {
-                    showDescriptionValidation = "true";
-                }
-
-                if (DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture)))
-                {
-                    showDateValidation = "true";
-                }
-                else if (existingTicketDetail != null && DateTimeOffset.Compare(existingTicketDetail.IssueOccuredOn, ticketDetail.IssueOccuredOn) < 0)
-                {
-                    showDateValidation = "true";
-                }
-                else
-                {
-                    issueDateString = ticketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture);
-                }
+                showTitleValidation = true;
+            }
+            else
+            {
+                issueTitle = ticketDetail.Title;
             }
 
-            Dictionary<string, string> variablesToValues = new Dictionary<string, string>()
+            if (string.IsNullOrWhiteSpace(ticketDetail.Description))
             {
-                { "DynamicContent", dynamicTemplate },
-                { "issueTitle", CardHelper.GetDictionaryValue(ticketAdditionalDetails, "Title") },
-                { "issueDescription", CardHelper.GetDictionaryValue(ticketAdditionalDetails, "Description") },
-                { "issueDate", issueDateString },
-                { "titleValidationText", localizer.GetString("TitleValidationText") },
-                { "showTitleValidation", showTitleValidation },
-                { "descriptionValidationText", localizer.GetString("DescriptionValidationText") },
-                { "showDescriptionValidation", showDescriptionValidation },
-                { "dateValidationText", localizer.GetString("DateValidationText") },
-                { "showDateValidation", showDateValidation },
-                { "maxDate", DateTime.Now.ToString("YYYY-DD-MM", CultureInfo.InvariantCulture) },
-                { "cardId", cardConfiuration.CardId },
-                { "teamId", cardConfiuration.TeamId },
-                { "issueRequestType", ticketDetail.RequestType },
-                { "ticketId", ticketDetail.TicketId },
-                { "TitleDisplayText", localizer.GetString("TitleDisplayText") },
-                { "TitlePlaceHolderText", localizer.GetString("TitlePlaceHolderText") },
-                { "DescriptionText", localizer.GetString("DescriptionText") },
-                { "DesciptionPlaceHolderText", localizer.GetString("DesciptionPlaceHolderText") },
-                { "RequestTypeText", localizer.GetString("RequestTypeText") },
-                { "NormalText", localizer.GetString("NormalText") },
-                { "UrgentText", localizer.GetString("UrgentText") },
-                { "UpdateActionText", localizer.GetString("UpdateActionText") },
-                { "CancelButtonText", localizer.GetString("CancelButtonText") },
-            };
+                showDescriptionValidation = true;
+            }
+            else
+            {
+                issueDescription = ticketDetail.Description;
+            }
 
-            cardPayload = CardHelper.ResolveTemplateParams(cardPayload, variablesToValues);
-            AdaptiveCard card = AdaptiveCard.FromJson(cardPayload).Card;
-            return new Attachment()
+            if (ticketDetail.IssueOccuredOn == null || DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture)))
             {
-                Content = card,
+                showDateValidation = true;
+            }
+            else if (existingTicketDetail != null && DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, existingTicketDetail.IssueOccuredOn) > 0)
+            {
+                showDateValidation = true;
+            }
+
+            var ticketAdditionalDetails = JsonConvert.DeserializeObject<Dictionary<string, string>>(ticketDetail.AdditionalProperties);
+            ticketAdditionalFields = CardHelper.ConvertToAdaptiveCard(localizer, cardConfiguration.CardTemplate, showDateValidation, ticketAdditionalDetails);
+
+            dynamicElements.AddRange(new List<AdaptiveElement>
+            {
+                new AdaptiveTextBlock()
+                {
+                    Text = localizer.GetString("TitleDisplayText"),
+                    Spacing = AdaptiveSpacing.Medium,
+                },
+                new AdaptiveTextInput()
+                {
+                    Id = "Title",
+                    MaxLength = 100,
+                    Placeholder = localizer.GetString("TitlePlaceHolderText"),
+                    Spacing = AdaptiveSpacing.Small,
+                    Value = issueTitle,
+                },
+                new AdaptiveTextBlock()
+                {
+                    Text = localizer.GetString("TitleValidationText"),
+                    Spacing = AdaptiveSpacing.None,
+                    IsVisible = showTitleValidation,
+                    Color = AdaptiveTextColor.Attention,
+                },
+                new AdaptiveTextBlock()
+                {
+                    Text = localizer.GetString("DescriptionText"),
+                    Spacing = AdaptiveSpacing.Medium,
+                },
+                new AdaptiveTextInput()
+                {
+                    Id = "Description",
+                    MaxLength = 500,
+                    IsMultiline = true,
+                    Placeholder = localizer.GetString("DesciptionPlaceHolderText"),
+                    Spacing = AdaptiveSpacing.Small,
+                    Value = issueDescription,
+                },
+                new AdaptiveTextBlock()
+                {
+                    Text = localizer.GetString("DescriptionValidationText"),
+                    Spacing = AdaptiveSpacing.None,
+                    IsVisible = showDescriptionValidation,
+                    Color = AdaptiveTextColor.Attention,
+                },
+                new AdaptiveTextBlock()
+                {
+                    Text = localizer.GetString("RequestTypeText"),
+                    Spacing = AdaptiveSpacing.Medium,
+                },
+                new AdaptiveChoiceSetInput
+                {
+                    Choices = new List<AdaptiveChoice>
+                    {
+                        new AdaptiveChoice
+                        {
+                            Title = localizer.GetString("NormalText"),
+                            Value = localizer.GetString("NormalText"),
+                        },
+                        new AdaptiveChoice
+                        {
+                            Title = localizer.GetString("UrgentText"),
+                            Value = localizer.GetString("UrgentText"),
+                        },
+                    },
+                    Id = "RequestType",
+                    Value = !string.IsNullOrEmpty(ticketDetail?.RequestType) ? ticketDetail?.RequestType : localizer.GetString("NormalText"),
+                    Style = AdaptiveChoiceInputStyle.Expanded,
+                },
+            });
+
+            dynamicElements.AddRange(ticketAdditionalFields);
+
+            AdaptiveCard ticketDetailsPersonalChatCard = new AdaptiveCard(Constants.AdaptiveCardVersion)
+            {
+                Body = dynamicElements,
+                Actions = new List<AdaptiveAction>
+                {
+                    new AdaptiveSubmitAction
+                    {
+                        Title = localizer.GetString("UpdateActionText"),
+                        Id = "UpdateRequest",
+                        Data = new AdaptiveCardAction
+                        {
+                            Command = Constants.UpdateRequestAction,
+                            TeamId = cardConfiguration?.TeamId,
+                            TicketId = ticketDetail.TicketId,
+                            CardId = ticketDetail.CardId,
+                        },
+                    },
+                    new AdaptiveSubmitAction
+                    {
+                        Title = localizer.GetString("CancelButtonText"),
+                        Id = "Cancel",
+                        Data = new AdaptiveCardAction
+                        {
+                            Command = Constants.CancelCommand,
+                        },
+                    },
+                },
+            };
+            return new Attachment
+            {
                 ContentType = AdaptiveCard.ContentType,
+                Content = ticketDetailsPersonalChatCard,
             };
         }
 

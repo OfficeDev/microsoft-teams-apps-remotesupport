@@ -159,7 +159,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
                 this.logger.LogError(ex, "Failed to get user token to make GET call to API.");
                 return this.GetErrorResponse(StatusCodes.Status401Unauthorized, ex.Message);
             }
+            #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
+            #pragma warning restore CA1031 // Do not catch general exception types
             {
                 this.logger.LogError(ex, "Error while getting on call experts list.");
                 throw;
@@ -197,7 +199,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
                 this.logger.LogError(ex, "Failed to get user token to make POST call to API.");
                 return this.GetErrorResponse(StatusCodes.Status401Unauthorized, ex.Message);
             }
+            #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
+            #pragma warning restore CA1031 // Do not catch general exception types
             {
                 this.logger.LogError(ex, "Error while saving on call support details.");
                 throw;

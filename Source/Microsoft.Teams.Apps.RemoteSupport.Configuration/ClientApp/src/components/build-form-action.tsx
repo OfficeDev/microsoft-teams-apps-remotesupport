@@ -92,6 +92,7 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
 
     onOpen = () => {
         let items = this.props.HomeState.CardItems;
+        items = items.filter(agg => agg.type !== 'TextBlock');
         this.addComponentsToState(items);
     }
     OnChangeSelection = {
@@ -163,7 +164,7 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
 
 
         let items = this.state.json;
-        let uniqueDisplayNameCheck = items.find(element => (element.id.substr(0, element.id.indexOf('_')).toUpperCase() === properties.displayName.toUpperCase()))
+        let uniqueDisplayNameCheck = items.find(element => (element.id.toUpperCase() === properties.displayName.toUpperCase()))
 
         if (uniqueDisplayNameCheck) {
             this.setState({ Error: this.props.resourceStrings.buildForm.uniqueDisplayName })
@@ -177,7 +178,8 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                     "type": "Input.Text",
                     "placeholder": properties.placeholder,
                     "maxLength": 500,
-                    "id": properties.displayName + "_InputText" + keyVal
+                    "id": properties.displayName,
+                    "displayName": properties.displayName
                 });
 
                 break;
@@ -189,7 +191,8 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         "placeholder": properties.placeholder,
                         "choices": choices,
                         "style": properties.style,
-                        "id": properties.displayName + "_ChoiceSet" + keyVal
+                        "id": properties.displayName,
+                        "displayName": properties.displayName
                     });
                 }
                 else if (properties.isMultiSelect === true) {
@@ -199,7 +202,8 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         "placeholder": properties.placeholder,
                         "choices": choices,
                         "isMultiSelect": true,
-                        "id": properties.displayName + "_ChoiceSet" + keyVal
+                        "id": properties.displayName,
+                        "displayName": properties.displayName
                     });
                 }
                 else {
@@ -208,7 +212,8 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         "type": "Input.ChoiceSet",
                         "placeholder": properties.placeholder,
                         "choices": choices,
-                        "id": properties.displayName + "_ChoiceSet" + keyVal
+                        "id": properties.displayName,
+                        "displayName": properties.displayName
                     });
                 }
 
@@ -216,7 +221,8 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
             case 'Input.Date':
                 items.push({
                     "type": "Input.Date",
-                    "id": properties.displayName + "_Date" + keyVal
+                    "id": properties.displayName,
+                    "displayName": properties.displayName
                 });
                 break;
 
@@ -232,29 +238,29 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
             switch (element.type) {
                 case 'Input.Text':
                     components.push(
-                        <InputTextPreview key={index} keyVal={index} placeholder={element.placeholder} displayName={element.id.substr(0, element.id.indexOf('_'))} OnDeleteComponent={this.OnDeleteComponent} />
+                        <InputTextPreview key={index} keyVal={index} placeholder={element.placeholder} displayName={element.displayName} OnDeleteComponent={this.OnDeleteComponent} />
                     );
                     break;
                 case 'Input.ChoiceSet':
                     if (element.style === 'expanded') {
                         components.push(
-                            <RadioButtonPreview key={index} displayName={element.id.substr(0, element.id.indexOf('_'))} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} />
+                            <RadioButtonPreview key={index} displayName={element.displayName} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} />
                         );
                     }
                     else if (element.isMultiSelect === true) {
                         components.push(
-                            <CheckBoxPreview key={index} displayName={element.id.substr(0, element.id.indexOf('_'))} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} />
+                            <CheckBoxPreview key={index} displayName={element.displayName} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} />
                         );
                     }
                     else {
                         components.push(
-                            <ChoiceSetPreview key={index} displayName={element.id.substr(0, element.id.indexOf('_'))} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} placeholder={element.placeholder} />
+                            <ChoiceSetPreview key={index} displayName={element.displayName} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} placeholder={element.placeholder} />
                         );
                     }
                     break;
                 case 'Input.Date':
                     components.push(
-                        <DatePickerPreview displayName={element.id.substr(0, element.id.indexOf('_'))} key={index} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} />
+                        <DatePickerPreview displayName={element.displayName} key={index} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} />
                     );
                     break;
             }
@@ -332,9 +338,9 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                                     <Text content={this.props.resourceStrings.buildForm.previewTitle} size="large" weight="semibold" />
                                 <Divider fitted key={1} size={1} styles={{ padding: "0.5rem" }} />
                                 <Flex column gap='gap.small' >
-                                        <Input fluid placeholder={this.props.resourceStrings.buildForm.staticInput1} styles={{ marginTop: '1rem' }} />
-                                        <Text content={this.props.resourceStrings.buildForm.staticText2} />
-                                        <Input fluid placeholder={this.props.resourceStrings.buildForm.staticInput2} />
+                                        <Input fluid placeholder={this.props.resourceStrings.buildForm.titleText} styles={{ marginTop: '1rem' }} />
+                                        <Text content={this.props.resourceStrings.buildForm.descriptionText} />
+                                        <Input fluid placeholder={this.props.resourceStrings.buildForm.descriptionPlaceholderText} />
                                         <Text content={this.props.resourceStrings.buildForm.staticDropdown} />
                                         <Dropdown items={this.requestType} placeholder={this.props.resourceStrings.buildForm.staticDropdownPlaceholder} />
                                     {this.state.jsx}

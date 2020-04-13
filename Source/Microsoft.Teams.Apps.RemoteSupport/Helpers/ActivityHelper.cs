@@ -255,7 +255,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 case Constants.NewRequestAction:
                     logger.LogInformation("New request action called.");
                     CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
-                    IMessageActivity newTicketActivity = MessageFactory.Attachment(TicketCard.GetNewTicketCard(environment, cardTemplateJson, localizer));
+                    IMessageActivity newTicketActivity = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardTemplateJson, localizer));
                     await turnContext.SendActivityAsync(newTicketActivity);
                     break;
 
@@ -336,9 +336,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     else
                     {
                         // Update card with validation message.
-                        var additionalProperties = message.Value?.ToString();
+                        newTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(message.Value?.ToString(), timeSpan: turnContext.Activity.LocalTimestamp.Value.Offset);
                         CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
-                        endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetNewTicketCard(environment: environment, cardConfiuration: cardTemplateJson, localizer: localizer, showValidationMessage: true, ticketDetail: newTicketDetail, ticketAdditionalDetails: additionalProperties));
+                        endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardConfiuration: cardTemplateJson, localizer: localizer, showValidationMessage: true, ticketDetail: newTicketDetail));
                         await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
                     }
 

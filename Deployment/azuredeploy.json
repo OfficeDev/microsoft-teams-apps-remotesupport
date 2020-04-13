@@ -59,7 +59,10 @@
     },
     "teamLink": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "metadata": {
+        "description":  "Experts team's Microsoft Team link to which the app will send support request notifications."
+      }
     },
     "tokenEncryptionKey": {
       "type": "string",
@@ -124,31 +127,6 @@
         "description": "The branch of the GitHub repository to deploy."
       },
       "defaultValue": "master"
-    },
-    "default": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "Information"
-    },
-    "microsoft": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "Information"
-    },
-    "allowedHosts": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "*"
-    },
-    "defaultCulture": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "en-US"
-    },
-    "supportedCultures": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "en-US,fr-Fr"
     }
   },
   "variables": {
@@ -233,7 +211,7 @@
             },
             {
               "name": "Logging:LogLevel:Default",
-              "value": "[parameters('default')]"
+              "value": "Information"
             },
             {
               "name": "ApplicationInsights:InstrumentationKey",
@@ -241,15 +219,15 @@
             },
             {
               "name": "ApplicationInsights:LogLevel:Default",
-              "value": "[parameters('default')]"
+              "value": "Information"
             },
             {
               "name": "ApplicationInsights:LogLevel:Microsoft",
-              "value": "[parameters('microsoft')]"
+              "value": "Information"
             },
             {
               "name": "AllowedHosts",
-              "value": "[parameters('allowedHosts')]"
+              "value": "*"
             },
             {
               "name": "MicrosoftAppId",
@@ -285,11 +263,11 @@
             },
             {
               "name": "i18n:DefaultCulture",
-              "value": "[parameters('defaultCulture')]"
+              "value": "en-US"
             },
             {
               "name": "i18n:SupportedCultures",
-              "value": "[parameters('supportedCultures')]"
+              "value": "en-US"
             },
             {
               "name": "Search:SearchServiceName",

@@ -94,7 +94,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Models
         /// Gets or sets the date and time on which the request was first occurred on.
         /// </summary>
         [IsSortable]
-        [JsonProperty("First observed on_IssueOccuredOn")]
+        [JsonProperty("IssueOccuredOn")]
         public virtual DateTimeOffset IssueOccuredOn { get; set; }
 
         /// <summary>

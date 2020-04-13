@@ -122,7 +122,7 @@
     <comment>Text to show in ME Thumbnail card</comment>
   </data>
   <data name="EditRequestTitle" xml:space="preserve">
-    <value>Edit request</value>
+    <value>Edit Request</value>
     <comment>Text to show on button</comment>
   </data>
   <data name="EditTicketActionText" xml:space="preserve">
@@ -170,7 +170,7 @@
     <comment>Text to show on withdraw button in Request submitted card.</comment>
   </data>
   <data name="WithdrawText" xml:space="preserve">
-    <value>Your request #{0} has been withdrawn. If other problems come up, make a new request. </value>
+    <value>Your request #{0} has been withdrawn. If other problem comes up, make a new request. </value>
     <comment>Text to show End User Notification when requets is submitted.</comment>
   </data>
   <data name="Yes" xml:space="preserve">
@@ -298,7 +298,7 @@
     <comment>Text to show in manage experts page shown in task module </comment>
   </data>
   <data name="NoUpdateHistoryText" xml:space="preserve">
-    <value>On-call history is not available.</value>
+    <value>There is no on-call history available.</value>
     <comment>Text to show when no update history is available.</comment>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
@@ -334,11 +334,11 @@
     <comment>Text to show if description field is empty.</comment>
   </data>
   <data name="TitleValidationText" xml:space="preserve">
-    <value>Title is required</value>
+    <value>Input is required</value>
     <comment>Text to show if title field is empty.</comment>
   </data>
   <data name="GroupName" xml:space="preserve">
-    <value>Request no {0} - attention required</value>
+    <value>Request no {0}- attention required</value>
     <comment>Text to use as a group name when group is created.</comment>
   </data>
   <data name="MessageContent" xml:space="preserve">

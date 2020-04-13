@@ -185,7 +185,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
                 var tableIndex = new Index()
                 {
                     Name = TicketsIndexName,
-                    Fields = FieldBuilder.BuildForType<TicketDetailSearchServiceFields>(),
+                    Fields = FieldBuilder.BuildForType<TicketDetail>(),
                 };
                 await this.searchServiceClient.Indexes.CreateAsync(tableIndex);
             }

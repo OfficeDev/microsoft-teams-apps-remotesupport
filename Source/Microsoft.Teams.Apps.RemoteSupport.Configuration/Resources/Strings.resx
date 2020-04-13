@@ -135,6 +135,12 @@
   <data name="componentDropdown" xml:space="preserve">
     <value>Select your component</value>
   </data>
+  <data name="descriptionPlaceholderText" xml:space="preserve">
+    <value>Describe the problem</value>
+  </data>
+  <data name="descriptionText" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="displayName" xml:space="preserve">
     <value>Display name (max 50 characters)</value>
   </data>
@@ -225,20 +231,14 @@
   <data name="staticDropdownPlaceholder" xml:space="preserve">
     <value>Select request type</value>
   </data>
-  <data name="staticInput1" xml:space="preserve">
-    <value>What is it about?</value>
-  </data>
-  <data name="staticInput2" xml:space="preserve">
-    <value>Enter description here</value>
-  </data>
-  <data name="staticText2" xml:space="preserve">
-    <value>Tell us more about the issue you are facing</value>
-  </data>
   <data name="successPublish" xml:space="preserve">
     <value>Data saved successfully</value>
   </data>
   <data name="teamLink" xml:space="preserve">
     <value>Team link</value>
+  </data>
+  <data name="titleText" xml:space="preserve">
+    <value>What is it about?</value>
   </data>
   <data name="uniqueDisplayName" xml:space="preserve">
     <value>Display name should be unique</value>

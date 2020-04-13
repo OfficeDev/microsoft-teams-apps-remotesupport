@@ -47,17 +47,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
             var dynamicElements = new List<AdaptiveElement>();
             var ticketAdditionalFields = new List<AdaptiveElement>();
 
-            // removing mapping elements from ticket details.
-            CardHelper.RemoveMappingElement(ticketAdditionalDetail, "CardId");
-            CardHelper.RemoveMappingElement(ticketAdditionalDetail, "TeamId");
-
-            CardHelper.RemoveMappingElement(ticketAdditionalDetail, "Title");
-            CardHelper.RemoveMappingElement(ticketAdditionalDetail, "Description");
-            CardHelper.RemoveMappingElement(ticketAdditionalDetail, "RequestType");
-
             foreach (KeyValuePair<string, string> item in ticketAdditionalDetail)
             {
-                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(item.Key.Split("_")?[0], item.Value));
+                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(item.Key, item.Value));
             }
 
             dynamicElements.AddRange(new List<AdaptiveElement>

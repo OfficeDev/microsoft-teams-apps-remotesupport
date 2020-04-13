@@ -115,6 +115,24 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Configuration {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Describe the problem.
+        /// </summary>
+        public static string descriptionPlaceholderText {
+            get {
+                return ResourceManager.GetString("descriptionPlaceholderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string descriptionText {
+            get {
+                return ResourceManager.GetString("descriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display name (max 50 characters).
         /// </summary>
         public static string displayName {
@@ -385,33 +403,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Configuration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is it about?.
-        /// </summary>
-        public static string staticInput1 {
-            get {
-                return ResourceManager.GetString("staticInput1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter description here.
-        /// </summary>
-        public static string staticInput2 {
-            get {
-                return ResourceManager.GetString("staticInput2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tell us more about the issue you are facing.
-        /// </summary>
-        public static string staticText2 {
-            get {
-                return ResourceManager.GetString("staticText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Data saved successfully.
         /// </summary>
         public static string successPublish {
@@ -426,6 +417,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Configuration {
         public static string teamLink {
             get {
                 return ResourceManager.GetString("teamLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What is it about?.
+        /// </summary>
+        public static string titleText {
+            get {
+                return ResourceManager.GetString("titleText", resourceCulture);
             }
         }
         

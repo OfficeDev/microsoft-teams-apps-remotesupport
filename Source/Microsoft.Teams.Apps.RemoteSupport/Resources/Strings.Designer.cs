@@ -214,7 +214,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit request.
+        ///   Looks up a localized string similar to Edit Request.
         /// </summary>
         public static string EditRequestTitle {
             get {
@@ -313,7 +313,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request no {0} - attention required.
+        ///   Looks up a localized string similar to Request no {0}- attention required.
         /// </summary>
         public static string GroupName {
             get {
@@ -448,7 +448,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On-call history is not available..
+        ///   Looks up a localized string similar to There is no on-call history available..
         /// </summary>
         public static string NoUpdateHistoryText {
             get {
@@ -736,7 +736,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title is required.
+        ///   Looks up a localized string similar to Input is required.
         /// </summary>
         public static string TitleValidationText {
             get {
@@ -853,7 +853,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your request #{0} has been withdrawn. If other problems come up, make a new request. .
+        ///   Looks up a localized string similar to Your request #{0} has been withdrawn. If other problem comes up, make a new request. .
         /// </summary>
         public static string WithdrawText {
             get {

@@ -308,7 +308,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                         }
 
                         this.logger.LogInformation("Fetch and send edit request card.");
-                        return CardHelper.GetEditTicketAdaptiveCard(environment: this.environment, cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, ticketDetail: ticketDetail, showValidationMessage: false, localizer: this.localizer);
+                        return CardHelper.GetEditTicketAdaptiveCard(cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, ticketDetail: ticketDetail, localizer: this.localizer);
 
                     case Constants.ManageExpertsAction:
                         this.logger.LogInformation("Sending manage experts card.");
@@ -366,13 +366,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                         IMessageActivity ticketDetailActivity = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(ticketDetail, this.localizer, true));
                         ticketDetailActivity.Conversation = turnContext.Activity.Conversation;
                         ticketDetailActivity.Id = ticketDetail.RequesterTicketActivityId;
-                        await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeEditNotification, this.appBaseUrl, this.localizer, this.logger, cancellationToken);
                         await turnContext.UpdateActivityAsync(ticketDetailActivity);
+                        await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeEditNotification, this.appBaseUrl, this.localizer, this.logger, cancellationToken);
                     }
                     else
                     {
                         editTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(additionalDetails: ((JObject)activity.Value).GetValue("data", StringComparison.OrdinalIgnoreCase)?.ToString(), timeSpan: turnContext.Activity.LocalTimestamp.Value.Offset);
-                        return CardHelper.GetEditTicketAdaptiveCard(environment: this.environment, cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, ticketDetail: editTicketDetail, showValidationMessage: true, localizer: this.localizer, existingTicketDetail: ticketDetail);
+                        return CardHelper.GetEditTicketAdaptiveCard(cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, ticketDetail: editTicketDetail, localizer: this.localizer, existingTicketDetail: ticketDetail);
                     }
 
                     break;
@@ -381,7 +381,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                     var expertChannelId = teamsChannelData.Team == null ? this.teamId : teamsChannelData.Team.Id;
                     if (expertChannelId != this.teamId)
                     {
-                        this.logger.LogInformation("Invalid team.Bot is not installed in this team.");
+                        this.logger.LogInformation("Invalid team. Bot is not installed in this team.");
                         await turnContext.SendActivityAsync(this.localizer.GetString("InvalidTeamText"));
                         return null;
                     }

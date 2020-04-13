@@ -22,5 +22,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Models
         /// </summary>
         [JsonProperty("type")]
         public string InputType { get; set; }
+
+        /// <summary>
+        /// Gets or sets displayName of control to be shown on adaptive card.
+        /// </summary>
+        [JsonProperty("displayName")]
+        public string DisplayName { get; set; }
     }
 }
