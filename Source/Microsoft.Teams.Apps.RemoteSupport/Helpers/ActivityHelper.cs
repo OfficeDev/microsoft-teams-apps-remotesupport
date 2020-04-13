@@ -338,7 +338,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                         // Update card with validation message.
                         newTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(message.Value?.ToString(), timeSpan: turnContext.Activity.LocalTimestamp.Value.Offset);
                         CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
-                        endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardConfiuration: cardTemplateJson, localizer: localizer, showValidationMessage: true, ticketDetail: newTicketDetail));
+                        endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardConfiguration: cardTemplateJson, localizer: localizer, showValidationMessage: true, ticketDetail: newTicketDetail));
                         await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
                     }
 

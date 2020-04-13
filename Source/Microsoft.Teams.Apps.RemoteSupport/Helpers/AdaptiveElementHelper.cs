@@ -27,16 +27,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         {
             var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonProperty);
             bool isVisible = true;
-            if (!string.IsNullOrEmpty(CardHelper.GetDictionaryValue(result, "isVisible")))
+            if (!string.IsNullOrEmpty(CardHelper.TryParseTicketDetailsKeyValuePair(result, "isVisible")))
             {
-                bool status = bool.TryParse(CardHelper.GetDictionaryValue(result, "isVisible"), out isVisible);
+                bool status = bool.TryParse(CardHelper.TryParseTicketDetailsKeyValuePair(result, "isVisible"), out isVisible);
             }
 
-            string color = CardHelper.GetDictionaryValue(result, "color");
+            string color = CardHelper.TryParseTicketDetailsKeyValuePair(result, "color");
             return new AdaptiveTextBlock()
             {
-                Id = CardHelper.GetDictionaryValue(result, "id"),
-                Text = CardHelper.GetDictionaryValue(result, "text"),
+                Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
+                Text = CardHelper.TryParseTicketDetailsKeyValuePair(result, "text"),
                 IsVisible = isVisible,
                 Color = string.IsNullOrEmpty(color) ? AdaptiveTextColor.Default : (AdaptiveTextColor)Enum.Parse(typeof(AdaptiveTextColor), color),
             };
@@ -51,13 +51,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         {
             var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonProperty);
             int maxLength = 500;
-            bool flag = int.TryParse(CardHelper.GetDictionaryValue(result, "maxLength"), out maxLength);
+            bool flag = int.TryParse(CardHelper.TryParseTicketDetailsKeyValuePair(result, "maxLength"), out maxLength);
 
             return new AdaptiveTextInput()
             {
-                Id = CardHelper.GetDictionaryValue(result, "id"),
-                Placeholder = CardHelper.GetDictionaryValue(result, "placeholder"),
-                Value = CardHelper.GetDictionaryValue(result, "value"),
+                Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
+                Placeholder = CardHelper.TryParseTicketDetailsKeyValuePair(result, "placeholder"),
+                Value = CardHelper.TryParseTicketDetailsKeyValuePair(result, "value"),
                 MaxLength = maxLength,
             };
         }
@@ -73,11 +73,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
             return new AdaptiveDateInput()
             {
-                Id = CardHelper.GetDictionaryValue(result, "id"),
-                Placeholder = CardHelper.GetDictionaryValue(result, "placeholder"),
-                Value = string.IsNullOrEmpty(CardHelper.GetDictionaryValue(result, "value")) ? DateTime.Now.ToString(CultureInfo.InvariantCulture) : CardHelper.GetDictionaryValue(result, "value"),
-                Max = CardHelper.GetDictionaryValue(result, "max"),
-                Min = CardHelper.GetDictionaryValue(result, "min"),
+                Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
+                Placeholder = CardHelper.TryParseTicketDetailsKeyValuePair(result, "placeholder"),
+                Value = string.IsNullOrEmpty(CardHelper.TryParseTicketDetailsKeyValuePair(result, "value")) ? DateTime.Now.ToString(CultureInfo.InvariantCulture) : CardHelper.TryParseTicketDetailsKeyValuePair(result, "value"),
+                Max = CardHelper.TryParseTicketDetailsKeyValuePair(result, "max"),
+                Min = CardHelper.TryParseTicketDetailsKeyValuePair(result, "min"),
             };
         }
 

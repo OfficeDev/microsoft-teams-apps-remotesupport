@@ -214,7 +214,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Request.
+        ///   Looks up a localized string similar to Edit request.
         /// </summary>
         public static string EditRequestTitle {
             get {

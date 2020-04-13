@@ -24,14 +24,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
         /// <summary>
         /// Get the create new ticket card.
         /// </summary>
-        /// <param name="cardConfiuration">Card configuration.</param>
+        /// <param name="cardConfiguration">Card configuration.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <param name="showValidationMessage">Represents whether to show validation message or not.</param>
         /// <param name="ticketDetail"> Information of the ticket which is being created.</param>
         /// <returns>Returns an attachment of new ticket.</returns>
-        public static Attachment GetNewTicketCard(CardConfigurationEntity cardConfiuration, IStringLocalizer<Strings> localizer, bool showValidationMessage = false, TicketDetail ticketDetail = null)
+        public static Attachment GetNewTicketCard(CardConfigurationEntity cardConfiguration, IStringLocalizer<Strings> localizer, bool showValidationMessage = false, TicketDetail ticketDetail = null)
         {
-            cardConfiuration = cardConfiuration ?? throw new ArgumentNullException(nameof(cardConfiuration));
+            cardConfiguration = cardConfiguration ?? throw new ArgumentNullException(nameof(cardConfiguration));
 
             string issueTitle = string.Empty;
             string issueDescription = string.Empty;
@@ -69,7 +69,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                 }
             }
 
-            ticketAdditionalFields = CardHelper.ConvertToAdaptiveCard(localizer, cardConfiuration.CardTemplate, showDateValidation);
+            ticketAdditionalFields = CardHelper.ConvertToAdaptiveCard(localizer, cardConfiguration.CardTemplate, showDateValidation);
 
             dynamicElements.AddRange(new List<AdaptiveElement>
             {
@@ -169,8 +169,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                                 Type = Constants.MessageBackActionType,
                                 Text = Constants.SendRequestAction,
                             },
-                            CardId = cardConfiuration?.CardId,
-                            TeamId = cardConfiuration?.TeamId,
+                            CardId = cardConfiguration?.CardId,
+                            TeamId = cardConfiguration?.TeamId,
                         },
                     },
                 },

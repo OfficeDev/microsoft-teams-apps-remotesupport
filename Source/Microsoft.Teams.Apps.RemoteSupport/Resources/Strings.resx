@@ -122,7 +122,7 @@
     <comment>Text to show in ME Thumbnail card</comment>
   </data>
   <data name="EditRequestTitle" xml:space="preserve">
-    <value>Edit Request</value>
+    <value>Edit request</value>
     <comment>Text to show on button</comment>
   </data>
   <data name="EditTicketActionText" xml:space="preserve">

@@ -61,7 +61,7 @@
       "type": "string",
       "minLength": 1,
       "metadata": {
-        "description":  "Experts team's Microsoft Team link to which the app will send support request notifications."
+        "description": "Experts team's Microsoft Team link to which the app will send support request notifications."
       }
     },
     "tokenEncryptionKey": {
@@ -69,7 +69,7 @@
       "minLength": 13,
       "defaultValue": "[concat(uniqueString(newGuid()), uniqueString(newGuid()))]",
       "metadata": {
-        "description": "A secret used to further encrypt stored tokens at rest."
+        "description": "Unique key use to create Symmetric security key for generating custom JWT for client authentication"
       }
     },
     "sku": {

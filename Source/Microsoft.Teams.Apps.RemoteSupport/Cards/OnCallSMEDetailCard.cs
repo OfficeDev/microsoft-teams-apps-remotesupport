@@ -128,7 +128,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                                 {
                                     new AdaptiveTextBlock
                                     {
-                                        Text = CardHelper.FormatDateStringToAdaptiveCardDateFormat(onCallSupportDetail.ModifiedOn?.ToString(CultureInfo.InvariantCulture)),
+                                        Text = CardHelper.AdaptiveTextParseWithDateTime(onCallSupportDetail.ModifiedOn?.ToString(CultureInfo.InvariantCulture)),
                                         Size = AdaptiveTextSize.Medium,
                                     },
                                 },

@@ -313,7 +313,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                     case Constants.ManageExpertsAction:
                         this.logger.LogInformation("Sending manage experts card.");
                         string customAPIAuthenticationToken = this.tokenHelper.GenerateAPIAuthToken(applicationBasePath: activity.ServiceUrl, fromId: activity.From.Id, jwtExpiryMinutes: 60);
-                        return CardHelper.GetTaskModuleResponse(applicationBasePath: this.appBaseUrl, customAPIAuthenticationToken: customAPIAuthenticationToken, taskModuleRequestData: taskModuleRequest, telemetryClient: this.telemetryClient, activityId: valuesforTaskModule?.ActivityId, localizer: this.localizer);
+                        return CardHelper.GetTaskModuleResponse(applicationBasePath: this.appBaseUrl, customAPIAuthenticationToken: customAPIAuthenticationToken, telemetryClient: this.telemetryClient, activityId: valuesforTaskModule?.ActivityId, localizer: this.localizer);
                     default:
                         this.logger.LogInformation($"Invalid command for task module fetch activity.Command is : {command} ");
                         await turnContext.SendActivityAsync(this.localizer.GetString("ErrorMessage"));

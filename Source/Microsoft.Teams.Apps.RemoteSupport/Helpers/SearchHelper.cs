@@ -215,9 +215,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <returns>Group chat Uri.</returns>
         private static string CreateGroupChat(string onCallSMENames, string ticketId, string requesterName, IStringLocalizer<Strings> localizer)
         {
-            var groupNameText = localizer.GetString("GroupName", ticketId);
-            var messageToSend = localizer.GetString("MessageContent", requesterName);
-            return $"https://teams.microsoft.com/l/chat/0/0?users={Uri.UnescapeDataString(onCallSMENames)}&topicName={Uri.EscapeDataString(groupNameText)}&message={Uri.EscapeDataString(messageToSend)}";
+            var groupChatTitle = localizer.GetString("GroupName", ticketId);
+            var previewText = localizer.GetString("MessageContent", requesterName);
+            return $"https://teams.microsoft.com/l/chat/0/0?users={Uri.EscapeDataString(onCallSMENames)}&topicName={Uri.EscapeDataString(groupChatTitle)}&message={Uri.EscapeDataString(previewText)}";
         }
     }
 }
