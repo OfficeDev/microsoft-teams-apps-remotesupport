@@ -25,7 +25,6 @@ interface IChoices {
 }
 
 const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
-    
     const [properties, setProperties] = React.useState<IChoices>({ type: 'Input.ChoiceSet', choicesJsx: [], option: '', placeholder: '', options: [], displayName: '', error : '' });
 
     const onAddComponent = (event: any) => {
@@ -108,7 +107,6 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 return;
             }
         }
-
 
         choicesJsx.push(
             <Flex key={properties.option + keyVal} padding="padding.medium">

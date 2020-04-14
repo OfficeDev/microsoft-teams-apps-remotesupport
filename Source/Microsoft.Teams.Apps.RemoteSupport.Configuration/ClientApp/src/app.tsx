@@ -11,7 +11,6 @@ import { runWithAdal } from 'react-adal';
 import { authContext } from './adal-config';
 
 export default class App extends React.Component<{}, {}> {
-
     constructor(props: any) {
         super(props);
     }
@@ -25,10 +24,9 @@ export default class App extends React.Component<{}, {}> {
     }
 }
 
-/**
-	* Renders the component
-*/
+/* renders the component */
 const DO_NOT_LOGIN = false;
+
 runWithAdal(authContext, () => {
     ReactDOM.render(
         <App />, document.getElementById("container"));

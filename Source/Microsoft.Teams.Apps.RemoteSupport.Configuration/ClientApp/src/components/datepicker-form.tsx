@@ -15,7 +15,6 @@ interface IPropertiesProps {
 
 
 const DatePickerForm: React.FunctionComponent<IPropertiesProps> = (props) => {
-
     const [properties, setProperties] = useState({ type: 'Input.Date', displayName: '' });
     const onAddComponent = (event: any) => {
         let result = props.onAddComponent(properties);

@@ -24,7 +24,6 @@ interface IState {
     resourceStringsLoaded: boolean,
 }
 
-
 /** Component for displaying home page of incident report configuration application. */
 class Home extends React.Component<{}, IState>
 {
@@ -55,9 +54,9 @@ class Home extends React.Component<{}, IState>
         this.getConfigurationsAsync();
     }
 
-/** 
-*  Get resource strings according to user locale.
-* */
+    /** 
+    *  Get resource strings according to user locale.
+    * */
     getResourceStrings = async () => {
         const resourceStringsResponse = await getResourceStrings(this.bearer!);
         if (resourceStringsResponse) {

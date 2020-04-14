@@ -163,7 +163,6 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
             return false;
         }
 
-
         let items = this.state.json;
         let uniqueDisplayNameCheck = (properties.displayName.toUpperCase() === this.props.resourceStrings.buildForm.titleText.toUpperCase()
             || properties.displayName.toUpperCase() === this.props.resourceStrings.buildForm.descriptionText.toUpperCase()
@@ -360,11 +359,5 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
         );
     };
 }
+
 export default BuildYourForm;
-
-
-
-
-
-
-

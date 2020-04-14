@@ -15,7 +15,6 @@ interface IPreviewProps {
     onDeleteComponent: (keyVal: number) => void
 }
 
-
 export const CheckBoxPreview: React.FunctionComponent<IPreviewProps> = (props) => {
     const onDeleteComponent = (keyVal: number) => {
         props.onDeleteComponent(keyVal);

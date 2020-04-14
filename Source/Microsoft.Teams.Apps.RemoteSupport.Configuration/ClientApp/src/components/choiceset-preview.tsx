@@ -16,7 +16,6 @@ interface IPreviewProps {
     onDeleteComponent: (keyVal: number) => void
 }
 
-
 export const ChoiceSetPreview: React.FunctionComponent<IPreviewProps> = (props) => {
     const onDeleteComponent = (keyVal: number) => {
         props.onDeleteComponent(keyVal);
