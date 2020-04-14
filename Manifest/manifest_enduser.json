@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0.0",
+  "id": "6b827722-686d-4c35-ab76-6c1bd61ec7d2",
+  "packageName": "com.microsoft.teams.remotesupport.users",
+  "developer": {
+    "name": "<<Developer name>>",
+    "websiteUrl": "<<WebsiteUrl>>",
+    "privacyUrl": "<<PrivacyUrl>>",
+    "termsOfUseUrl": "<<TermsOfUseUrl>>"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Remote Support"
+  },
+  "description": {
+    "short": "Helps request support and connect with experts quickly",
+    "full": "Request remote support quickly. Search requests and escalate to on call experts via group chat for urgent requests."
+  },
+  "accentColor": "#64A2CC",
+  "bots": [
+    {
+      "botId": "<<Bot id>>",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "New request",
+              "description": "Make a request to the on-call team"
+            }
+          ]
+        }
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<Bot id>>",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "activerequests",
+          "type": "query",
+          "title": "Active",
+          "description": "Search active requests",
+          "parameters": [
+            {
+              "name": "searchText",
+              "title": "Search",
+              "description": "Search requests"
+            }
+          ],
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "initialRun": true
+        },
+        {
+          "id": "closedrequests",
+          "type": "query",
+          "title": "Closed",
+          "description": "Search closed requests",
+          "parameters": [
+            {
+              "name": "searchText",
+              "title": "Search",
+              "description": "Search requests"
+            }
+          ],
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "initialRun": true
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<valid domains>>"
+  ]
+}

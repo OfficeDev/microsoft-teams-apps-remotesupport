@@ -3,51 +3,49 @@ page_type: sample
 languages:
 - csharp
 products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
+- office-teams
+description: Microsoft Teams bot and messaging extesion to search & report incidents and connect with specialists immediately
+urlFragment: microsoft-teams-apps-remotesupport
 ---
 
-# Official Microsoft Sample
+| [Documentation](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Home) | [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Deployment-Guide) | [Architecture](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Solution-Overview) |
+| ---- | ---- | ---- |
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+Most organizations have a team of remote individuals providing support to employees across the organization often distributed geographically. Support and collaboration in such instances is often ad-hoc, sub-optimal and inefficient. Common incumbent solutions include shared email-inbox where employees send in requests; a SharePoint site where requests are submitted; calling a dedicated helpline,  email or chat based messaging systems with a dedicated point person etc.
+ 
+Remote Support Bot provides all end users (internal users seeking help from a central team) an easy interface (bot) right within Microsoft Teams to:
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
+- Submit requests for support
+- Edit/withdraw requests
+- Notify end users about the status of their request
+- Escalate to a group chat that connects them immediately with an expert allowing real time video/screen-sharing ability
+- Route incoming requests in real-time to a specific/Teams channel which allows the members of the channel an easy interface (a bot within their teams/channel) to:
+- See in real-time all incoming requests with associated details
+- Start an instant chat or video call with the requester
+- Receive and act upon an incoming Teams group chat from the remote requester
+- Manage incoming requests within the central team (lightweight ticketing)
+- Manage the list of experts who will be on-call to receive incoming Teams group chat requests
 
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
+![Remote support new request](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/new-request.png)
 
-Give a short description for your sample here. What does it do and why is it important?
+![Remote support messaging extension](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/messaging-extension.png)
 
-## Contents
+## Legal Notice
+Please read the license terms applicable to this app template [here](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/blob/master/LICENSE). In addition to these terms, by using this app template you agree to the following:
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
+* You are responsible for complying with applicable privacy and security regulations related to use, collection and handling of any personal data by your app.  This includes complying with all internal privacy and security policies of your organization if your app is developed to be sideloaded internally within your organization.
 
-| File/folder       | Description                                |
-|-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
+* Microsoft will have no access to data collected through your app.  Microsoft will not be responsible for any data related incidents or data subject requests.
 
-## Prerequisites
+* Any trademarks or registered trademarks of Microsoft in the United States and/or other countries and logos included in this repository are the property of Microsoft, and the license for this project does not grant you rights to use any Microsoft names, logos or trademarks outside of this repository.  Microsoft’s general trademark guidelines can be found [here](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx)
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
+* Use of this template does not guarantee acceptance of your app to the Teams app store.  To make this app available in the Teams app store, you will have to comply with [submission process and validation](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/publish), and all associated requirements such as including your own privacy statement and terms of use for your app. 
 
-## Setup
+## Getting started
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+Begin with the [Solution overview](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Solution-overview) to read about what the app does and how it works.
 
-## Running the sample
-
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
-
-## Key concepts
-
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+When you're ready to try out Remote Support bot, or to use it in your own organization, follow the steps in the [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/DeployementGuide).
 
 ## Contributing
 

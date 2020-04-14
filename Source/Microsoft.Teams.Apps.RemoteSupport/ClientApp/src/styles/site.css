@@ -1,0 +1,71 @@
+﻿/*
+    <copyright file="style.css" company="Microsoft">
+    Copyright (c) Microsoft. All rights reserved.
+    </copyright>
+*/
+
+.container-div {
+	height: 96vh;
+	padding-left: 3.5rem;
+	padding-right: 2.5rem;
+	width: 100vw;
+	position: fixed;
+}
+
+.container-subdiv {
+	max-height: 70vh;
+	overflow-y: auto;
+	width: auto;
+}
+
+.container-subdiv-main {
+    max-height: 70vh;
+    width: auto;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: auto;
+	padding-bottom: 1.5rem;
+	padding-left: 2.5rem;
+	padding-right: 5rem;
+	align-content: flex-end;
+}
+
+.error {
+	position: fixed;
+	bottom: 3.2rem;
+	width: auto;
+	padding-bottom: 1.5rem;
+	padding-right: 5rem;
+	align-content: flex-end;
+}
+
+
+.title {
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+.margin-button {
+	margin-left: 3.5rem
+}
+
+.list-title {
+	margin-bottom: 1rem; 
+	margin-top: 2rem;
+}
+
+.list-width {
+	width: 38rem
+}
+
+.small-margin-left {
+	margin-left: 1rem
+}
+
+.error-container {
+	padding-top: 30vh
+}

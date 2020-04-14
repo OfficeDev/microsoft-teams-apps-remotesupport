@@ -1,0 +1,85 @@
+/*
+    <copyright file="theme.css" company="Microsoft">
+    Copyright (c) Microsoft. All rights reserved.
+    </copyright>
+*/
+
+.container-div {
+    height: 100vh;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    width: auto;
+    overflow: auto;
+}
+
+.dialog-container-div {
+    height: 60vh;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    width: auto;
+    overflow: auto;
+}
+
+.container-subdiv {
+    height: 82vh;
+    overflow-y:auto;
+    width: auto;
+}
+
+.menu {
+    border-bottom: 0px; 
+    margin-bottom: 1rem;
+    margin-top: 0.5rem
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: inherit;
+    padding-bottom: 1.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+
+.div-shadow {
+    border: 1px solid #E2E2E2;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+    border-radius: 3px;
+    border-radius: 3px;
+}
+
+.add-icon {
+    padding: 1rem;
+}
+
+.add-icon:hover {
+        cursor: pointer;
+}
+
+.preview-item{
+    padding: .5rem;
+}
+
+.preview-item:hover {
+    cursor: pointer;
+    background-color: #8B8CC7;
+}
+.medium-margin-top{
+    margin-top: 1rem;
+}
+.small-margin-right {
+    margin-right: 0.5rem;
+}
+.common-padding{
+    padding: 1rem;
+}
+
+.team-link {
+    margin-left: -18rem;
+    margin-top: 0.3rem;
+}
+
+.team-textbox-width {
+    width: 30rem;
+}
