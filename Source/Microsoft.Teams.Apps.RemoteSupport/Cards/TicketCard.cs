@@ -63,7 +63,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                     issueDescription = ticketDetail.Description;
                 }
 
-                if (ticketDetail.IssueOccuredOn == null || DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture)))
+                if (ticketDetail.IssueOccurredOn == null || DateTimeOffset.Compare(ticketDetail.IssueOccurredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccurredOn.ToString(CultureInfo.InvariantCulture)))
                 {
                     showDateValidation = true;
                 }
@@ -185,19 +185,29 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
         /// <summary>
         /// Card to show ticket details in 1:1 chat with bot after submitting request details.
         /// </summary>
+        /// <param name="cardElementMapping">Represents Adaptive card item element {Id, display name} mapping.</param>
         /// <param name="ticketDetail">New ticket values entered by user.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <param name="isEdited">flag that sets when card is edited.</param>
         /// <returns>An attachment with ticket details.</returns>
-        public static Attachment GetTicketDetailsForPersonalChatCard(TicketDetail ticketDetail, IStringLocalizer<Strings> localizer, bool isEdited = false)
+        public static Attachment GetTicketDetailsForPersonalChatCard(Dictionary<string, string> cardElementMapping, TicketDetail ticketDetail, IStringLocalizer<Strings> localizer, bool isEdited = false)
         {
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
+            cardElementMapping = cardElementMapping ?? throw new ArgumentNullException(nameof(cardElementMapping));
+
             Dictionary<string, string> ticketAdditionalDetail = JsonConvert.DeserializeObject<Dictionary<string, string>>(ticketDetail.AdditionalProperties);
             var dynamicElements = new List<AdaptiveElement>();
             var ticketAdditionalFields = new List<AdaptiveElement>();
+
             foreach (KeyValuePair<string, string> item in ticketAdditionalDetail)
             {
-                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(item.Key, item.Value));
+                string key = item.Key;
+                if (item.Key.Equals(Constants.IssueOccurredOnId, StringComparison.OrdinalIgnoreCase))
+                {
+                    key = localizer.GetString("FirstObservedText");
+                }
+
+                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(cardElementMapping.ContainsKey(key) ? cardElementMapping[key] : key, item.Value));
             }
 
             dynamicElements.AddRange(new List<AdaptiveElement>

@@ -10,7 +10,7 @@ import { isNullorWhiteSpace } from "../constants";
 import "../styles/theme.css";
 
 interface IPropertiesProps {
-    OnAddComponent: (properties: any) => boolean,
+    onAddComponent: (properties: any) => boolean,
     resourceStrings: any,
 }
 
@@ -28,7 +28,7 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
     
     const [properties, setProperties] = React.useState<IChoices>({ type: 'Input.ChoiceSet', choicesJsx: [], option: '', placeholder: '', options: [], displayName: '', error : '' });
 
-    const OnAddComponent = (event: any) => {
+    const onAddComponent = (event: any) => {
         if (properties.options.length < 2) {
             setProperties({
                 placeholder: properties.placeholder,
@@ -39,11 +39,10 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 displayName: properties.displayName,
                 error: props.resourceStrings.common.minimumItems
             });
-
             return;
         }
 
-        let result = props.OnAddComponent(properties);
+        let result = props.onAddComponent(properties);
         if (result) {
             setProperties({ type: 'Input.ChoiceSet', choicesJsx: [], option: '', placeholder: '', options: [], displayName: '', error: '' });
         }
@@ -79,7 +78,6 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 displayName: properties.displayName,
                 error: props.resourceStrings.dropdown.maxDropdownChoices
             });
-
             return;
         }
 
@@ -93,7 +91,6 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 displayName: properties.displayName,
                 error: props.resourceStrings.common.nonEmptyItem
             });
-
             return;
         }
         else {
@@ -108,7 +105,6 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     displayName: properties.displayName,
                     error: props.resourceStrings.common.duplicateItem
                 });
-
                 return;
             }
         }
@@ -160,7 +156,7 @@ const ChoiceSetForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     {properties.choicesJsx}
                 </Flex>
             </Flex.Item>
-            <Button content={props.resourceStrings.common.btnAddComponent} onClick={OnAddComponent} />
+            <Button content={props.resourceStrings.common.btnAddComponent} onClick={onAddComponent} />
         </Flex>
     );
 }

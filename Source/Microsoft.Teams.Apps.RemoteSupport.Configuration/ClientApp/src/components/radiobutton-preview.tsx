@@ -12,13 +12,13 @@ interface IPreviewProps {
     keyVal: number,
     displayName: string,
     options: Array<string>,
-    OnDeleteComponent: (keyVal: number) => void
+    onDeleteComponent: (keyVal: number) => void
 }
 
 
 export const RadioButtonPreview: React.FunctionComponent<IPreviewProps> = (props) => {
-    const OnDeleteComponent = (keyVal: number) => {
-        props.OnDeleteComponent(keyVal);
+    const onDeleteComponent = (keyVal: number) => {
+        props.onDeleteComponent(keyVal);
     }
 
     return (
@@ -29,7 +29,7 @@ export const RadioButtonPreview: React.FunctionComponent<IPreviewProps> = (props
                     <RadioGroup items={props.options} vertical className="medium-margin-top" />
                 </div>
             </Flex.Item>
-            <Icon className="common-padding" name='trash-can' onClick={() => OnDeleteComponent(props.keyVal)} />
+            <Icon className="common-padding" name='trash-can' onClick={() => onDeleteComponent(props.keyVal)} />
         </Flex>
     );
 }

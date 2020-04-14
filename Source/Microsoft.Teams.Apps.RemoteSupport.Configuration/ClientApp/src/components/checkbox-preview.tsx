@@ -12,13 +12,13 @@ interface IPreviewProps {
     keyVal: number,
     displayName: string,
     options: Array<string>,
-    OnDeleteComponent: (keyVal: number) => void
+    onDeleteComponent: (keyVal: number) => void
 }
 
 
 export const CheckBoxPreview: React.FunctionComponent<IPreviewProps> = (props) => {
-    const OnDeleteComponent = (keyVal: number) => {
-        props.OnDeleteComponent(keyVal);
+    const onDeleteComponent = (keyVal: number) => {
+        props.onDeleteComponent(keyVal);
     }
 
     return (
@@ -33,7 +33,7 @@ export const CheckBoxPreview: React.FunctionComponent<IPreviewProps> = (props) =
                     </div>
                 </div>
             </Flex.Item>
-            <Icon className="common-padding" name='trash-can' onClick={() => OnDeleteComponent(props.keyVal)} />
+            <Icon className="common-padding" name='trash-can' onClick={() => onDeleteComponent(props.keyVal)} />
         </Flex>
     );
 }

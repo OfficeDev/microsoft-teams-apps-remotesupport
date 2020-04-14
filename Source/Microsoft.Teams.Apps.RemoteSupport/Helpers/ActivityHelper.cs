@@ -13,9 +13,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using System.Threading.Tasks;
     using System.Xml;
     using AdaptiveCards;
-    using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.DataContracts;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Connector.Authentication;
@@ -49,6 +47,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="onCallSupportDetailSearchService">Provider to search on call support details in Azure Table Storage.</param>
         /// <param name="ticketDetailStorageProvider">Provider to store ticket details to Azure Table Storage.</param>
+        /// <param name="cardConfigurationStorageProvider">Provider to search card configuration details in Azure Table Storage.</param>
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <param name="appBaseUrl">Represents the Application base Uri.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
@@ -59,7 +58,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             ITurnContext<IMessageActivity> turnContext,
             IOnCallSupportDetailSearchService onCallSupportDetailSearchService,
             ITicketDetailStorageProvider ticketDetailStorageProvider,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ICardConfigurationStorageProvider cardConfigurationStorageProvider,
+            ILogger logger,
             string appBaseUrl,
             IStringLocalizer<Strings> localizer,
             CancellationToken cancellationToken)
@@ -68,7 +68,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             if (!string.IsNullOrEmpty(message.ReplyToId) && message.Value != null && ((JObject)message.Value).HasValues)
             {
                 logger.LogInformation($"Card submit in channel {message.Value?.ToString()}");
-                await OnAdaptiveCardSubmitInChannelAsync(message: message, turnContext: turnContext, ticketDetailStorageProvider: ticketDetailStorageProvider, logger: logger, appBaseUrl: appBaseUrl, localizer: localizer, cancellationToken: cancellationToken);
+                await OnAdaptiveCardSubmitInChannelAsync(message: message, turnContext: turnContext, ticketDetailStorageProvider: ticketDetailStorageProvider, cardConfigurationStorageProvider: cardConfigurationStorageProvider, logger: logger, appBaseUrl: appBaseUrl, localizer: localizer, cancellationToken: cancellationToken);
                 return;
             }
 
@@ -109,6 +109,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="message">A message in a conversation.</param>
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="ticketDetailStorageProvider">Provider to store ticket details to Azure Table Storage.</param>
+        /// <param name="cardConfigurationStorageProvider">Provider to search card configuration details in Azure Table Storage.</param>
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <param name="appBaseUrl">Represents the Application base Uri.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
@@ -118,7 +119,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             IMessageActivity message,
             ITurnContext<IMessageActivity> turnContext,
             ITicketDetailStorageProvider ticketDetailStorageProvider,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ICardConfigurationStorageProvider cardConfigurationStorageProvider,
+            ILogger logger,
             string appBaseUrl,
             IStringLocalizer<Strings> localizer,
             CancellationToken cancellationToken)
@@ -171,7 +173,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     ticketData.Severity = (int)(TicketSeverity)Enum.Parse(typeof(TicketSeverity), payload.RequestType);
                     ticketData.RequestType = payload.RequestType;
                     logger.LogInformation($"Received submit:  action={payload.RequestType} ticketId={payload.TicketId}");
-                    smeNotification = localizer.GetString("SmeSeveritystatus", ticketData.RequestType, message.From.Name);
+                    smeNotification = localizer.GetString("SmeSeverityStatus", ticketData.RequestType, message.From.Name);
                     userNotification = MessageFactory.Text(localizer.GetString("RequestActionTicketUserNotification", ticketData.TicketId));
                     break;
 
@@ -187,12 +189,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             await ticketDetailStorageProvider.UpsertTicketAsync(ticketData);
             logger.LogInformation($"Ticket {ticketData.TicketId} updated to status ({ticketData.TicketStatus}, {ticketData.AssignedToObjectId}) in store");
 
+            // Get card item element mappings
+            var cardElementMapping = await cardConfigurationStorageProvider.GetCardItemElementMappingAsync(ticketData.CardId);
+
             // Update the card in the SME team.
             Activity updateCardActivity = new Activity(ActivityTypes.Message)
             {
                 Id = ticketData.SmeTicketActivityId,
                 Conversation = new ConversationAccount { Id = ticketData.SmeConversationId },
-                Attachments = new List<Attachment> { new SmeTicketCard(ticketData).GetTicketDetailsForSMEChatCard(ticketData, appBaseUrl, localizer) },
+                Attachments = new List<Attachment> { new SmeTicketCard(ticketData).GetTicketDetailsForSMEChatCard(cardElementMapping, ticketData, appBaseUrl, localizer) },
             };
             ResourceResponse updateResponse = await turnContext.UpdateActivityAsync(updateCardActivity, cancellationToken);
             logger.LogInformation($"Card for ticket {ticketData.TicketId} updated to status ({ticketData.TicketStatus}, {ticketData.AssignedToObjectId}), activityId = {updateResponse.Id}");
@@ -217,10 +222,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// </summary>
         /// <param name="message">Message activity of bot.</param>
         /// <param name="turnContext">The turn context.</param>
-        /// <param name="telemetryClient">The Application Insights telemetry client. </param>
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <param name="cardConfigurationStorageProvider">Provider to search card configuration details in Azure Table Storage.</param>
-        /// <param name="environment">Hosting environment.</param>
         /// <param name="ticketGenerateStorageProvider">Provider to get ticket id to Azure Table Storage.</param>
         /// <param name="ticketDetailStorageProvider">Provider to store ticket details to Azure Table Storage.</param>
         /// <param name="microsoftAppCredentials">Microsoft Application credentials for Bot/ME.</param>
@@ -231,10 +234,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         internal static async Task OnMessageActivityInPersonalChatAsync(
             IMessageActivity message,
             ITurnContext<IMessageActivity> turnContext,
-            TelemetryClient telemetryClient,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ILogger logger,
             ICardConfigurationStorageProvider cardConfigurationStorageProvider,
-            IHostingEnvironment environment,
             ITicketIdGeneratorStorageProvider ticketGenerateStorageProvider,
             ITicketDetailStorageProvider ticketDetailStorageProvider,
             MicrosoftAppCredentials microsoftAppCredentials,
@@ -244,8 +245,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         {
             if (!string.IsNullOrEmpty(message.ReplyToId) && message.Value != null && ((JObject)message.Value).HasValues)
             {
-                telemetryClient.TrackTrace("Card submitted in 1:1 chat.");
-                await OnAdaptiveCardSubmitInPersonalChatAsync(message: message, turnContext: turnContext, ticketGenerateStorageProvider: ticketGenerateStorageProvider, ticketDetailStorageProvider: ticketDetailStorageProvider, cardConfigurationStorageProvider: cardConfigurationStorageProvider, microsoftAppCredentials: microsoftAppCredentials, logger: logger, appBaseUrl: appBaseUrl, environment: environment, localizer: localizer, cancellationToken: cancellationToken);
+                logger.LogInformation("Card submitted in 1:1 chat.");
+                await OnAdaptiveCardSubmitInPersonalChatAsync(message, turnContext, ticketGenerateStorageProvider, ticketDetailStorageProvider, cardConfigurationStorageProvider, microsoftAppCredentials, logger, appBaseUrl, localizer, cancellationToken);
                 return;
             }
 
@@ -285,7 +286,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="microsoftAppCredentials">Microsoft Application credentials for Bot/ME.</param>
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <param name="appBaseUrl">Represents the Application base Uri.</param>
-        /// <param name="environment">Hosting environment.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A task that handles submit action in 1:1 chat.</returns>
@@ -296,9 +296,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             ITicketDetailStorageProvider ticketDetailStorageProvider,
             ICardConfigurationStorageProvider cardConfigurationStorageProvider,
             MicrosoftAppCredentials microsoftAppCredentials,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ILogger logger,
             string appBaseUrl,
-            IHostingEnvironment environment,
             IStringLocalizer<Strings> localizer,
             CancellationToken cancellationToken)
         {
@@ -327,8 +326,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                         }
 
                         logger.LogInformation("New request created with ticket Id:" + newTicketDetail.TicketId);
-                        endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(newTicketDetail, localizer, false));
-                        await CardHelper.SendRequestCardToSMEChannelAsync(turnContext: turnContext, ticketDetail: newTicketDetail, logger: logger, ticketDetailStorageProvider: ticketDetailStorageProvider, applicationBasePath: appBaseUrl, localizer, teamId: cardDetail?.TeamId, microsoftAppCredentials: microsoftAppCredentials, cancellationToken: cancellationToken);
+
+                        // Get card item element mappings
+                        var carditemElementMapping = await cardConfigurationStorageProvider.GetCardItemElementMappingAsync(cardDetail?.CardId);
+                        endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(carditemElementMapping, newTicketDetail, localizer, false));
+                        await CardHelper.SendRequestCardToSMEChannelAsync(turnContext: turnContext, ticketDetail: newTicketDetail, logger: logger, ticketDetailStorageProvider: ticketDetailStorageProvider, applicationBasePath: appBaseUrl, cardElementMapping: carditemElementMapping, localizer, teamId: cardDetail?.TeamId, microsoftAppCredentials: microsoftAppCredentials, cancellationToken: cancellationToken);
                         await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(localizer.GetString("EndUserNotificationText", newTicketDetail.TicketId)));
@@ -369,7 +371,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                     logger.LogInformation("Withdrawn the ticket:" + ticketDetail.TicketId);
                     IMessageActivity smeWithdrawNotification = MessageFactory.Text(localizer.GetString("SmeWithdrawNotificationText", ticketDetail.RequesterName));
-                    await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeWithdrawNotification, appBaseUrl, localizer, logger, cancellationToken);
+                    var itemElementMapping = await cardConfigurationStorageProvider.GetCardItemElementMappingAsync(ticketDetail?.CardId);
+                    await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeWithdrawNotification, appBaseUrl, itemElementMapping, localizer, logger, cancellationToken);
                     await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);
                     break;
             }
@@ -390,7 +393,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
            IList<ChannelAccount> membersAdded,
            ITurnContext<IConversationUpdateActivity> turnContext,
            MicrosoftAppCredentials microsoftAppCredentials,
-           ILogger<RemoteSupportActivityHandler> logger,
+           ILogger logger,
            string appBaseUrl,
            IStringLocalizer<Strings> localizer,
            CancellationToken cancellationToken)
@@ -419,7 +422,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         internal static async Task OnMembersAddedToPersonalChatAsync(
             IList<ChannelAccount> membersAdded,
             ITurnContext<IConversationUpdateActivity> turnContext,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ILogger logger,
             string appBaseUrl,
             IStringLocalizer<Strings> localizer)
         {
@@ -445,7 +448,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         internal static async Task<Activity> SendMentionActivityAsync(
             List<string> onCallExpertsEmails,
             ITurnContext<IInvokeActivity> turnContext,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ILogger logger,
             IStringLocalizer<Strings> localizer,
             CancellationToken cancellationToken)
         {

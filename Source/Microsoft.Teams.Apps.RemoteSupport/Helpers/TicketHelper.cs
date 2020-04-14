@@ -26,11 +26,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         {
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
             if (updatedTicketDetail == null || string.IsNullOrWhiteSpace(updatedTicketDetail.Title) || string.IsNullOrWhiteSpace(updatedTicketDetail.Description) ||
-                updatedTicketDetail.IssueOccuredOn == null || (DateTimeOffset.Compare(updatedTicketDetail.IssueOccuredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(updatedTicketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture))))
+                updatedTicketDetail.IssueOccurredOn == null || (DateTimeOffset.Compare(updatedTicketDetail.IssueOccurredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(updatedTicketDetail.IssueOccurredOn.ToString(CultureInfo.InvariantCulture))))
             {
                 return false;
             }
-            else if (existingTicketDetail != null && DateTimeOffset.Compare(existingTicketDetail.IssueOccuredOn, ConvertToDateTimeoffset(updatedTicketDetail.IssueOccuredOn, turnContext.Activity.LocalTimestamp.Value.Offset)) < 0)
+            else if (existingTicketDetail != null && DateTimeOffset.Compare(existingTicketDetail.IssueOccurredOn, ConvertToDateTimeoffset(updatedTicketDetail.IssueOccurredOn, turnContext.Activity.LocalTimestamp.Value.Offset)) < 0)
             {
                 return false;
             }
@@ -49,13 +49,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         {
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
-            if (ticketDetail.IssueOccuredOn == DateTimeOffset.MinValue || taskModuleResponseValues?.IssueOccuredOn == DateTimeOffset.MinValue)
+            if (ticketDetail.IssueOccurredOn == DateTimeOffset.MinValue || taskModuleResponseValues?.IssueOccurredOn == DateTimeOffset.MinValue)
             {
-                ticketDetail.IssueOccuredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
             }
             else
             {
-                ticketDetail.IssueOccuredOn = ConvertToDateTimeoffset(taskModuleResponseValues.IssueOccuredOn, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(taskModuleResponseValues.IssueOccurredOn, turnContext.Activity.LocalTimestamp.Value.Offset);
             }
 
             ticketDetail.Description = taskModuleResponseValues?.Description;
@@ -83,13 +83,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
 
             ticketDetail.CreatedOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
-            if (ticketDetail.IssueOccuredOn == DateTimeOffset.MinValue)
+            if (ticketDetail.IssueOccurredOn == DateTimeOffset.MinValue)
             {
-                ticketDetail.IssueOccuredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
             }
             else
             {
-                ticketDetail.IssueOccuredOn = ConvertToDateTimeoffset(ticketDetail.IssueOccuredOn, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(ticketDetail.IssueOccurredOn, turnContext.Activity.LocalTimestamp.Value.Offset);
             }
 
             ticketDetail.CreatedByObjectId = turnContext.Activity.From.AadObjectId;

@@ -8,14 +8,14 @@ import React, { useState } from "react";
 import { Button, Input, Text, Flex } from '@fluentui/react';
 
 interface IPropertiesProps {
-    OnAddComponent: (properties: any) => boolean,
+    onAddComponent: (properties: any) => boolean,
     resourceStrings: any,
 }
 
 const InputTextForm: React.FunctionComponent<IPropertiesProps> = (props) => {
     const [properties, setProperties] = useState({ type: 'Input.Text', placeholder: '', displayName: '' });
-    const OnAddComponent = (event: any) => {
-        let result = props.OnAddComponent(properties);
+    const onAddComponent = (event: any) => {
+        let result = props.onAddComponent(properties);
         if (result) {
             setProperties({ type: 'Input.Text', placeholder: '', displayName: '' });
         }
@@ -31,7 +31,7 @@ const InputTextForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     <Input fluid placeholder={props.resourceStrings.placeholderText} value={properties.placeholder} onChange={(e: any) => { setProperties({ ...properties, placeholder: e.target.value }) }} />
                 </>
             </Flex.Item>
-            <Button content="Add Component" onClick={OnAddComponent} />
+            <Button content="Add Component" onClick={onAddComponent} />
         </>
     );
 }

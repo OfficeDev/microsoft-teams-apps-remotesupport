@@ -35,21 +35,32 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
         /// <summary>
         /// Returns an attachment based on the state and information of the ticket.
         /// </summary>
+        /// <param name="cardElementMapping">Represents Adaptive card item element {Id, display name} mapping.</param>
         /// <param name="ticketDetail"> ticket values entered by user.</param>
         /// <param name="applicationBasePath">Represents the Application base URI.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <returns>Returns the attachment that will be sent in a message.</returns>
-        public Attachment GetTicketDetailsForSMEChatCard(TicketDetail ticketDetail, string applicationBasePath, IStringLocalizer<Strings> localizer)
+        public Attachment GetTicketDetailsForSMEChatCard(Dictionary<string, string> cardElementMapping, TicketDetail ticketDetail, string applicationBasePath, IStringLocalizer<Strings> localizer)
         {
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
+            cardElementMapping = cardElementMapping ?? throw new ArgumentNullException(nameof(cardElementMapping));
 
             Dictionary<string, string> ticketAdditionalDetail = JsonConvert.DeserializeObject<Dictionary<string, string>>(ticketDetail.AdditionalProperties);
             var dynamicElements = new List<AdaptiveElement>();
             var ticketAdditionalFields = new List<AdaptiveElement>();
 
-            foreach (KeyValuePair<string, string> item in ticketAdditionalDetail)
+            foreach (KeyValuePair<string, string> ticket in ticketAdditionalDetail)
             {
-                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(item.Key, item.Value));
+                string key = ticket.Key;
+
+                // Issue occured on text block name needs to be fetched from card templates
+                // here IssueOccurredOn is the id of text block
+                if (ticket.Key.Equals(Constants.IssueOccurredOnId, StringComparison.OrdinalIgnoreCase))
+                {
+                    key = localizer.GetString("FirstObservedText");
+                }
+
+                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(cardElementMapping.ContainsKey(key) ? cardElementMapping[key] : key, ticket.Value));
             }
 
             dynamicElements.AddRange(new List<AdaptiveElement>
@@ -78,7 +89,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                             {
                                 new AdaptiveImage
                                 {
-                                    Url = new Uri(string.Format(CultureInfo.InvariantCulture, "{0}/images/Urgent.png", applicationBasePath?.Trim('/'))),
+                                    Url = new Uri(string.Format(CultureInfo.InvariantCulture, "{0}/Artifacts/Urgent.png", applicationBasePath?.Trim('/'))),
                                     Size = AdaptiveImageSize.Large,
                                     AltText = localizer.GetString("UrgentText"),
                                     IsVisible = ticketDetail.RequestType == Constants.UrgentString,

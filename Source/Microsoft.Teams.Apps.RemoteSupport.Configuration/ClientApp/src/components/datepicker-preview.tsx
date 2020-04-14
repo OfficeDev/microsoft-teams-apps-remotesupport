@@ -11,12 +11,12 @@ import "../styles/theme.css";
 interface IPreviewProps {
     keyVal: number,
     displayName : string,
-    OnDeleteComponent: (keyVal: number) => void
+    onDeleteComponent: (keyVal: number) => void
 }
 
 export const DatePickerPreview: React.FunctionComponent<IPreviewProps> = (props) => {
-    const OnDeleteComponent = (keyVal: number) => {
-        props.OnDeleteComponent(keyVal);
+    const onDeleteComponent = (keyVal: number) => {
+        props.onDeleteComponent(keyVal);
     }
 
     return (
@@ -28,7 +28,7 @@ export const DatePickerPreview: React.FunctionComponent<IPreviewProps> = (props)
                     <Icon name="calendar" className="common-padding" color="blue" />
                 </div>
             </Flex.Item>
-            <Icon className="common-padding" name='trash-can' onClick={() => OnDeleteComponent(props.keyVal)} />
+            <Icon className="common-padding" name='trash-can' onClick={() => onDeleteComponent(props.keyVal)} />
         </Flex>
     );
 }

@@ -12,17 +12,17 @@ import { authContext } from './adal-config';
 
 export default class App extends React.Component<{}, {}> {
 
-	constructor(props: any) {
-		super(props);
-	}
+    constructor(props: any) {
+        super(props);
+    }
 
-	render(): JSX.Element {
-		return (
-				<div className="appContainer">
-					<AppRoute />
-				</div>
-		);
-	}
+    render(): JSX.Element {
+        return (
+            <div className="appContainer">
+                <AppRoute />
+            </div>
+        );
+    }
 }
 
 /**
@@ -30,6 +30,6 @@ export default class App extends React.Component<{}, {}> {
 */
 const DO_NOT_LOGIN = false;
 runWithAdal(authContext, () => {
-	ReactDOM.render(
-		<App />, document.getElementById("container"));
+    ReactDOM.render(
+        <App />, document.getElementById("container"));
 }, DO_NOT_LOGIN);

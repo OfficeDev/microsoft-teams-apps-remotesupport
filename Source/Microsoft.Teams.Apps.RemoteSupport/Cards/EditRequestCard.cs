@@ -60,11 +60,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                 issueDescription = ticketDetail.Description;
             }
 
-            if (ticketDetail.IssueOccuredOn == null || DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccuredOn.ToString(CultureInfo.InvariantCulture)))
+            if (ticketDetail.IssueOccurredOn == null || DateTimeOffset.Compare(ticketDetail.IssueOccurredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccurredOn.ToString(CultureInfo.InvariantCulture)))
             {
                 showDateValidation = true;
             }
-            else if (existingTicketDetail != null && DateTimeOffset.Compare(ticketDetail.IssueOccuredOn, existingTicketDetail.IssueOccuredOn) > 0)
+            else if (existingTicketDetail != null && DateTimeOffset.Compare(ticketDetail.IssueOccurredOn, existingTicketDetail.IssueOccurredOn) > 0)
             {
                 showDateValidation = true;
             }

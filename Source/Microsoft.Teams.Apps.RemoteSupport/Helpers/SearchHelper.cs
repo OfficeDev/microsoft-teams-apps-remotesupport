@@ -171,7 +171,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                             new AdaptiveOpenUrlAction
                             {
                                 Title = localizer.GetString("GoToOriginalThreadButtonText"),
-                                Url = new Uri(CreateDeeplinkToThread(ticket.SmeConversationId)),
+                                Url = new Uri(CreateDeepLinkToThread(ticket.SmeConversationId)),
                             });
                     }
 
@@ -197,7 +197,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// </summary>
         /// <param name="threadConversationId">The thread along with message Id stored in storage table.</param>
         /// <returns>Original thread Uri.</returns>
-        private static string CreateDeeplinkToThread(string threadConversationId)
+        private static string CreateDeepLinkToThread(string threadConversationId)
         {
             string[] threadAndMessageId = threadConversationId.Split(";");
             var threadId = threadAndMessageId[0];

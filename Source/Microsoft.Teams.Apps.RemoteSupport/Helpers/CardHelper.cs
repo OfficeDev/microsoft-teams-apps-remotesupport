@@ -11,7 +11,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using System.Threading;
     using System.Threading.Tasks;
     using AdaptiveCards;
-    using Microsoft.ApplicationInsights;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Connector.Authentication;
@@ -78,11 +77,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// </summary>
         /// <param name="applicationBasePath">Represents the Application base Uri.</param>
         /// <param name="customAPIAuthenticationToken">JWT token.</param>
-        /// <param name="telemetryClient">The Application Insights telemetry client.</param>
+        /// <param name="telemetryInstrumentationKey">The Application Insights telemetry client instrumentation key.</param>
         /// <param name="activityId">Task module activity Id.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <returns>Returns task module response.</returns>
-        public static TaskModuleResponse GetTaskModuleResponse(string applicationBasePath, string customAPIAuthenticationToken, TelemetryClient telemetryClient, string activityId, IStringLocalizer<Strings> localizer)
+        public static TaskModuleResponse GetTaskModuleResponse(string applicationBasePath, string customAPIAuthenticationToken, string telemetryInstrumentationKey, string activityId, IStringLocalizer<Strings> localizer)
         {
             return new TaskModuleResponse
             {
@@ -90,7 +89,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 {
                     Value = new TaskModuleTaskInfo()
                     {
-                        Url = $"{applicationBasePath}/manage-experts?token={customAPIAuthenticationToken}&telemetry={telemetryClient?.InstrumentationKey}&activityId={activityId}&theme=" + "{theme}&locale=" + "{locale}",
+                        Url = $"{applicationBasePath}/manage-experts?token={customAPIAuthenticationToken}&telemetry={telemetryInstrumentationKey}&activityId={activityId}&theme={{theme}}&locale={{locale}}",
                         Height = TaskModuleHeight,
                         Width = TaskModuleWidth,
                         Title = localizer.GetString("ManageExpertsTitle"),
@@ -155,6 +154,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <param name="ticketDetailStorageProvider">Provider to store ticket details to Azure Table Storage.</param>
         /// <param name="applicationBasePath">Represents the Application base Uri.</param>
+        /// <param name="cardElementMapping">Represents Adaptive card item element {Id, display name} mapping.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <param name="teamId">Represents unique id of a Team.</param>
         /// <param name="microsoftAppCredentials">Microsoft Application credentials for Bot/ME.</param>
@@ -163,15 +163,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         public static async Task<ConversationResourceResponse> SendRequestCardToSMEChannelAsync(
             ITurnContext<IMessageActivity> turnContext,
             TicketDetail ticketDetail,
-            ILogger<RemoteSupportActivityHandler> logger,
+            ILogger logger,
             ITicketDetailStorageProvider ticketDetailStorageProvider,
             string applicationBasePath,
+            Dictionary<string, string> cardElementMapping,
             IStringLocalizer<Strings> localizer,
             string teamId,
             MicrosoftAppCredentials microsoftAppCredentials,
             CancellationToken cancellationToken)
         {
-            Attachment smeTeamCard = new SmeTicketCard(ticketDetail).GetTicketDetailsForSMEChatCard(ticketDetail, applicationBasePath, localizer);
+            Attachment smeTeamCard = new SmeTicketCard(ticketDetail).GetTicketDetailsForSMEChatCard(cardElementMapping, ticketDetail, applicationBasePath, localizer);
             ConversationResourceResponse resourceResponse = await SendCardToTeamAsync(turnContext, smeTeamCard, teamId, microsoftAppCredentials, cancellationToken);
 
             if (resourceResponse == null)
@@ -327,11 +328,20 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="ticketDetail"> Ticket details entered by user.</param>
         /// <param name="messageActivity">Message activity of bot.</param>
         /// <param name="applicationBasePath"> Represents the Application base Uri.</param>
+        /// <param name="cardElementMapping">Represents Adaptive card item element {Id, display name} mapping.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <param name="logger">Telemetry logger.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>task that updates card.</returns>
-        public static async Task UpdateSMECardAsync(ITurnContext turnContext, TicketDetail ticketDetail, IMessageActivity messageActivity, string applicationBasePath, IStringLocalizer<Strings> localizer, ILogger<RemoteSupportActivityHandler> logger, CancellationToken cancellationToken)
+        public static async Task UpdateSMECardAsync(
+            ITurnContext turnContext,
+            TicketDetail ticketDetail,
+            IMessageActivity messageActivity,
+            string applicationBasePath,
+            Dictionary<string, string> cardElementMapping,
+            IStringLocalizer<Strings> localizer,
+            ILogger logger,
+            CancellationToken cancellationToken)
         {
             try
             {
@@ -343,7 +353,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 {
                     Id = ticketDetail?.SmeTicketActivityId,
                     Conversation = new ConversationAccount { Id = ticketDetail.SmeConversationId },
-                    Attachments = new List<Attachment> { new SmeTicketCard(ticketDetail).GetTicketDetailsForSMEChatCard(ticketDetail, applicationBasePath, localizer) },
+                    Attachments = new List<Attachment> { new SmeTicketCard(ticketDetail).GetTicketDetailsForSMEChatCard(cardElementMapping, ticketDetail, applicationBasePath, localizer) },
                 };
                 await turnContext.Adapter.UpdateActivityAsync(turnContext, updateCardActivity, cancellationToken);
                 messageActivity.Conversation = new ConversationAccount { Id = ticketDetail.SmeConversationId };
@@ -357,7 +367,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     logger.LogError(ex, $"failed to update activity due to conversation id not found {nameof(UpdateSMECardAsync)}");
                 }
 
-                logger.LogError(ex, $"error occured in {nameof(UpdateSMECardAsync)}");
+                logger.LogError(ex, $"error occurred in {nameof(UpdateSMECardAsync)}");
             }
         }
 
@@ -456,7 +466,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 if (templateMapping.InputType != "TextBlock")
                 {
                     // get first observed display text if parsed from appSettings; rest all values will be set up directly in JSON payload.
-                    if (templateMapping.Id == "IssueOccuredOn")
+                    if (templateMapping.Id == Constants.IssueOccurredOnId)
                     {
                         templateMapping.DisplayName = localizer.GetString("FirstObservedText");
                     }

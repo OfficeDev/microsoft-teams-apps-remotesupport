@@ -66,14 +66,17 @@
     <Content Remove="Properties\launchSettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wwwroot\images\AppIcon.png" />
-    <Content Include="wwwroot\images\Urgent.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <AdditionalFiles Include="..\..\Build\stylecop.json" Link="stylecop.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\Artifacts\AppIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\Artifacts\Urgent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

@@ -146,5 +146,10 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common
         /// Closed requests command id in the manifest file.
         /// </summary>
         public const string ClosedCommandId = "closedrequests";
+
+        /// <summary>
+        /// Text block card id for first observed on text in remote support request card
+        /// </summary>
+        public const string IssueOccurredOnId = "IssueOccurredOn";
     }
 }

@@ -13,6 +13,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
     using Microsoft.Extensions.Options;
     using Microsoft.Teams.Apps.RemoteSupport.Common.Models;
     using Microsoft.WindowsAzure.Storage.Table;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// Card configuration helps in fetching and storing dynamic card configuration in Azure table storage.
@@ -50,7 +52,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             }
             while (continuationToken != null);
 
-            return configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
+            var cardConfigurationEntity = configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
+            if (cardConfigurationEntity == null)
+            {
+                return null;
+            }
+            else
+            {
+                cardConfigurationEntity.CardTemplate = cardConfigurationEntity.CardTemplate.Replace("\\", string.Empty);
+                return cardConfigurationEntity;
+            }
         }
 
         /// <summary>
@@ -76,7 +87,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             }
             while (continuationToken != null);
 
-            return configurations.Where(configuration => configuration.CardId == cardId).FirstOrDefault();
+            var cardConfigurationEntity = configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
+            if (cardConfigurationEntity == null)
+            {
+                return null;
+            }
+            else
+            {
+                cardConfigurationEntity.CardTemplate = cardConfigurationEntity.CardTemplate.Replace("\\", string.Empty);
+                return cardConfigurationEntity;
+            }
         }
 
         /// <summary>
@@ -90,6 +110,25 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             TableOperation addOrUpdateOperation = TableOperation.InsertOrReplace(configurationEntity);
             var result = await this.CloudTable.ExecuteAsync(addOrUpdateOperation);
             return result.Result as CardConfigurationEntity;
+        }
+
+        /// <summary>
+        /// Returns the Adaptive card item element {Id, display name} mapping present in the Azure table storage by CardId
+        /// </summary>
+        /// <param name="cardId">Unique identifier of the card configuration.</param>
+        /// <returns>A <see cref="Task{TResult}"/>configuration details.</returns>
+        public async Task<Dictionary<string, string>> GetCardItemElementMappingAsync(string cardId)
+        {
+            Dictionary<string, string> cardElementMapping = new Dictionary<string, string>();
+            CardConfigurationEntity configuration = await this.GetConfigurationsByCardIdAsync(cardId);
+            var cardTemplates = JsonConvert.DeserializeObject<List<JObject>>(configuration?.CardTemplate);
+            foreach (var template in cardTemplates)
+            {
+                var templateMapping = template.ToObject<AdaptiveCardPlaceHolderMapper>();
+                cardElementMapping.Add(templateMapping.Id, templateMapping.DisplayName);
+            }
+
+            return cardElementMapping;
         }
 
         /// <summary>

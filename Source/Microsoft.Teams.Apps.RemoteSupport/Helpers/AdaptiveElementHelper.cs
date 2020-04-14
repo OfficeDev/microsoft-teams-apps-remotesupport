@@ -21,9 +21,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// Converts JSON property to adaptive card TextBlock element.
         /// </summary>
         /// <param name="cardElementTemplate">TextBlock item element json property.</param>
-        /// <param name="showDateValidation">true if need to show validation message else false.</param>
         /// <returns>Returns adaptive card TextBlock item element.</returns>
-        public static AdaptiveTextBlock ConvertToAdaptiveTextBlock(string cardElementTemplate, bool showDateValidation = false)
+        public static AdaptiveTextBlock ConvertToAdaptiveTextBlock(string cardElementTemplate)
         {
             var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(cardElementTemplate);
             bool isVisible = true;
@@ -33,12 +32,22 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             }
 
             string color = CardHelper.TryParseTicketDetailsKeyValuePair(result, "color");
+            AdaptiveTextColor textColor;
+            if (CardHelper.TryParseTicketDetailsKeyValuePair(result, "id") == "DateValidationMessage")
+            {
+                textColor = AdaptiveTextColor.Attention;
+            }
+            else
+            {
+                textColor = string.IsNullOrEmpty(color) ? AdaptiveTextColor.Default : (AdaptiveTextColor)Enum.Parse(typeof(AdaptiveTextColor), color);
+            }
+
             return new AdaptiveTextBlock()
             {
                 Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
                 Text = CardHelper.TryParseTicketDetailsKeyValuePair(result, "text"),
                 IsVisible = isVisible,
-                Color = string.IsNullOrEmpty(color) ? AdaptiveTextColor.Default : (AdaptiveTextColor)Enum.Parse(typeof(AdaptiveTextColor), color),
+                Color = textColor,
             };
         }
 

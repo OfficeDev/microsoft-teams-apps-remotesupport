@@ -94,8 +94,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Models
         /// Gets or sets the date and time on which the request was first occurred on.
         /// </summary>
         [IsSortable]
-        [JsonProperty("IssueOccuredOn")]
-        public virtual DateTimeOffset IssueOccuredOn { get; set; }
+        [JsonProperty("IssueOccurredOn")]
+        public DateTimeOffset IssueOccurredOn { get; set; }
 
         /// <summary>
         /// Gets or sets the AAD object id of the user that last modified the ticket.

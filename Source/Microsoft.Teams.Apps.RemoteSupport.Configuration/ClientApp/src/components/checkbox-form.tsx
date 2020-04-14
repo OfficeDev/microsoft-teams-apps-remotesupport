@@ -10,7 +10,7 @@ import { isNullorWhiteSpace } from "../constants";
 import "../styles/theme.css";
 
 interface IPropertiesProps {
-    OnAddComponent: (properties: any) => boolean,
+    onAddComponent: (properties: any) => boolean,
     resourceStrings: any,
 }
 
@@ -25,10 +25,10 @@ interface IChoices {
 }
 
 const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
-    
-    const [properties, setProperties] = React.useState<IChoices>({ type: 'Input.ChoiceSet', choicesJsx: [], option: '', options: [], isMultiSelect: true, displayName:'', error: '' });
 
-    const OnAddComponent = (event: any) => {
+    const [properties, setProperties] = React.useState<IChoices>({ type: 'Input.ChoiceSet', choicesJsx: [], option: '', options: [], isMultiSelect: true, displayName: '', error: '' });
+
+    const onAddComponent = (event: any) => {
         if (properties.options.length < 2) {
             setProperties({
                 choicesJsx: properties.choicesJsx,
@@ -39,21 +39,20 @@ const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 displayName: properties.displayName,
                 error: props.resourceStrings.common.minimumItems
             });
-
             return;
         }
-        let result = props.OnAddComponent(properties);
+        let result = props.onAddComponent(properties);
         if (result) {
             setProperties({ type: 'Input.ChoiceSet', choicesJsx: [], option: '', options: [], isMultiSelect: true, displayName: '', error: '' });
         }
-        
+
     }
 
     const onDeleteOption = (key: number, option: string) => {
         let result = properties.choicesJsx.find(x => x.key === option + key.toString());
         properties.choicesJsx.splice(properties.choicesJsx.indexOf(result!), 1);
-        properties.options.splice(key, 1); 
-     
+        properties.options.splice(key, 1);
+
         setProperties({
             choicesJsx: properties.choicesJsx,
             type: properties.type,
@@ -81,7 +80,6 @@ const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 displayName: properties.displayName,
                 error: props.resourceStrings.checkbox.maxCheckBoxChoices
             });
-
             return;
         }
 
@@ -95,7 +93,6 @@ const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                 displayName: properties.displayName,
                 error: props.resourceStrings.common.nonEmptyItem
             });
-
             return;
         }
         else {
@@ -110,7 +107,6 @@ const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     displayName: properties.displayName,
                     error: props.resourceStrings.common.duplicateItem
                 });
-
                 return;
             }
         }
@@ -147,7 +143,7 @@ const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     <Text content={props.resourceStrings.checkbox.checkBoxOptions} />
                     <div>
                         <Input placeholder="Text" value={properties.option} onChange={(e: any) => { setProperties({ ...properties, option: e.target.value }) }} />
-                        <Icon name="add" onClick={onAddOption} className = "add-icon" />
+                        <Icon name="add" onClick={onAddOption} className="add-icon" />
                     </div>
                 </>
             </Flex.Item>
@@ -157,7 +153,7 @@ const CheckBoxForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     {properties.choicesJsx}
                 </Flex>
             </Flex.Item>
-            <Button content={props.resourceStrings.common.btnAddComponent} onClick={OnAddComponent} />
+            <Button content={props.resourceStrings.common.btnAddComponent} onClick={onAddComponent} />
         </Flex>
     );
 }

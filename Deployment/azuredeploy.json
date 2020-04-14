@@ -250,8 +250,8 @@
               "value": "[parameters('teamLink')]"
             },
             {
-                "name": "Card:DefaultCardTemplate",
-                "value": "[[{\"type\": \"Input.Date\",\"id\": \"First observed on_IssueOccuredOn\",\"max\":\"_maxDate_\",\"value\": \"_issueDate_\"},{\"type\": \"TextBlock\",\"id\": \"Validation Message_ValidationMessage\",\"text\": \"_dateValidationText_\",\"spacing\": \"None\",\"color\": \"Attention\",\"isVisible\": \"_showDateValidation_\"}]"
+              "name": "Card:DefaultCardTemplate",
+              "value": "[[{\"type\": \"Input.Date\",\"displayName\":\"_FirstObservedOn_\",\"id\": \"IssueOccurredOn\"},{\"type\": \"TextBlock\",\"id\": \"DateValidationMessage\",\"text\": \"_dateValidationText_\",\"spacing\": \"None\",\"color\": \"Attention\",\"isVisible\": \"true\"}]"
             },
             {
               "name": "Storage:ConnectionString",

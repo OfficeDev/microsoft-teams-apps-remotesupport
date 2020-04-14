@@ -22,17 +22,17 @@ import { getToken } from '../adal-config';
 
 
 interface ITeamState {
-    SelectedItem: string,
+    selectedItem: string,
     jsx: Array<JSX.Element>,
     json: Array<any>,
-    Error: string,
+    error: string,
     open: boolean | undefined,
 }
 
 interface ITeamProps {
-    HomeState: {
-        TeamId: string,
-        CardItems: Array<any>
+    homeState: {
+        teamId: string,
+        cardItems: Array<any>
     },
     onPublish: (result: boolean, msg: string) => void,
     resourceStrings: any,
@@ -53,11 +53,11 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
     constructor(props: ITeamProps) {
         super(props);
         this.state = {
-            SelectedItem: '',
+            selectedItem: '',
             jsx: [],
             json: [],
             open: undefined,
-            Error: '',
+            error: '',
         };
 
         this.bearer = getToken();
@@ -91,22 +91,23 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
     }
 
     onOpen = () => {
-        let items = this.props.HomeState.CardItems;
+        let items = this.props.homeState.cardItems;
         items = items.filter(agg => agg.type !== 'TextBlock');
         this.addComponentsToState(items);
     }
-    OnChangeSelection = {
+
+    onChangeSelection = {
         onAdd: item => {
-            this.setState({ SelectedItem: item.controlId });
+            this.setState({ selectedItem: item.controlId });
             return `${item} has been selected.`
         },
         onRemove: item => {
-            this.setState({ SelectedItem: '' });
+            this.setState({ selectedItem: '' });
             return `${item} has been removed.`
         },
     };
 
-    OnDeleteComponent = (index: number) => {
+    onDeleteComponent = (index: number) => {
         let jsonItems = this.state.json;
         jsonItems.splice(index, 1);
 
@@ -114,8 +115,8 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
 
     }
 
-    ValidateUrl = () => {
-        let link = this.props.HomeState.TeamId;
+    validateUrl = () => {
+        let link = this.props.homeState.teamId;
         if (isNullorWhiteSpace(link)) {
             this.setState({ open: false });
             this.props.onPublish(false, this.props.resourceStrings.common.invalidTeamLink);
@@ -134,7 +135,7 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
     onPublish = (event: any) => {
         this.setState({ open: false });
 
-        this.saveConfigurationsAsync(this.props.HomeState.TeamId, JSON.stringify(this.state.json))
+        this.saveConfigurationsAsync(this.props.homeState.teamId, JSON.stringify(this.state.json))
             .then(response => {
                 this.props.onPublish(response, (response) ? this.props.resourceStrings.common.successPublish : this.props.resourceStrings.common.genericError)
             });
@@ -145,44 +146,46 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
         this.setState({open : false});
     }
 
-    OnAddComponent = (properties: any) : boolean => {
+    onAddComponent = (properties: any) : boolean => {
         let keyVal = this.state.json.length;
         if (keyVal > 3) {
-            this.setState({ Error: this.props.resourceStrings.buildForm.maxComponents })
+            this.setState({ error: this.props.resourceStrings.buildForm.maxComponents })
             return false;
         }
 
         if (isNullorWhiteSpace(properties.displayName)) {
 
-            this.setState({ Error: this.props.resourceStrings.buildForm.notEmptyDisplayName })
+            this.setState({ error: this.props.resourceStrings.buildForm.notEmptyDisplayName })
             return false;
         }
         else if (properties.displayName.length > 50) {
-            this.setState({ Error: this.props.resourceStrings.buildForm.maxLengthDisplayName })
+            this.setState({ error: this.props.resourceStrings.buildForm.maxLengthDisplayName })
             return false;
         }
 
 
         let items = this.state.json;
-        let uniqueDisplayNameCheck = items.find(element => (element.id.toUpperCase() === properties.displayName.toUpperCase()))
+        let uniqueDisplayNameCheck = (properties.displayName.toUpperCase() === this.props.resourceStrings.buildForm.titleText.toUpperCase()
+            || properties.displayName.toUpperCase() === this.props.resourceStrings.buildForm.descriptionText.toUpperCase()
+            || properties.displayName.toUpperCase() === this.props.resourceStrings.buildForm.staticDropdown.toUpperCase()
+            || items.find(element => (element.displayName.toUpperCase() === properties.displayName.toUpperCase())));
 
         if (uniqueDisplayNameCheck) {
-            this.setState({ Error: this.props.resourceStrings.buildForm.uniqueDisplayName })
+            this.setState({ error: this.props.resourceStrings.buildForm.uniqueDisplayName })
             return false;
         }
         // switch case push component based on type
         switch (properties.type) {
             case 'Input.Text':
-
                 items.push({
                     "type": "Input.Text",
                     "placeholder": properties.placeholder,
                     "maxLength": 500,
-                    "id": properties.displayName,
+                    "id": properties.displayName + keyVal,
                     "displayName": properties.displayName
                 });
-
                 break;
+
             case 'Input.ChoiceSet':
                 if (properties.style === 'expanded') {
                     let choices = properties.options.map(x => ({ "title": x, "value": x }));
@@ -191,7 +194,7 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         "placeholder": properties.placeholder,
                         "choices": choices,
                         "style": properties.style,
-                        "id": properties.displayName,
+                        "id": properties.displayName + keyVal,
                         "displayName": properties.displayName
                     });
                 }
@@ -202,7 +205,7 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         "placeholder": properties.placeholder,
                         "choices": choices,
                         "isMultiSelect": true,
-                        "id": properties.displayName,
+                        "id": properties.displayName + keyVal,
                         "displayName": properties.displayName
                     });
                 }
@@ -212,16 +215,16 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         "type": "Input.ChoiceSet",
                         "placeholder": properties.placeholder,
                         "choices": choices,
-                        "id": properties.displayName,
+                        "id": properties.displayName + keyVal,
                         "displayName": properties.displayName
                     });
                 }
-
                 break;
+
             case 'Input.Date':
                 items.push({
                     "type": "Input.Date",
-                    "id": properties.displayName,
+                    "id": properties.displayName + keyVal,
                     "displayName": properties.displayName
                 });
                 break;
@@ -238,34 +241,37 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
             switch (element.type) {
                 case 'Input.Text':
                     components.push(
-                        <InputTextPreview key={index} keyVal={index} placeholder={element.placeholder} displayName={element.displayName} OnDeleteComponent={this.OnDeleteComponent} />
+                        <InputTextPreview key={index} keyVal={index} placeholder={element.placeholder} displayName={element.displayName} onDeleteComponent={this.onDeleteComponent} />
                     );
                     break;
+
                 case 'Input.ChoiceSet':
                     if (element.style === 'expanded') {
                         components.push(
-                            <RadioButtonPreview key={index} displayName={element.displayName} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} />
+                            <RadioButtonPreview key={index} displayName={element.displayName} keyVal={index} onDeleteComponent={this.onDeleteComponent} options={element.choices.map(x => x.title)} />
                         );
                     }
                     else if (element.isMultiSelect === true) {
                         components.push(
-                            <CheckBoxPreview key={index} displayName={element.displayName} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} />
+                            <CheckBoxPreview key={index} displayName={element.displayName} keyVal={index} onDeleteComponent={this.onDeleteComponent} options={element.choices.map(x => x.title)} />
                         );
                     }
                     else {
                         components.push(
-                            <ChoiceSetPreview key={index} displayName={element.displayName} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} options={element.choices.map(x => x.title)} placeholder={element.placeholder} />
+                            <ChoiceSetPreview key={index} displayName={element.displayName} keyVal={index} onDeleteComponent={this.onDeleteComponent} options={element.choices.map(x => x.title)} placeholder={element.placeholder} />
                         );
                     }
                     break;
+
                 case 'Input.Date':
                     components.push(
-                        <DatePickerPreview displayName={element.displayName} key={index} keyVal={index} OnDeleteComponent={this.OnDeleteComponent} />
+                        <DatePickerPreview displayName={element.displayName} key={index} keyVal={index} onDeleteComponent={this.onDeleteComponent} />
                     );
                     break;
+
             }
         });
-        this.setState({ json: items, jsx: components, Error: '' });
+        this.setState({ json: items, jsx: components, error: '' });
     }
 
     /** 
@@ -280,28 +286,27 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
         };
 
         const saveConfigurationsResult = await saveConfigurationsAsync(configurationDetail, this.bearer);
-        if (saveConfigurationsResult.status === 200) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return saveConfigurationsResult.status === 200;
     }
 
     /** Render function. */
     render() {
         const renderComponent = () => {
-            switch (Number(this.state.SelectedItem)) {
+            switch (Number(this.state.selectedItem)) {
                 case userControls.inputText:
-                    return (<InputTextForm OnAddComponent={this.OnAddComponent} resourceStrings={this.props.resourceStrings.common} />);
+                    return (<InputTextForm onAddComponent={this.onAddComponent} resourceStrings={this.props.resourceStrings.common} />);
+
                 case userControls.dropDown:
-                    return (<ChoiceSetForm OnAddComponent={this.OnAddComponent} resourceStrings={this.props.resourceStrings} />);
+                    return (<ChoiceSetForm onAddComponent={this.onAddComponent} resourceStrings={this.props.resourceStrings} />);
+
                 case userControls.inputDate:
-                    return (<DatePickerForm OnAddComponent={this.OnAddComponent} resourceStrings={this.props.resourceStrings.common} />);
+                    return (<DatePickerForm onAddComponent={this.onAddComponent} resourceStrings={this.props.resourceStrings.common} />);
+
                 case userControls.radioButton:
-                    return (<RadioButtonForm OnAddComponent={this.OnAddComponent} resourceStrings={this.props.resourceStrings} />);
+                    return (<RadioButtonForm onAddComponent={this.onAddComponent} resourceStrings={this.props.resourceStrings} />);
+
                 case userControls.checkBox:
-                    return (<CheckBoxForm OnAddComponent={this.OnAddComponent} resourceStrings={this.props.resourceStrings} />);
+                    return (<CheckBoxForm onAddComponent={this.onAddComponent} resourceStrings={this.props.resourceStrings} />);
             }
         }
 
@@ -322,11 +327,11 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                             <div>
                                     <Text size="large" content={this.props.resourceStrings.buildForm.headerTitle} weight="semibold" />
                                 <Divider key={1} size={1} />
-                                {this.state.Error.length > 0 && <Text error content={this.state.Error} />}
+                                {this.state.error.length > 0 && <Text error content={this.state.error} />}
                                 <Flex column gap='gap.small' padding='padding.medium'>
                                     <Dropdown clearable items={this.inputItems}
                                             placeholder={this.props.resourceStrings.buildForm.componentDropdown}
-                                        getA11ySelectionMessage={this.OnChangeSelection} />
+                                        getA11ySelectionMessage={this.onChangeSelection} />
                                     {renderComponent()}
                                 </Flex>
                             </div>
@@ -350,7 +355,7 @@ class BuildYourForm extends React.Component<ITeamProps, ITeamState>
                         </Flex>
                     </>
                 }
-                trigger={<Button content={this.props.resourceStrings.buildForm.btnBuildForm} onClick={this.ValidateUrl}/>}
+                trigger={<Button content={this.props.resourceStrings.buildForm.btnBuildForm} onClick={this.validateUrl}/>}
             />
         );
     };

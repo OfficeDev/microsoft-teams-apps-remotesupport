@@ -218,7 +218,7 @@
     <comment>Text to show Close action in Change status section.</comment>
   </data>
   <data name="FirstObservedText" xml:space="preserve">
-    <value>First observed on </value>
+    <value>First observed on</value>
     <comment>Text to shown title for First observed in ticket card.</comment>
   </data>
   <data name="ReopenActionChoiceTitle" xml:space="preserve">
@@ -261,7 +261,7 @@
     <value>Status changed to resolved by {0}.</value>
     <comment>Text to show notification as request is closed to SME Users.</comment>
   </data>
-  <data name="SmeSeveritystatus" xml:space="preserve">
+  <data name="SmeSeverityStatus" xml:space="preserve">
     <value>Severity changed to {0} by {1}.</value>
     <comment>Text to show notification when request changes severity from SME Users.</comment>
   </data>
@@ -410,7 +410,7 @@
     <comment>Text to show description in request submitted card.</comment>
   </data>
   <data name="RequestNumberText" xml:space="preserve">
-    <value>Request number </value>
+    <value>Request number</value>
     <comment>Text to show as request number in new request card.</comment>
   </data>
   <data name="RequestTypeText" xml:space="preserve">
