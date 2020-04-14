@@ -25,6 +25,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using Microsoft.Teams.Apps.RemoteSupport.Common.Providers;
     using Microsoft.Teams.Apps.RemoteSupport.Models;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// Class that handles the card configuration.
@@ -404,7 +405,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// </summary>
         /// <param name="elements">Adaptive item element Json object.</param>
         /// <returns>Returns adaptive card item element.</returns>
-        public static List<AdaptiveElement> ConvertToAdaptiveCardItemElement(List<object> elements)
+        public static List<AdaptiveElement> ConvertToAdaptiveCardItemElement(List<JObject> elements)
         {
             var adaptiveElements = new List<AdaptiveElement>();
             if (elements == null || elements.Count == 0)
@@ -418,16 +419,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                 switch (cardElementWithValues.InputType)
                 {
-                    case "TextBlock":
+                    case AdaptiveTextBlock.TypeName:
                         adaptiveElements.Add(AdaptiveElementHelper.ConvertToAdaptiveTextBlock(cardElement.ToString()));
                         break;
-                    case "Input.Text":
+                    case AdaptiveTextInput.TypeName:
                         adaptiveElements.Add(AdaptiveElementHelper.ConvertToAdaptiveTextInput(cardElement.ToString()));
                         break;
-                    case "Input.ChoiceSet":
+                    case AdaptiveChoiceSetInput.TypeName:
                         adaptiveElements.Add(AdaptiveElementHelper.ConvertToAdaptiveChoiceSetInput(cardElement.ToString()));
                         break;
-                    case "Input.Date":
+                    case AdaptiveDateInput.TypeName:
                         adaptiveElements.Add(AdaptiveElementHelper.ConvertToAdaptiveDateInput(cardElement.ToString()));
                         break;
                 }
@@ -446,15 +447,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <returns>Adaptive card item element json string.</returns>
         public static List<AdaptiveElement> ConvertToAdaptiveCard(IStringLocalizer<Strings> localizer, string cardTemplate, bool showDateValidation, Dictionary<string, string> ticketDetails = null)
         {
-            var cardTemplates = JsonConvert.DeserializeObject<List<object>>(cardTemplate);
-            var cardTemplateElements = new List<object>();
+            var cardTemplates = JsonConvert.DeserializeObject<List<JObject>>(cardTemplate);
+            var cardTemplateElements = new List<JObject>();
 
             foreach (var template in cardTemplates)
             {
                 var templateMapping = JsonConvert.DeserializeObject<AdaptiveCardPlaceHolderMapper>(template.ToString());
                 if (templateMapping.InputType != "TextBlock")
                 {
-                    // get first observerd display text if parsed from appSettings; rest all values will be set up directly in JSON payload.
+                    // get first observed display text if parsed from appSettings; rest all values will be set up directly in JSON payload.
                     if (templateMapping.Id == "IssueOccuredOn")
                     {
                         templateMapping.DisplayName = localizer.GetString("FirstObservedText");
@@ -462,36 +463,38 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                     // every input elements display name is integrated with the JSON payload
                     // and is converted to text block corresponding to input element
-                    cardTemplateElements.Add(JsonConvert.DeserializeObject(JsonConvert.SerializeObject(new
+                    cardTemplateElements.Add(JObject.FromObject(new
                     {
-                        type = "TextBlock",
+                        type = AdaptiveTextBlock.TypeName,
                         displayName = templateMapping.DisplayName,
                         text = templateMapping.DisplayName,
-                    })));
+                    }));
 
                     var templateMappingFieldValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(template.ToString());
+
                     if (ticketDetails != null)
                     {
-                        if (!templateMappingFieldValues.ContainsKey("value"))
-                        {
-                            templateMappingFieldValues.Add("value", TryParseTicketDetailsKeyValuePair(ticketDetails, templateMapping.Id));
-                        }
-                        else
-                        {
-                            templateMappingFieldValues["value"] = TryParseTicketDetailsKeyValuePair(ticketDetails, templateMapping.Id);
-                        }
+                        templateMappingFieldValues["value"] = TryParseTicketDetailsKeyValuePair(ticketDetails, templateMapping.Id);
                     }
 
-                    cardTemplateElements.Add(JsonConvert.DeserializeObject(JsonConvert.SerializeObject(templateMappingFieldValues)));
+                    cardTemplateElements.Add(JObject.FromObject(templateMappingFieldValues));
                 }
                 else
                 {
-                    // Enabling validation message for First observed on.
+                    // Enabling validation message for First observed on date time field.
                     if (templateMapping.Id == "DateValidationMessage")
                     {
                         if (showDateValidation)
                         {
-                            cardTemplateElements.Add(template.ToString().Replace("_dateValidationText_", localizer.GetString("DateValidationText"), StringComparison.InvariantCulture));
+                            cardTemplateElements.Add(JObject.FromObject(new
+                            {
+                                type = AdaptiveTextBlock.TypeName,
+                                id = "DateValidationMessage",
+                                spacing = "None",
+                                color = "Attention",
+                                isVisible = "true",
+                                text = localizer.GetString("DateValidationText"),
+                            }));
                         }
                     }
                     else

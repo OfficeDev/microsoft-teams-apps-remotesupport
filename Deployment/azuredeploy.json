@@ -61,7 +61,7 @@
       "type": "string",
       "minLength": 1,
       "metadata": {
-        "description": "Experts team's Microsoft Team link to which the app will send support request notifications."
+        "description": "URL link to the team of experts in Microsoft Teams, to which the app will send support request notifications. This URL starts with https://teams.microsoft.com/l/team/"
       }
     },
     "tokenEncryptionKey": {

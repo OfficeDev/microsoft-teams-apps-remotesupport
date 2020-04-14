@@ -13,19 +13,19 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Helper class to convert Json property into Adaptive card element
+    /// Helper class to convert JSON property into Adaptive card element
     /// </summary>
     public static class AdaptiveElementHelper
     {
         /// <summary>
-        /// Converts json property to adaptive card TextBlock element.
+        /// Converts JSON property to adaptive card TextBlock element.
         /// </summary>
-        /// <param name="jsonProperty">TextBlock item element json property.</param>
+        /// <param name="cardElementTemplate">TextBlock item element json property.</param>
         /// <param name="showDateValidation">true if need to show validation message else false.</param>
         /// <returns>Returns adaptive card TextBlock item element.</returns>
-        public static AdaptiveTextBlock ConvertToAdaptiveTextBlock(string jsonProperty, bool showDateValidation = false)
+        public static AdaptiveTextBlock ConvertToAdaptiveTextBlock(string cardElementTemplate, bool showDateValidation = false)
         {
-            var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonProperty);
+            var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(cardElementTemplate);
             bool isVisible = true;
             if (!string.IsNullOrEmpty(CardHelper.TryParseTicketDetailsKeyValuePair(result, "isVisible")))
             {
@@ -43,15 +43,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         }
 
         /// <summary>
-        /// Converts json property to adaptive card TextInput element.
+        /// Converts JSON property to adaptive card TextInput element.
         /// </summary>
-        /// <param name="jsonProperty">TextInput item element json property.</param>
+        /// <param name="cardElementTemplate">TextInput item element json property.</param>
         /// <returns>Returns adaptive card TextInput item element.</returns>
-        public static AdaptiveTextInput ConvertToAdaptiveTextInput(string jsonProperty)
+        public static AdaptiveTextInput ConvertToAdaptiveTextInput(string cardElementTemplate)
         {
-            var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonProperty);
+            var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(cardElementTemplate);
             int maxLength = 500;
-            bool flag = int.TryParse(CardHelper.TryParseTicketDetailsKeyValuePair(result, "maxLength"), out maxLength);
 
             return new AdaptiveTextInput()
             {
@@ -63,13 +62,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         }
 
         /// <summary>
-        /// Converts json property to adaptive card DateInput element.
+        /// Converts JSON property to adaptive card DateInput element.
         /// </summary>
-        /// <param name="jsonProperty">DateInput item element json property.</param>
+        /// <param name="cardElementTemplate">DateInput item element json property.</param>
         /// <returns>Returns adaptive card DateInput item element.</returns>
-        public static AdaptiveDateInput ConvertToAdaptiveDateInput(string jsonProperty)
+        public static AdaptiveDateInput ConvertToAdaptiveDateInput(string cardElementTemplate)
         {
-            var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonProperty);
+            var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(cardElementTemplate);
 
             return new AdaptiveDateInput()
             {
@@ -84,11 +83,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <summary>
         /// Converts JSON property to adaptive card ChoiceSetInput element.
         /// </summary>
-        /// <param name="jsonProperty">ChoiceSetInput item element json property.</param>
+        /// <param name="cardElementTemplate">ChoiceSetInput item element json property.</param>
         /// <returns>Returns adaptive card ChoiceSetInput item element.</returns>
-        public static AdaptiveChoiceSetInput ConvertToAdaptiveChoiceSetInput(string jsonProperty)
+        public static AdaptiveChoiceSetInput ConvertToAdaptiveChoiceSetInput(string cardElementTemplate)
         {
-            var adpativeChoiceSetCard = JsonConvert.DeserializeObject<InputChoiceSet>(jsonProperty);
+            var adpativeChoiceSetCard = JsonConvert.DeserializeObject<InputChoiceSet>(cardElementTemplate);
             List<AdaptiveChoice> choices = adpativeChoiceSetCard.Choices
                 .Select(choice => new AdaptiveChoice()
                 {
