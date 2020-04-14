@@ -452,7 +452,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
             foreach (var template in cardTemplates)
             {
-                var templateMapping = JsonConvert.DeserializeObject<AdaptiveCardPlaceHolderMapper>(template.ToString());
+                var templateMapping = template.ToObject<AdaptiveCardPlaceHolderMapper>();
                 if (templateMapping.InputType != "TextBlock")
                 {
                     // get first observed display text if parsed from appSettings; rest all values will be set up directly in JSON payload.
@@ -463,14 +463,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                     // every input elements display name is integrated with the JSON payload
                     // and is converted to text block corresponding to input element
-                    cardTemplateElements.Add(JObject.FromObject(new
+                    cardTemplateElements.Add(JObject.FromObject(new AdaptiveTextBlock
                     {
-                        type = AdaptiveTextBlock.TypeName,
-                        displayName = templateMapping.DisplayName,
-                        text = templateMapping.DisplayName,
+                        Type = AdaptiveTextBlock.TypeName,
+                        Text = templateMapping.DisplayName,
                     }));
 
-                    var templateMappingFieldValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(template.ToString());
+                    var templateMappingFieldValues = template.ToObject<Dictionary<string, object>>();
 
                     if (ticketDetails != null)
                     {
@@ -486,14 +485,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     {
                         if (showDateValidation)
                         {
-                            cardTemplateElements.Add(JObject.FromObject(new
+                            cardTemplateElements.Add(JObject.FromObject(new AdaptiveTextBlock
                             {
-                                type = AdaptiveTextBlock.TypeName,
-                                id = "DateValidationMessage",
-                                spacing = "None",
-                                color = "Attention",
-                                isVisible = "true",
-                                text = localizer.GetString("DateValidationText"),
+                                Type = AdaptiveTextBlock.TypeName,
+                                Id = "DateValidationMessage",
+                                Spacing = AdaptiveSpacing.None,
+                                Color = AdaptiveTextColor.Attention,
+                                IsVisible = true,
+                                Text = localizer.GetString("DateValidationText"),
                             }));
                         }
                     }
