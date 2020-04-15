@@ -191,24 +191,26 @@ class ManageExperts extends React.Component<{}, IState>
                 // Convert API response into list items.
                 let onCallExperts: Array<any> = [];
                 let teamMembers = this.state.allMembers;
-                let onCallExpertsDetails = JSON.parse(onCallExpertsResponse.data[0].OnCallSMEs);
-                onCallExpertsDetails.forEach((onCallExpertsDetail) => {
+                if (onCallExpertsResponse.data != null && onCallExpertsResponse.data[0] != null) {
+                    let onCallExpertsDetails = JSON.parse(onCallExpertsResponse.data[0].OnCallSMEs);
+                    onCallExpertsDetails.forEach((onCallExpertsDetail) => {
 
-                    let member = teamMembers.find(element => element.aadobjectid == onCallExpertsDetail.objectid);
-                    const actions = (
-                        <Flex gap="gap.large" vAlign="center">
-                            <Button icon="icon-close" text iconOnly title="Close" onClick={() => this.removeUserFromExpertList(onCallExpertsDetail.objectid)} />
-                        </Flex>
-                    );
-                    if (member != undefined) {
-                        onCallExperts.push({
-                            key: onCallExpertsDetail.objectid,
-                            header: member.header,
-                            endMedia: actions,
-                        });
-                    }
-                    teamMembers = teamMembers.filter(item => item !== member)
-                });
+                        let member = teamMembers.find(element => element.aadobjectid == onCallExpertsDetail.objectid);
+                        const actions = (
+                            <Flex gap="gap.large" vAlign="center">
+                                <Button icon="icon-close" text iconOnly title="Close" onClick={() => this.removeUserFromExpertList(onCallExpertsDetail.objectid)} />
+                            </Flex>
+                        );
+                        if (member != undefined) {
+                            onCallExperts.push({
+                                key: onCallExpertsDetail.objectid,
+                                header: member.header,
+                                endMedia: actions,
+                            });
+                        }
+                        teamMembers = teamMembers.filter(item => item !== member)
+                    });
+                }
                 this.setState({ onCallExperts: onCallExperts });
                 this.setState({ teamMembers: teamMembers });
 

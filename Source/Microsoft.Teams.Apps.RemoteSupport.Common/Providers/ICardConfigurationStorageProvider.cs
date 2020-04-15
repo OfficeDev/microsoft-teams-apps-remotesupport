@@ -4,6 +4,7 @@
 
 namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.Teams.Apps.RemoteSupport.Common.Models;
 
@@ -31,5 +32,12 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
         /// <param name="cardId">Unique identifier of the card configuration.</param>
         /// <returns>A <see cref="Task{TResult}"/>configuration details.</returns>
         Task<CardConfigurationEntity> GetConfigurationsByCardIdAsync(string cardId);
+
+        /// <summary>
+        /// Returns the Adaptive card item element {Id, display name} mapping present in the Azure table storage by CardId
+        /// </summary>
+        /// <param name="cardId">Unique identifier of the card configuration.</param>
+        /// <returns>A <see cref="Task{TResult}"/>configuration details.</returns>
+        Task<Dictionary<string, string>> GetCardItemElementMappingAsync(string cardId);
     }
 }

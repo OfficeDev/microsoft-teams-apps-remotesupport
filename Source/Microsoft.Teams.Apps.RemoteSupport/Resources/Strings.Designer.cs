@@ -295,7 +295,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First observed on .
+        ///   Looks up a localized string similar to First observed on.
         /// </summary>
         public static string FirstObservedText {
             get {
@@ -529,7 +529,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request number .
+        ///   Looks up a localized string similar to Request number.
         /// </summary>
         public static string RequestNumberText {
             get {
@@ -657,9 +657,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         /// <summary>
         ///   Looks up a localized string similar to Severity changed to {0} by {1}..
         /// </summary>
-        public static string SmeSeveritystatus {
+        public static string SmeSeverityStatus {
             get {
-                return ResourceManager.GetString("SmeSeveritystatus", resourceCulture);
+                return ResourceManager.GetString("SmeSeverityStatus", resourceCulture);
             }
         }
         

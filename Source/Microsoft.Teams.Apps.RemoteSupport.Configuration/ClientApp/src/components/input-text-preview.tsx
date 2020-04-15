@@ -12,12 +12,12 @@ interface IPreviewProps {
     keyVal: number,
     placeholder: string,
     displayName: string,
-    OnDeleteComponent: (keyVal: number) => void
+    onDeleteComponent: (keyVal: number) => void
 }
 
 export const InputTextPreview: React.FunctionComponent<IPreviewProps> = (props) => {
-    const OnDeleteComponent = (keyVal: number) => {
-        props.OnDeleteComponent(keyVal);
+    const onDeleteComponent = (keyVal: number) => {
+        props.onDeleteComponent(keyVal);
     }
 
     return (
@@ -28,7 +28,7 @@ export const InputTextPreview: React.FunctionComponent<IPreviewProps> = (props) 
                     <Input fluid key={'i' + props.keyVal} placeholder={props.placeholder} className="medium-margin-top" />
                 </div>
             </Flex.Item>
-            <Icon className="common-padding" name='trash-can' onClick={() => OnDeleteComponent(props.keyVal)} />
+            <Icon className="common-padding" name='trash-can' onClick={() => onDeleteComponent(props.keyVal)} />
         </Flex>
     );
 }

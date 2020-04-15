@@ -14,16 +14,15 @@ import { getToken, authContext } from '../adal-config';
 
 /** State interface. */
 interface IState {
-    TeamId: string,
+    teamId: string,
     isAuthenticated: boolean | null,
     isError: boolean | null,
-    CardItems: Array<any>,
-    Message: string,
-    MessageType: boolean,
+    cardItems: Array<any>,
+    message: string,
+    messageType: boolean,
     resourceStrings: any,
     resourceStringsLoaded: boolean,
 }
-
 
 /** Component for displaying home page of incident report configuration application. */
 class Home extends React.Component<{}, IState>
@@ -37,12 +36,12 @@ class Home extends React.Component<{}, IState>
     constructor(props: {}) {
         super(props);
         this.state = {
-            TeamId: "",
+            teamId: "",
             isAuthenticated: null,
             isError: null,
-            CardItems: [],
-            Message: "",
-            MessageType: false,
+            cardItems: [],
+            message: "",
+            messageType: false,
             resourceStrings: {},
             resourceStringsLoaded: false,
         };
@@ -55,9 +54,9 @@ class Home extends React.Component<{}, IState>
         this.getConfigurationsAsync();
     }
 
-/** 
-*  Get resource strings according to user locale.
-* */
+    /** 
+    *  Get resource strings according to user locale.
+    * */
     getResourceStrings = async () => {
         const resourceStringsResponse = await getResourceStrings(this.bearer!);
         if (resourceStringsResponse) {
@@ -78,7 +77,7 @@ class Home extends React.Component<{}, IState>
         }
         else if (configurationsResponse.status === 200) {
             const results = await configurationsResponse.data;
-            this.setState({ TeamId: results.TeamLink, CardItems: JSON.parse(results.CardTemplate), isAuthenticated: true, isError: false });
+            this.setState({ teamId: results.TeamLink, cardItems: JSON.parse(results.CardTemplate), isAuthenticated: true, isError: false });
         }
         else {
             this.setState({ isAuthenticated: true, isError: true });
@@ -91,10 +90,10 @@ class Home extends React.Component<{}, IState>
 
     onPublish = (result: boolean, msg: string) => {
         if (result) {
-            this.setState({ Message: msg, MessageType: result });
+            this.setState({ message: msg, messageType: result });
         }
         else {
-            this.setState({ Message: msg, MessageType: result });
+            this.setState({ message: msg, messageType: result });
         }
        
     }
@@ -111,15 +110,15 @@ class Home extends React.Component<{}, IState>
                             </Flex.Item>
                             <Flex.Item size="size.half" className="team-textbox-width" >
                                 <Input fluid placeholder={this.state.resourceStrings.common.teamLink}
-                                    value={this.state.TeamId}
-                                    onChange={(e: any) => { this.setState({ TeamId: e.target.value }) }} />
+                                    value={this.state.teamId}
+                                    onChange={(e: any) => { this.setState({ teamId: e.target.value }) }} />
                             </Flex.Item>
                         </Flex>
                         <Flex hAlign="center">
-                            <BuildYourForm HomeState={this.state} onPublish={this.onPublish} resourceStrings={this.state.resourceStrings} />
+                            <BuildYourForm homeState={this.state} onPublish={this.onPublish} resourceStrings={this.state.resourceStrings} />
                         </Flex>
-                        {this.state.MessageType ? <Text className="medium-margin-top" align="center" success content={this.state.Message} />
-                            : <Text className="medium-margin-top" align="center" error content={this.state.Message} />}
+                        {this.state.messageType ? <Text className="medium-margin-top" align="center" success content={this.state.message} />
+                            : <Text className="medium-margin-top" align="center" error content={this.state.message} />}
                     </div>
                 );
         }

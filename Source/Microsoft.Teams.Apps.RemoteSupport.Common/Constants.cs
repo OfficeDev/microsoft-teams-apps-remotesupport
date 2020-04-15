@@ -105,14 +105,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common
         public const string UrgentString = "Urgent";
 
         /// <summary>
-        /// Date time format to support adaptive card text feature.
-        /// </summary>
-        /// <remarks>
-        /// refer adaptive card text feature https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/text-features#datetime-formatting-and-localization.
-        /// </remarks>
-        public const string Rfc3339DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'";
-
-        /// <summary>
         /// Cancel command.
         /// </summary>
         public const string CancelCommand = "CANCEL";

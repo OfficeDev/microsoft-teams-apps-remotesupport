@@ -6,7 +6,6 @@ import axios from "./axios-decorator";
 
 const baseAxiosUrl = window.location.origin;
 
-
 /**
 * Get localized resource strings from API
 */

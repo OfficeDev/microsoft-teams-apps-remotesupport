@@ -6,9 +6,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using AdaptiveCards;
+    using Microsoft.Teams.Apps.RemoteSupport.Cards;
     using Microsoft.Teams.Apps.RemoteSupport.Models;
     using Newtonsoft.Json;
 
@@ -21,9 +21,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// Converts JSON property to adaptive card TextBlock element.
         /// </summary>
         /// <param name="cardElementTemplate">TextBlock item element json property.</param>
-        /// <param name="showDateValidation">true if need to show validation message else false.</param>
         /// <returns>Returns adaptive card TextBlock item element.</returns>
-        public static AdaptiveTextBlock ConvertToAdaptiveTextBlock(string cardElementTemplate, bool showDateValidation = false)
+        public static AdaptiveTextBlock ConvertToAdaptiveTextBlock(string cardElementTemplate)
         {
             var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(cardElementTemplate);
             bool isVisible = true;
@@ -33,12 +32,22 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             }
 
             string color = CardHelper.TryParseTicketDetailsKeyValuePair(result, "color");
+            AdaptiveTextColor textColor;
+            if (CardHelper.TryParseTicketDetailsKeyValuePair(result, "id") == CardConstants.DateValidationMessageId)
+            {
+                textColor = AdaptiveTextColor.Attention;
+            }
+            else
+            {
+                textColor = string.IsNullOrEmpty(color) ? AdaptiveTextColor.Default : (AdaptiveTextColor)Enum.Parse(typeof(AdaptiveTextColor), color);
+            }
+
             return new AdaptiveTextBlock()
             {
                 Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
                 Text = CardHelper.TryParseTicketDetailsKeyValuePair(result, "text"),
                 IsVisible = isVisible,
-                Color = string.IsNullOrEmpty(color) ? AdaptiveTextColor.Default : (AdaptiveTextColor)Enum.Parse(typeof(AdaptiveTextColor), color),
+                Color = textColor,
             };
         }
 
@@ -74,7 +83,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             {
                 Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
                 Placeholder = CardHelper.TryParseTicketDetailsKeyValuePair(result, "placeholder"),
-                Value = string.IsNullOrEmpty(CardHelper.TryParseTicketDetailsKeyValuePair(result, "value")) ? DateTime.Now.ToString(CultureInfo.InvariantCulture) : CardHelper.TryParseTicketDetailsKeyValuePair(result, "value"),
+                Value = CardHelper.TryParseTicketDetailsKeyValuePair(result, "value"),
                 Max = CardHelper.TryParseTicketDetailsKeyValuePair(result, "max"),
                 Min = CardHelper.TryParseTicketDetailsKeyValuePair(result, "min"),
             };

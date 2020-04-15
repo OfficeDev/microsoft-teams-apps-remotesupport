@@ -11,7 +11,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport
     using System.Threading.Tasks;
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.DataContracts;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Connector.Authentication;
@@ -110,11 +109,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport
         private readonly ITokenHelper tokenHelper;
 
         /// <summary>
-        /// Represents Web Hosting environment.
-        /// </summary>
-        private readonly IHostingEnvironment environment;
-
-        /// <summary>
         /// Represents unique id of a Team.
         /// </summary>
         private readonly string teamId;
@@ -127,7 +121,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport
         /// <param name="localizer">The current cultures' string localizer.</param>
         /// <param name="telemetryClient">The Application Insights telemetry client. </param>
         /// <param name="options">A set of key/value application configuration properties.</param>
-        /// <param name="environment">Hosting environment.</param>
         /// <param name="ticketDetailStorageProvider">Provider to store ticket details to Azure Table Storage.</param>
         /// <param name="onCallSupportDetailSearchService">Provider to search on call support details in Azure Table Storage.</param>
         /// <param name="ticketSearchService">Provider to search ticket details in Azure Table Storage.</param>
@@ -141,7 +134,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport
             IStringLocalizer<Strings> localizer,
             TelemetryClient telemetryClient,
             IOptions<RemoteSupportActivityHandlerOptions> options,
-            IHostingEnvironment environment,
             ITicketDetailStorageProvider ticketDetailStorageProvider,
             IOnCallSupportDetailSearchService onCallSupportDetailSearchService,
             ITicketSearchService ticketSearchService,
@@ -155,7 +147,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport
             this.localizer = localizer;
             this.telemetryClient = telemetryClient;
             this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.environment = environment;
             this.teamId = this.options.Value.TeamId;
             this.ticketDetailStorageProvider = ticketDetailStorageProvider;
             this.ticketSearchService = ticketSearchService;
@@ -212,11 +203,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                 switch (activity.Conversation.ConversationType)
                 {
                     case PersonalConversationType:
-                        await ActivityHelper.OnMessageActivityInPersonalChatAsync(message: activity, turnContext: turnContext, telemetryClient: this.telemetryClient, logger: this.logger, cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, environment: this.environment, ticketGenerateStorageProvider: this.ticketGenerateStorageProvider, ticketDetailStorageProvider: this.ticketDetailStorageProvider, microsoftAppCredentials: this.microsoftAppCredentials, appBaseUrl: this.appBaseUrl, localizer: this.localizer, cancellationToken: cancellationToken);
+                        await ActivityHelper.OnMessageActivityInPersonalChatAsync(activity, turnContext, this.logger, this.cardConfigurationStorageProvider, this.ticketGenerateStorageProvider, this.ticketDetailStorageProvider, this.microsoftAppCredentials, this.appBaseUrl, this.localizer, cancellationToken);
                         break;
 
                     case ChannelConversationType:
-                        await ActivityHelper.OnMessageActivityInChannelAsync(message: activity, turnContext: turnContext, onCallSupportDetailSearchService: this.onCallSupportDetailSearchService, ticketDetailStorageProvider: this.ticketDetailStorageProvider, logger: this.logger, appBaseUrl: this.appBaseUrl, localizer: this.localizer, cancellationToken: cancellationToken);
+                        await ActivityHelper.OnMessageActivityInChannelAsync(message: activity, turnContext: turnContext, onCallSupportDetailSearchService: this.onCallSupportDetailSearchService, ticketDetailStorageProvider: this.ticketDetailStorageProvider, cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, logger: this.logger, appBaseUrl: this.appBaseUrl, localizer: this.localizer, cancellationToken: cancellationToken);
                         break;
 
                     default:
@@ -313,7 +304,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                     case Constants.ManageExpertsAction:
                         this.logger.LogInformation("Sending manage experts card.");
                         string customAPIAuthenticationToken = this.tokenHelper.GenerateAPIAuthToken(applicationBasePath: activity.ServiceUrl, fromId: activity.From.Id, jwtExpiryMinutes: 60);
-                        return CardHelper.GetTaskModuleResponse(applicationBasePath: this.appBaseUrl, customAPIAuthenticationToken: customAPIAuthenticationToken, telemetryClient: this.telemetryClient, activityId: valuesforTaskModule?.ActivityId, localizer: this.localizer);
+                        return CardHelper.GetTaskModuleResponse(applicationBasePath: this.appBaseUrl, customAPIAuthenticationToken: customAPIAuthenticationToken, telemetryInstrumentationKey: this.telemetryClient.InstrumentationKey, activityId: valuesforTaskModule?.ActivityId, localizer: this.localizer);
                     default:
                         this.logger.LogInformation($"Invalid command for task module fetch activity.Command is : {command} ");
                         await turnContext.SendActivityAsync(this.localizer.GetString("ErrorMessage"));
@@ -363,11 +354,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                         // Send update audit trail message and request details card in personal chat and SME team.
                         this.logger.LogInformation($"Edited the ticket:{ticketDetail.TicketId}");
                         IMessageActivity smeEditNotification = MessageFactory.Text(string.Format(CultureInfo.InvariantCulture, this.localizer.GetString("SmeEditNotificationText"), ticketDetail.LastModifiedByName));
-                        IMessageActivity ticketDetailActivity = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(ticketDetail, this.localizer, true));
+
+                        // Get card item element mappings
+                        var cardElementMapping = await this.cardConfigurationStorageProvider.GetCardItemElementMappingAsync(ticketDetail.CardId);
+
+                        IMessageActivity ticketDetailActivity = MessageFactory.Attachment(TicketCard.GetTicketDetailsForPersonalChatCard(cardElementMapping, ticketDetail, this.localizer, true));
                         ticketDetailActivity.Conversation = turnContext.Activity.Conversation;
                         ticketDetailActivity.Id = ticketDetail.RequesterTicketActivityId;
                         await turnContext.UpdateActivityAsync(ticketDetailActivity);
-                        await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeEditNotification, this.appBaseUrl, this.localizer, this.logger, cancellationToken);
+                        await CardHelper.UpdateSMECardAsync(turnContext, ticketDetail, smeEditNotification, this.appBaseUrl, cardElementMapping, this.localizer, this.logger, cancellationToken);
                     }
                     else
                     {

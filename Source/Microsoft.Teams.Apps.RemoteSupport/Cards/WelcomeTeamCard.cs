@@ -41,7 +41,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                                 {
                                     new AdaptiveImage
                                     {
-                                        Url = new Uri(string.Format(CultureInfo.InvariantCulture, "{0}/images/AppIcon.png", applicationBasePath?.Trim('/'))),
+                                        Url = new Uri(string.Format(CultureInfo.InvariantCulture, "{0}/Artifacts/AppIcon.png", applicationBasePath?.Trim('/'))),
                                         Size = AdaptiveImageSize.Large,
                                     },
                                 },

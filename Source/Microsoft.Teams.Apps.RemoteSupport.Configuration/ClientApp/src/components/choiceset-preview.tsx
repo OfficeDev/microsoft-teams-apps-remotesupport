@@ -13,13 +13,12 @@ interface IPreviewProps {
     placeholder: string,
     displayName : string,
     options: Array<string>,
-    OnDeleteComponent: (keyVal: number) => void
+    onDeleteComponent: (keyVal: number) => void
 }
 
-
 export const ChoiceSetPreview: React.FunctionComponent<IPreviewProps> = (props) => {
-    const OnDeleteComponent = (keyVal: number) => {
-        props.OnDeleteComponent(keyVal);
+    const onDeleteComponent = (keyVal: number) => {
+        props.onDeleteComponent(keyVal);
     }
 
     return (
@@ -30,7 +29,7 @@ export const ChoiceSetPreview: React.FunctionComponent<IPreviewProps> = (props) 
                     <Dropdown items={props.options} placeholder={props.placeholder} className="medium-margin-top" />
                 </div>
             </Flex.Item>
-            <Icon className="common-padding" name='trash-can' onClick={() => OnDeleteComponent(props.keyVal)} />
+            <Icon className="common-padding" name='trash-can' onClick={() => onDeleteComponent(props.keyVal)} />
         </Flex>
     );
 }

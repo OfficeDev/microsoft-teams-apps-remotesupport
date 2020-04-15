@@ -4,7 +4,7 @@ languages:
 - csharp
 products:
 - office-teams
-description: Microsoft Teams bot and messaging extesion to search & report incidents and connect with specialists immediately
+description: Microsoft Teams bot and messaging extension to search & report incidents and connect with specialists immediately
 urlFragment: microsoft-teams-apps-remotesupport
 ---
 

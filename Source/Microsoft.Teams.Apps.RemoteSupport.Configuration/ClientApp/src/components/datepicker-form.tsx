@@ -9,16 +9,15 @@ import { Button, Icon, Text, Flex, Input } from '@fluentui/react';
 import "../styles/theme.css";
 
 interface IPropertiesProps {
-    OnAddComponent: (properties: any) => boolean,
+    onAddComponent: (properties: any) => boolean,
     resourceStrings: any,
 }
 
 
 const DatePickerForm: React.FunctionComponent<IPropertiesProps> = (props) => {
-
     const [properties, setProperties] = useState({ type: 'Input.Date', displayName: '' });
-    const OnAddComponent = (event: any) => {
-        let result = props.OnAddComponent(properties);
+    const onAddComponent = (event: any) => {
+        let result = props.onAddComponent(properties);
         if (result) {
             setProperties({ type: 'Input.Date', displayName: '' });
         }
@@ -36,7 +35,7 @@ const DatePickerForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     </div>
                 </>
             </Flex.Item>
-            <Button content={props.resourceStrings.btnAddComponent} onClick={OnAddComponent} />
+            <Button content={props.resourceStrings.btnAddComponent} onClick={onAddComponent} />
         </>
     );
 }
