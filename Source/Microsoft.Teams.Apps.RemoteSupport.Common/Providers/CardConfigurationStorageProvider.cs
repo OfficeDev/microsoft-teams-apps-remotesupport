@@ -52,16 +52,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             }
             while (continuationToken != null);
 
-            var cardConfigurationEntity = configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
-            if (cardConfigurationEntity == null)
-            {
-                return null;
-            }
-            else
-            {
-                cardConfigurationEntity.CardTemplate = cardConfigurationEntity.CardTemplate.Replace("\\", string.Empty);
-                return cardConfigurationEntity;
-            }
+            return configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
         }
 
         /// <summary>
@@ -87,16 +78,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
             }
             while (continuationToken != null);
 
-            var cardConfigurationEntity = configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
-            if (cardConfigurationEntity == null)
-            {
-                return null;
-            }
-            else
-            {
-                cardConfigurationEntity.CardTemplate = cardConfigurationEntity.CardTemplate.Replace("\\", string.Empty);
-                return cardConfigurationEntity;
-            }
+            return configurations.OrderByDescending(configuration => configuration.CreatedOn).FirstOrDefault();
         }
 
         /// <summary>
