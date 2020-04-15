@@ -6,7 +6,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using AdaptiveCards;
     using Microsoft.Bot.Schema;
     using Microsoft.Extensions.Localization;
@@ -204,7 +203,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
             foreach (KeyValuePair<string, string> item in ticketAdditionalDetail)
             {
                 string key = item.Key;
-                if (item.Key.Equals(Constants.IssueOccurredOnId, StringComparison.OrdinalIgnoreCase))
+                if (item.Key.Equals(CardConstants.IssueOccurredOnId, StringComparison.OrdinalIgnoreCase))
                 {
                     key = localizer.GetString("FirstObservedText");
                 }

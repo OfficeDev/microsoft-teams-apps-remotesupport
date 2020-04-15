@@ -6,9 +6,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using AdaptiveCards;
+    using Microsoft.Teams.Apps.RemoteSupport.Cards;
     using Microsoft.Teams.Apps.RemoteSupport.Models;
     using Newtonsoft.Json;
 
@@ -33,7 +33,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
             string color = CardHelper.TryParseTicketDetailsKeyValuePair(result, "color");
             AdaptiveTextColor textColor;
-            if (CardHelper.TryParseTicketDetailsKeyValuePair(result, "id") == "DateValidationMessage")
+            if (CardHelper.TryParseTicketDetailsKeyValuePair(result, "id") == CardConstants.DateValidationMessageId)
             {
                 textColor = AdaptiveTextColor.Attention;
             }

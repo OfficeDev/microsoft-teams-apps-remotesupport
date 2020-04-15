@@ -31,7 +31,7 @@ const InputTextForm: React.FunctionComponent<IPropertiesProps> = (props) => {
                     <Input fluid placeholder={props.resourceStrings.placeholderText} value={properties.placeholder} onChange={(e: any) => { setProperties({ ...properties, placeholder: e.target.value }) }} />
                 </>
             </Flex.Item>
-            <Button content="Add Component" onClick={onAddComponent} />
+            <Button content={props.resourceStrings.common.btnAddComponent} onClick={onAddComponent} />
         </>
     );
 }
