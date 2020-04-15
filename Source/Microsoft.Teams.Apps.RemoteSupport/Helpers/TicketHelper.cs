@@ -25,8 +25,13 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         public static bool ValidateRequestDetail(TicketDetail updatedTicketDetail, ITurnContext turnContext, TicketDetail existingTicketDetail = null)
         {
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
-            if (updatedTicketDetail == null || string.IsNullOrWhiteSpace(updatedTicketDetail.Title) || string.IsNullOrWhiteSpace(updatedTicketDetail.Description) ||
-                updatedTicketDetail.IssueOccurredOn == null || (DateTimeOffset.Compare(updatedTicketDetail.IssueOccurredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(updatedTicketDetail.IssueOccurredOn.ToString(CultureInfo.InvariantCulture))))
+            if (updatedTicketDetail == null
+                || string.IsNullOrWhiteSpace(updatedTicketDetail.Title)
+                || string.IsNullOrWhiteSpace(updatedTicketDetail.Description)
+                || updatedTicketDetail.IssueOccurredOn == null
+                || updatedTicketDetail.IssueOccurredOn == DateTimeOffset.MinValue
+                || (DateTimeOffset.Compare(updatedTicketDetail.IssueOccurredOn, DateTime.Today) > 0
+                || string.IsNullOrEmpty(updatedTicketDetail.IssueOccurredOn.ToString(CultureInfo.InvariantCulture))))
             {
                 return false;
             }

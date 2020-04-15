@@ -63,7 +63,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                     issueDescription = ticketDetail.Description;
                 }
 
-                if (ticketDetail.IssueOccurredOn == null || DateTimeOffset.Compare(ticketDetail.IssueOccurredOn, DateTime.Today) > 0 || string.IsNullOrEmpty(ticketDetail.IssueOccurredOn.ToString(CultureInfo.InvariantCulture)))
+                if (ticketDetail.IssueOccurredOn == null
+                    || ticketDetail.IssueOccurredOn == DateTimeOffset.MinValue
+                    || DateTimeOffset.Compare(ticketDetail.IssueOccurredOn, DateTime.Today) > 0)
                 {
                     showDateValidation = true;
                 }
