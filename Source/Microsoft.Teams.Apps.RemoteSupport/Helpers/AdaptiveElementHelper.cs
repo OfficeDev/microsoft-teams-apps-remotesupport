@@ -83,7 +83,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             {
                 Id = CardHelper.TryParseTicketDetailsKeyValuePair(result, "id"),
                 Placeholder = CardHelper.TryParseTicketDetailsKeyValuePair(result, "placeholder"),
-                Value = string.IsNullOrEmpty(CardHelper.TryParseTicketDetailsKeyValuePair(result, "value")) ? DateTime.Now.ToString(CultureInfo.InvariantCulture) : CardHelper.TryParseTicketDetailsKeyValuePair(result, "value"),
+                Value = string.IsNullOrEmpty(CardHelper.TryParseTicketDetailsKeyValuePair(result, "value")) ? DateTime.UtcNow.ToString(CultureInfo.InvariantCulture) : CardHelper.TryParseTicketDetailsKeyValuePair(result, "value"),
                 Max = CardHelper.TryParseTicketDetailsKeyValuePair(result, "max"),
                 Min = CardHelper.TryParseTicketDetailsKeyValuePair(result, "min"),
             };
