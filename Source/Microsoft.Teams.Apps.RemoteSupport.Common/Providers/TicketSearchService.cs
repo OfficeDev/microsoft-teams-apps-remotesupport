@@ -98,12 +98,12 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Providers
                     break;
 
                 case TicketSearchScope.AssignedTickets:
-                    searchParameters.Filter = $"TicketStatus eq {(int)TicketState.Assigned} and AssignedToName ne null";
+                    searchParameters.Filter = $"TicketStatus eq {(int)TicketState.Assigned}";
                     searchParameters.OrderBy = new[] { "Timestamp desc" };
                     break;
 
                 case TicketSearchScope.UnassignedTickets:
-                    searchParameters.Filter = $"TicketStatus eq {(int)TicketState.Unassigned} and AssignedToName eq null";
+                    searchParameters.Filter = $"TicketStatus eq {(int)TicketState.Unassigned}";
                     searchParameters.OrderBy = new[] { "Timestamp desc" };
                     break;
                 case TicketSearchScope.ActiveTickets:

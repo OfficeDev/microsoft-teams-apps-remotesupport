@@ -11,9 +11,11 @@ urlFragment: microsoft-teams-apps-remotesupport
 | [Documentation](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Home) | [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Deployment-Guide) | [Architecture](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Solution-Overview) |
 | ---- | ---- | ---- |
 
+# Remote Support App Template
+
 Most organizations have a team of remote individuals providing support to employees across the organization often distributed geographically. Support and collaboration in such instances is often ad-hoc, sub-optimal and inefficient. Common incumbent solutions include shared email-inbox where employees send in requests; a SharePoint site where requests are submitted; calling a dedicated helpline,  email or chat based messaging systems with a dedicated point person etc.
  
-Remote Support Bot provides all end users (internal users seeking help from a central team) an easy interface (bot) right within Microsoft Teams to:
+Remote Support bot provides all end users (internal users seeking help from a central team) an easy interface (bot) right within Microsoft Teams to:
 
 - Submit requests for support
 - Edit/withdraw requests
@@ -28,7 +30,7 @@ Remote Support Bot provides all end users (internal users seeking help from a ce
 
 ![Remote support new request](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/new-request.png)
 
-![Remote support messaging extension](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/messaging-extension.png)
+![Remote support messaging extension](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/support-team-ackcard.jpg)
 
 ## Legal Notice
 Please read the license terms applicable to this app template [here](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/blob/master/LICENSE). In addition to these terms, by using this app template you agree to the following:
