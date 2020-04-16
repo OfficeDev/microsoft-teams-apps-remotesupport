@@ -30,7 +30,7 @@ Remote Support bot provides all end users (internal users seeking help from a ce
 
 ![Remote support new request](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/new-request.png)
 
-![Remote support messaging extension](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/messaging-extension.png)
+![Remote support messaging extension](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Images/support-team-ackcard.jpg)
 
 ## Legal Notice
 Please read the license terms applicable to this app template [here](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/blob/master/LICENSE). In addition to these terms, by using this app template you agree to the following:
