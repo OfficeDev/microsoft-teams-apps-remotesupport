@@ -11,7 +11,7 @@ urlFragment: microsoft-teams-apps-remotesupport
 | [Documentation](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Home) | [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Deployment-Guide) | [Architecture](https://github.com/OfficeDev/microsoft-teams-apps-remotesupport/wiki/Solution-Overview) |
 | ---- | ---- | ---- |
 
-## Remote Support bot
+# Remote Support App Template
 
 Most organizations have a team of remote individuals providing support to employees across the organization often distributed geographically. Support and collaboration in such instances is often ad-hoc, sub-optimal and inefficient. Common incumbent solutions include shared email-inbox where employees send in requests; a SharePoint site where requests are submitted; calling a dedicated helpline,  email or chat based messaging systems with a dedicated point person etc.
  
