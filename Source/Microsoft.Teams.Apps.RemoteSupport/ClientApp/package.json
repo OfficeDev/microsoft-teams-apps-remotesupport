@@ -7,7 +7,7 @@
 		"@microsoft/applicationinsights-react-js": "^2.3.1",
 		"@microsoft/teams-js": "^1.5.2",
 		"classnames": "^2.2.6",
-		"axios": "^0.19.2",
+		"axios": "^0.21.1",
 		"react": "^16.10.2",
 		"react-adal": "^0.5.0",
 		"react-appinsights": "^3.0.0-rc.6",
