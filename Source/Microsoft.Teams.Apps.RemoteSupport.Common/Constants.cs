@@ -15,6 +15,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common
         public const string NewRequestAction = "NEW REQUEST";
 
         /// <summary>
+        /// Normal request type text.
+        /// </summary>
+        public const string NormalString = "Normal";
+
+        /// <summary>
         /// Send request action.
         /// </summary>
         public const string SendRequestAction = "SEND REQUEST";

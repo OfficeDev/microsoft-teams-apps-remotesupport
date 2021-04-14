@@ -72,6 +72,27 @@
         "description": "Unique key use to create Symmetric security key for generating custom JWT for client authentication"
       }
     },
+    "defaultCulture": {
+      "type": "string",
+      "allowedValues": [
+        "ar-SA",
+        "de-DE",
+        "es-ES",
+        "en-US",
+        "fr-FR",
+        "he-IL",
+        "ja-JP",
+        "ko-KR",
+        "pt-BR",
+        "ru-RU",
+        "zh-CN",
+        "zh-TW"
+      ],
+      "defaultValue": "en-US",
+      "metadata": {
+        "description": "Default culture to be used by application."
+      }
+    },
     "sku": {
       "type": "string",
       "allowedValues": [
@@ -263,11 +284,11 @@
             },
             {
               "name": "i18n:DefaultCulture",
-              "value": "en-US"
+              "value": "en"
             },
             {
               "name": "i18n:SupportedCultures",
-              "value": "en-US"
+              "value": "en-US,ar-SA,de-DE,es-ES,fr-FR,he-IL,ja-JP,ko-KR,pt-BR,ru-RU,zh-CN,zh-TW"
             },
             {
               "name": "Search:SearchServiceName",

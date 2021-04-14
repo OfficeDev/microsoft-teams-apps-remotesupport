@@ -21,6 +21,7 @@ const ContrastTheme = "contrast";
 export default class ErrorPage extends React.Component<{}, errorPageState> {
     code: string | null = null;
     token: string | null = null;
+    locale?: string | null;
 
     constructor(props: any) {
         super(props);
@@ -41,9 +42,11 @@ export default class ErrorPage extends React.Component<{}, errorPageState> {
         microsoftTeams.getContext((context) => {
             let theme = context.theme || "";
             this.updateTheme(theme);
+            this.locale = context.locale;
             this.setState({
                 theme: theme
             });
+            this.getResourceStrings();
         });
 
         microsoftTeams.registerOnThemeChangeHandler((theme) => {
@@ -54,8 +57,6 @@ export default class ErrorPage extends React.Component<{}, errorPageState> {
                 this.forceUpdate();
             });
         });
-
-        await this.getResourceStrings();
     }
 
     /**
@@ -82,7 +83,7 @@ export default class ErrorPage extends React.Component<{}, errorPageState> {
   *  Get resource strings according to user locale.
   * */
     getResourceStrings = async () => {
-        const resourceStringsResponse = await getResourceStrings(this.token!);
+        const resourceStringsResponse = await getResourceStrings(this.token!, this.locale);
 
         if (resourceStringsResponse.status === 200) {
             this.setState({ resourceStrings: resourceStringsResponse.data });

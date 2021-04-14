@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Properties\launchSettings.json" />
+    <Content Remove="Resources\azuredeploy.json" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\Build\stylecop.json" Link="stylecop.json">
@@ -80,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azuredeploy.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Strings.Designer.cs">

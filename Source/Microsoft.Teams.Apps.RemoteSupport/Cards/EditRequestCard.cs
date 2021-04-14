@@ -127,16 +127,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                         new AdaptiveChoice
                         {
                             Title = localizer.GetString("NormalText"),
-                            Value = localizer.GetString("NormalText"),
+                            Value = Constants.NormalString,
                         },
                         new AdaptiveChoice
                         {
                             Title = localizer.GetString("UrgentText"),
-                            Value = localizer.GetString("UrgentText"),
+                            Value = Constants.UrgentString,
                         },
                     },
                     Id = "RequestType",
-                    Value = !string.IsNullOrEmpty(ticketDetail?.RequestType) ? ticketDetail?.RequestType : localizer.GetString("NormalText"),
+                    Value = !string.IsNullOrEmpty(ticketDetail?.RequestType) ? ticketDetail?.RequestType : Constants.NormalString,
                     Style = AdaptiveChoiceInputStyle.Expanded,
                 },
             });

@@ -75,30 +75,27 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             turnContext.Activity.RemoveRecipientMention();
             string text = turnContext.Activity.Text.Trim();
 
-            switch (text.ToUpperInvariant())
+            if (text.Equals(localizer.GetString("ExpertList").ToString(), StringComparison.InvariantCultureIgnoreCase))
             {
-                case Constants.ManageExpertsAction:
-                    // Get on call support data from storage
-                    var onCallSupportDetails = await onCallSupportDetailSearchService.SearchOnCallSupportTeamAsync(searchQuery: string.Empty, count: 10);
-                    var onCallSMEDetailActivity = MessageFactory.Attachment(OnCallSMEDetailCard.GetOnCallSMEDetailCard(onCallSupportDetails, localizer));
-                    var result = await turnContext.SendActivityAsync(onCallSMEDetailActivity);
+                // Get on call support data from storage
+                var onCallSupportDetails = await onCallSupportDetailSearchService.SearchOnCallSupportTeamAsync(searchQuery: string.Empty, count: 10);
+                var onCallSMEDetailActivity = MessageFactory.Attachment(OnCallSMEDetailCard.GetOnCallSMEDetailCard(onCallSupportDetails, localizer));
+                var result = await turnContext.SendActivityAsync(onCallSMEDetailActivity);
 
-                    // Add activityId in the data which will be posted to task module in future after clicking on Manage button.
-                    AdaptiveCard adaptiveCard = (AdaptiveCard)onCallSMEDetailActivity.Attachments?[0].Content;
-                    AdaptiveCardAction cardAction = (AdaptiveCardAction)((AdaptiveSubmitAction)adaptiveCard?.Actions?[0]).Data;
-                    cardAction.ActivityId = result.Id;
+                // Add activityId in the data which will be posted to task module in future after clicking on Manage button.
+                AdaptiveCard adaptiveCard = (AdaptiveCard)onCallSMEDetailActivity.Attachments?[0].Content;
+                AdaptiveCardAction cardAction = (AdaptiveCardAction)((AdaptiveSubmitAction)adaptiveCard?.Actions?[0]).Data;
+                cardAction.ActivityId = result.Id;
 
-                    // Refresh manage experts card with activity Id bound to manage button.
-                    onCallSMEDetailActivity.Id = result.Id;
-                    onCallSMEDetailActivity.ReplyToId = result.Id;
-                    await turnContext.UpdateActivityAsync(onCallSMEDetailActivity);
-
-                    break;
-
-                default:
-                    logger.LogInformation("Unrecognized input in channel.");
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(WelcomeTeamCard.GetCard(appBaseUrl, localizer)));
-                    break;
+                // Refresh manage experts card with activity Id bound to manage button.
+                onCallSMEDetailActivity.Id = result.Id;
+                onCallSMEDetailActivity.ReplyToId = result.Id;
+                await turnContext.UpdateActivityAsync(onCallSMEDetailActivity);
+            }
+            else
+            {
+                logger.LogInformation("Unrecognized input in channel.");
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(WelcomeTeamCard.GetCard(appBaseUrl, localizer)));
             }
         }
 
@@ -251,27 +248,26 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             }
 
             string text = (turnContext.Activity.Text ?? string.Empty).Trim().ToUpperInvariant();
-            switch (text)
+
+            if (text.Equals(localizer.GetString("NewRequestTitle").ToString(), StringComparison.InvariantCultureIgnoreCase))
             {
-                case Constants.NewRequestAction:
-                    logger.LogInformation("New request action called.");
-                    CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
-                    IMessageActivity newTicketActivity = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardTemplateJson, localizer));
-                    await turnContext.SendActivityAsync(newTicketActivity);
-                    break;
-
-                case Constants.NoCommand:
-                    return;
-
-                default:
-                    if (turnContext.Activity.Attachments == null || turnContext.Activity.Attachments.Count == 0)
-                    {
-                        // In case of ME when user clicks on closed or active requests the bot posts adaptive card of request details we don't have to consider this as invalid command.
-                        logger.LogInformation("Unrecognized input in End User.");
-                        await turnContext.SendActivityAsync(MessageFactory.Attachment(WelcomeCard.GetCard(appBaseUrl, localizer)));
-                    }
-
-                    break;
+                logger.LogInformation("New request action called.");
+                CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
+                IMessageActivity newTicketActivity = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardTemplateJson, localizer));
+                await turnContext.SendActivityAsync(newTicketActivity);
+            }
+            else if (text.Equals(localizer.GetString("No").ToString(), StringComparison.InvariantCultureIgnoreCase))
+            {
+                return;
+            }
+            else
+            {
+                if (turnContext.Activity.Attachments == null || turnContext.Activity.Attachments.Count == 0)
+                {
+                    // In case of ME when user clicks on closed or active requests the bot posts adaptive card of request details we don't have to consider this as invalid command.
+                    logger.LogInformation("Unrecognized input in End User.");
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(WelcomeCard.GetCard(appBaseUrl, localizer)));
+                }
             }
         }
 
@@ -338,7 +334,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                     else
                     {
                         // Update card with validation message.
-                        newTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(message.Value?.ToString(), timeSpan: turnContext.Activity.LocalTimestamp.Value.Offset);
+                        newTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(message.Value?.ToString(), timeSpan: turnContext.Activity.Timestamp.Value.Offset);
                         CardConfigurationEntity cardTemplateJson = await cardConfigurationStorageProvider.GetConfigurationAsync();
                         endUserUpdateCard = MessageFactory.Attachment(TicketCard.GetNewTicketCard(cardConfiguration: cardTemplateJson, localizer: localizer, showValidationMessage: true, ticketDetail: newTicketDetail));
                         await CardHelper.UpdateRequestCardForEndUserAsync(turnContext, endUserUpdateCard);

@@ -361,6 +361,10 @@
     <value>Enter one or more names or emails</value>
     <comment>Text to show in expert list dropdown placeholder.</comment>
   </data>
+  <data name="ExpertList" xml:space="preserve">
+    <value>Expert List</value>
+    <comment>Text to show on list of experts from command list.</comment>
+  </data>
   <data name="ExpertListTitle" xml:space="preserve">
     <value>Current on-call team</value>
     <comment>Text to show on manage experts page.</comment>
@@ -475,5 +479,93 @@
   <data name="TeamRequestBulletPoint" xml:space="preserve">
     <value>* To check requests assignements, click the small version of my icon near your message formatting options.</value>
     <comment>Text to show as a bullet point in team welcome card.</comment>
+  </data>
+  <data name="BotCommandExpertList" xml:space="preserve">
+    <value>Expert list</value>
+    <comment>Bot command expert list</comment>
+  </data>
+  <data name="BotCommandExpertListDescription" xml:space="preserve">
+    <value>List of on call experts</value>
+    <comment>Bot command expert list description</comment>
+  </data>
+  <data name="BotCommandNewRequest" xml:space="preserve">
+    <value>New request</value>
+    <comment>Bot command new request</comment>
+  </data>
+  <data name="BotCommandNewRequestDescription" xml:space="preserve">
+    <value>Make a request to the on-call team</value>
+    <comment>Bot command new request description</comment>
+  </data>
+  <data name="ComposeExtensionCommandAssigned" xml:space="preserve">
+    <value>Assigned</value>
+    <comment>Compose extension command assigned</comment>
+  </data>
+  <data name="ComposeExtensionCommandAssignedDescription" xml:space="preserve">
+    <value>Search requests assigned to an expert</value>
+    <comment>Compose extension command assigned description</comment>
+  </data>
+  <data name="ComposeExtensionCommandUnassigned" xml:space="preserve">
+    <value>Unassigned</value>
+    <comment>Compose extension command unassigned</comment>
+  </data>
+  <data name="ComposeExtensionCommandUnassignedDescription" xml:space="preserve">
+    <value>Search unassigned requests not yet assigned to an expert</value>
+    <comment>Compose extension command unassigned description</comment>
+  </data>
+  <data name="ComposeExtensionsCommandActive" xml:space="preserve">
+    <value>Active</value>
+    <comment>Compose extensions command active</comment>
+  </data>
+  <data name="ComposeExtensionsCommandActiveDescription" xml:space="preserve">
+    <value>Search active requests</value>
+    <comment>Compose extensions command active description</comment>
+  </data>
+  <data name="ComposeExtensionsCommandClosed" xml:space="preserve">
+    <value>Closed</value>
+    <comment>Compose extensions command closed</comment>
+  </data>
+  <data name="ComposeExtensionsCommandClosedDescription" xml:space="preserve">
+    <value>Search closed requests</value>
+    <comment>Compose extensions command closed description</comment>
+  </data>
+  <data name="ComposeExtensionsCommandParameterDescription" xml:space="preserve">
+    <value>Search requests</value>
+    <comment>Compose extensions command parameter search description</comment>
+  </data>
+  <data name="ComposeExtensionsCommandParameterSearch" xml:space="preserve">
+    <value>Search</value>
+    <comment>Compose extensions command parameter search</comment>
+  </data>
+  <data name="ComposeExtensionsCommandUrgent" xml:space="preserve">
+    <value>Urgent</value>
+    <comment>Compose extension command urgent</comment>
+  </data>
+  <data name="ComposeExtensionsCommandUrgentDescription" xml:space="preserve">
+    <value>Search urgent requests</value>
+    <comment>Compose extension command urgent description</comment>
+  </data>
+  <data name="EndUserManifestFullDescription" xml:space="preserve">
+    <value>Request remote support quickly. Search requests and escalate to on call experts via group chat for urgent requests.</value>
+    <comment>End user manifest full description</comment>
+  </data>
+  <data name="EndUserManifestName" xml:space="preserve">
+    <value>Remote Support</value>
+    <comment>End user manifest name</comment>
+  </data>
+  <data name="EndUserManifestShortDescription" xml:space="preserve">
+    <value>Helps request support and connect with experts quickly</value>
+    <comment>End user manifest short description</comment>
+  </data>
+  <data name="SmeManifestFullDescription" xml:space="preserve">
+    <value>Manage support request and set up on call experts in team. Search urgent, assigned and unassigned requests right from expert team.</value>
+    <comment>SME manifest full description</comment>
+  </data>
+  <data name="SmeManifestName" xml:space="preserve">
+    <value>Remote Support - Expert</value>
+    <comment>SME manifest name</comment>
+  </data>
+  <data name="SmeManifestShortDescription" xml:space="preserve">
+    <value>Expert team bot to handle user requests and set on call experts.</value>
+    <comment>SME manifest short description</comment>
   </data>
 </root>

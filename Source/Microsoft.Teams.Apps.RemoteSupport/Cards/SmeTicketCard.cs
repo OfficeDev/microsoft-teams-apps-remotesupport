@@ -172,12 +172,12 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                                     new AdaptiveChoice
                                     {
                                         Title = localizer.GetString("NormalText"),
-                                        Value = localizer.GetString("NormalText"),
+                                        Value = Constants.NormalString,
                                     },
                                     new AdaptiveChoice
                                     {
                                         Title = localizer.GetString("UrgentText"),
-                                        Value = localizer.GetString("UrgentText"),
+                                        Value = Constants.UrgentString,
                                     },
                                 },
                                 Id = "RequestType",

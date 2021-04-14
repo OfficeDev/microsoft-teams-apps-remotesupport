@@ -45,7 +45,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                             MsteamsCardAction = new CardAction
                             {
                                 Type = Constants.MessageBackActionType,
-                                Text = Constants.NewRequestAction,
+                                Text = localizer.GetString("NewRequestButtonText"),
                             },
                         },
                     },

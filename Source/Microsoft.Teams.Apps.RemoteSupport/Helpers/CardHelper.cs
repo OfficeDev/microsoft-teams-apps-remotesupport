@@ -523,7 +523,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <returns>Adaptive card supported date time format else return sting as-is.</returns>
         public static string AdaptiveTextParseWithDateTime(string inputText)
         {
-            if (DateTime.TryParse(inputText, out DateTime inputDateTime))
+            if (DateTime.TryParse(inputText, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime inputDateTime))
             {
                 return "{{DATE(" + inputDateTime.ToUniversalTime().ToString(CardConstants.Rfc3339DateTimeFormat, CultureInfo.InvariantCulture) + ", SHORT)}}";
             }

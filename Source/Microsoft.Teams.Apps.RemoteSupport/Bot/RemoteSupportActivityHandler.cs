@@ -339,7 +339,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                     var ticketDetail = await this.ticketDetailStorageProvider.GetTicketAsync(valuesforTaskModule.TicketId);
                     if (TicketHelper.ValidateRequestDetail(editTicketDetail, turnContext, ticketDetail))
                     {
-                        ticketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(((JObject)activity.Value).GetValue("data", StringComparison.OrdinalIgnoreCase)?.ToString(), turnContext.Activity.LocalTimestamp.Value.Offset);
+                        ticketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(((JObject)activity.Value).GetValue("data", StringComparison.OrdinalIgnoreCase)?.ToString(), turnContext.Activity.Timestamp.Value.Offset);
 
                         // Update request card with user entered values.
                         ticketDetail = TicketHelper.GetUpdatedTicketDetails(turnContext, ticketDetail, editTicketDetail);
@@ -366,7 +366,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
                     }
                     else
                     {
-                        editTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(additionalDetails: ((JObject)activity.Value).GetValue("data", StringComparison.OrdinalIgnoreCase)?.ToString(), timeSpan: turnContext.Activity.LocalTimestamp.Value.Offset);
+                        editTicketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(additionalDetails: ((JObject)activity.Value).GetValue("data", StringComparison.OrdinalIgnoreCase)?.ToString(), timeSpan: turnContext.Activity.Timestamp.Value.Offset);
                         return CardHelper.GetEditTicketAdaptiveCard(cardConfigurationStorageProvider: this.cardConfigurationStorageProvider, ticketDetail: editTicketDetail, localizer: this.localizer, existingTicketDetail: ticketDetail);
                     }
 

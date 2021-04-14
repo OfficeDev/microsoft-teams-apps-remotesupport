@@ -97,6 +97,42 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expert list.
+        /// </summary>
+        public static string BotCommandExpertList {
+            get {
+                return ResourceManager.GetString("BotCommandExpertList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of on call experts.
+        /// </summary>
+        public static string BotCommandExpertListDescription {
+            get {
+                return ResourceManager.GetString("BotCommandExpertListDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New request.
+        /// </summary>
+        public static string BotCommandNewRequest {
+            get {
+                return ResourceManager.GetString("BotCommandNewRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make a request to the on-call team.
+        /// </summary>
+        public static string BotCommandNewRequestDescription {
+            get {
+                return ResourceManager.GetString("BotCommandNewRequestDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CancelButtonText {
@@ -147,6 +183,114 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string ClosedTicketUserNotification {
             get {
                 return ResourceManager.GetString("ClosedTicketUserNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assigned.
+        /// </summary>
+        public static string ComposeExtensionCommandAssigned {
+            get {
+                return ResourceManager.GetString("ComposeExtensionCommandAssigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search requests assigned to an expert.
+        /// </summary>
+        public static string ComposeExtensionCommandAssignedDescription {
+            get {
+                return ResourceManager.GetString("ComposeExtensionCommandAssignedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unassigned.
+        /// </summary>
+        public static string ComposeExtensionCommandUnassigned {
+            get {
+                return ResourceManager.GetString("ComposeExtensionCommandUnassigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search unassigned requests not yet assigned to an expert.
+        /// </summary>
+        public static string ComposeExtensionCommandUnassignedDescription {
+            get {
+                return ResourceManager.GetString("ComposeExtensionCommandUnassignedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string ComposeExtensionsCommandActive {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search active requests.
+        /// </summary>
+        public static string ComposeExtensionsCommandActiveDescription {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandActiveDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        public static string ComposeExtensionsCommandClosed {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search closed requests.
+        /// </summary>
+        public static string ComposeExtensionsCommandClosedDescription {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandClosedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search requests.
+        /// </summary>
+        public static string ComposeExtensionsCommandParameterDescription {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandParameterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string ComposeExtensionsCommandParameterSearch {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandParameterSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urgent.
+        /// </summary>
+        public static string ComposeExtensionsCommandUrgent {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandUrgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search urgent requests.
+        /// </summary>
+        public static string ComposeExtensionsCommandUrgentDescription {
+            get {
+                return ResourceManager.GetString("ComposeExtensionsCommandUrgentDescription", resourceCulture);
             }
         }
         
@@ -232,6 +376,33 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request remote support quickly. Search requests and escalate to on call experts via group chat for urgent requests..
+        /// </summary>
+        public static string EndUserManifestFullDescription {
+            get {
+                return ResourceManager.GetString("EndUserManifestFullDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote Support.
+        /// </summary>
+        public static string EndUserManifestName {
+            get {
+                return ResourceManager.GetString("EndUserManifestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helps request support and connect with experts quickly.
+        /// </summary>
+        public static string EndUserManifestShortDescription {
+            get {
+                return ResourceManager.GetString("EndUserManifestShortDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The support team has received your request #{0}..
         /// </summary>
         public static string EndUserNotificationText {
@@ -264,6 +435,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string ExperListBulletPoint {
             get {
                 return ResourceManager.GetString("ExperListBulletPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expert List.
+        /// </summary>
+        public static string ExpertList {
+            get {
+                return ResourceManager.GetString("ExpertList", resourceCulture);
             }
         }
         
@@ -642,6 +822,33 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string SmeEditNotificationText {
             get {
                 return ResourceManager.GetString("SmeEditNotificationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage support request and set up on call experts in team. Search urgent, assigned and unassigned requests right from expert team..
+        /// </summary>
+        public static string SmeManifestFullDescription {
+            get {
+                return ResourceManager.GetString("SmeManifestFullDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote Support - Expert.
+        /// </summary>
+        public static string SmeManifestName {
+            get {
+                return ResourceManager.GetString("SmeManifestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expert team bot to handle user requests and set on call experts..
+        /// </summary>
+        public static string SmeManifestShortDescription {
+            get {
+                return ResourceManager.GetString("SmeManifestShortDescription", resourceCulture);
             }
         }
         
