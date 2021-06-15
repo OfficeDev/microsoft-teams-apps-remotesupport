@@ -16,6 +16,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Localization;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
@@ -114,6 +115,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport
         private readonly string teamId;
 
         /// <summary>
+        /// Cache for storing objectId's of on call experts.
+        /// </summary>
+        private readonly IMemoryCache memoryCache;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RemoteSupportActivityHandler"/> class.
         /// </summary>
         /// <param name="microsoftAppCredentials">Microsoft Application credentials for Bot/ME.</param>
@@ -128,6 +134,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
         /// <param name="cardConfigurationStorageProvider">Provider to search card configuration details in Azure Table Storage.</param>
         /// <param name="ticketGenerateStorageProvider">Provider to get ticket id to Azure Table Storage.</param>
         /// <param name="onCallSupportDetailStorageProvider"> Provider for fetching and storing information about on call support in storage table.</param>
+        /// <param name="memoryCache">MemoryCache instance for caching on call expert objectId's.</param>
         public RemoteSupportActivityHandler(
             MicrosoftAppCredentials microsoftAppCredentials,
             ILogger<RemoteSupportActivityHandler> logger,
@@ -140,7 +147,8 @@ namespace Microsoft.Teams.Apps.RemoteSupport
             ICardConfigurationStorageProvider cardConfigurationStorageProvider,
             ITokenHelper tokenHelper,
             ITicketIdGeneratorStorageProvider ticketGenerateStorageProvider,
-            IOnCallSupportDetailStorageProvider onCallSupportDetailStorageProvider)
+            IOnCallSupportDetailStorageProvider onCallSupportDetailStorageProvider,
+            IMemoryCache memoryCache)
         {
             this.microsoftAppCredentials = microsoftAppCredentials;
             this.logger = logger;
@@ -156,6 +164,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
             this.cardConfigurationStorageProvider = cardConfigurationStorageProvider;
             this.ticketGenerateStorageProvider = ticketGenerateStorageProvider;
             this.onCallSupportDetailStorageProvider = onCallSupportDetailStorageProvider;
+            this.memoryCache = memoryCache;
         }
 
         /// <summary>
@@ -383,7 +392,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
 
                     var onCallExpertsDetail = JsonConvert.DeserializeObject<OnCallExpertsDetail>(JObject.Parse(taskModuleRequest?.Data?.ToString())?.ToString());
                     await CardHelper.UpdateManageExpertsCardInTeamAsync(turnContext, onCallExpertsDetail, this.onCallSupportDetailSearchService, this.onCallSupportDetailStorageProvider, this.localizer);
-                    await ActivityHelper.SendMentionActivityAsync(onCallExpertsEmails: onCallExpertsDetail.OnCallExperts, turnContext: turnContext, logger: this.logger, localizer: this.localizer, cancellationToken: cancellationToken);
+                    await ActivityHelper.SendMentionActivityAsync(onCallExpertsDetail.OnCallExperts, turnContext: turnContext, logger: this.logger, localizer: this.localizer, memoryCache: this.memoryCache, cancellationToken: cancellationToken);
                     this.logger.LogInformation("Expert List has been updated");
                     return null;
 
@@ -419,7 +428,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport
 
                 if (messageExtensionQuery.CommandId == Constants.ActiveCommandId || messageExtensionQuery.CommandId == Constants.ClosedCommandId)
                 {
-                    onCallSMEUsers = await CardHelper.GetOnCallSMEuserListAsync(turnContext, this.onCallSupportDetailSearchService, this.teamId, this.logger);
+                    onCallSMEUsers = await CardHelper.GetOnCallSMEUserListAsync(turnContext, this.onCallSupportDetailSearchService, this.teamId, this.memoryCache, this.logger);
                     return new MessagingExtensionResponse
                     {
                         ComposeExtension = await SearchHelper.GetSearchResultAsync(searchQuery, messageExtensionQuery.CommandId, messageExtensionQuery.QueryOptions.Count, messageExtensionQuery.QueryOptions.Skip, this.ticketSearchService, this.localizer, turnContext.Activity.From.AadObjectId, onCallSMEUsers),

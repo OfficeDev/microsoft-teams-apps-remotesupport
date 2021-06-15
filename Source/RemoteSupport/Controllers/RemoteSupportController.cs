@@ -7,7 +7,6 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -108,7 +107,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
 
                 var userClaims = this.GetUserClaims();
 
-                IEnumerable<TeamsChannelAccount> teamsChannelAccounts = new List<TeamsChannelAccount>();
+                var teamsChannelAccounts = new List<TeamsChannelAccount>();
                 var conversationReference = new ConversationReference
                 {
                     ChannelId = teamId,
@@ -120,9 +119,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Controllers
                     conversationReference,
                     async (context, token) =>
                     {
-                        teamsChannelAccounts = await TeamsInfo.GetTeamMembersAsync(context, teamId, CancellationToken.None);
-                    },
-                    default);
+                        string continuationToken = null;
+                        do
+                        {
+                            var currentPage = await TeamsInfo.GetPagedTeamMembersAsync(context, teamId, continuationToken, pageSize: 500, token);
+                            continuationToken = currentPage.ContinuationToken;
+                            teamsChannelAccounts.AddRange(currentPage.Members);
+                        }
+                        while (continuationToken != null);
+                    }, default);
 
                 this.logger.LogInformation("GET call for fetching team members from team roster is successful.");
                 return this.Ok(teamsChannelAccounts.Select(member => new { content = member.Email, header = member.Name, aadobjectid = member.AadObjectId }));

@@ -22,5 +22,17 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common.Models
         /// </summary>
         [JsonProperty("objectid")]
         public string ObjectId { get; set; }
+
+        /// <summary>
+        /// Gets or sets object Id of on call expert .
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets email Id of on call expert.
+        /// </summary>
+        [JsonProperty("email")]
+        public string Email { get; set; }
     }
 }
