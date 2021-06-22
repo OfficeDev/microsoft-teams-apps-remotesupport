@@ -12,10 +12,10 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using System.Threading.Tasks;
     using AdaptiveCards;
     using Microsoft.Bot.Builder;
-    using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Localization;
     using Microsoft.Extensions.Logging;
     using Microsoft.Teams.Apps.RemoteSupport.Cards;
@@ -244,25 +244,27 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="onCallSupportDetailSearchService">Provider to search on call support details in Azure Table Storage.</param>
         /// <param name="teamId">Team id to which the message is being sent.</param>
+        /// <param name="memoryCache">MemoryCache instance for caching oncallexpert details.</param>
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <returns>string with appended email id's.</returns>
-        public static async Task<string> GetOnCallSMEuserListAsync(ITurnContext<IInvokeActivity> turnContext, IOnCallSupportDetailSearchService onCallSupportDetailSearchService, string teamId, ILogger<RemoteSupportActivityHandler> logger)
+        public static async Task<string> GetOnCallSMEUserListAsync(ITurnContext<IInvokeActivity> turnContext, IOnCallSupportDetailSearchService onCallSupportDetailSearchService, string teamId, IMemoryCache memoryCache, ILogger<RemoteSupportActivityHandler> logger)
         {
             try
             {
-                var teamsChannelAccounts = await TeamsInfo.GetTeamMembersAsync(turnContext, teamId, CancellationToken.None);
-                var onCallSupportDetails = await onCallSupportDetailSearchService?.SearchOnCallSupportTeamAsync(string.Empty, 1);
                 string onCallSMEUsers = string.Empty;
+
+                var onCallSupportDetails = await onCallSupportDetailSearchService?.SearchOnCallSupportTeamAsync(searchQuery: string.Empty, count: 1);
                 if (onCallSupportDetails != null && onCallSupportDetails.Any())
                 {
-                    var onCallSMEDetail = JsonConvert.DeserializeObject<List<OnCallSMEDetail>>(onCallSupportDetails.First().OnCallSMEs);
-                    if (onCallSMEDetail != null)
+                    var onCallSMEDetails = JsonConvert.DeserializeObject<List<OnCallSMEDetail>>(onCallSupportDetails.First().OnCallSMEs);
+                    var expertEmailList = new List<string>();
+                    foreach (var onCallSMEDetail in onCallSMEDetails)
                     {
-                        foreach (var onCallSME in onCallSMEDetail)
-                        {
-                            onCallSMEUsers += string.IsNullOrEmpty(onCallSMEUsers) ? teamsChannelAccounts.FirstOrDefault(teamsChannelAccount => teamsChannelAccount.AadObjectId == onCallSME.ObjectId)?.Email : "," + teamsChannelAccounts.FirstOrDefault(teamsChannelAccount => teamsChannelAccount.AadObjectId == onCallSME.ObjectId)?.Email;
-                        }
+                        var expertDetails = await TeamMemberCacheHelper.GetMemberInfoAsync(memoryCache, turnContext, onCallSMEDetail.ObjectId, teamId, CancellationToken.None);
+                        expertEmailList.Add(expertDetails.Email);
                     }
+
+                    onCallSMEUsers = string.Join(", ", expertEmailList);
                 }
 
                 return onCallSMEUsers;

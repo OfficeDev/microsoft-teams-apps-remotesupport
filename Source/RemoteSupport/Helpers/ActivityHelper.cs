@@ -11,14 +11,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Xml;
+    using System.Web;
     using AdaptiveCards;
     using Microsoft.ApplicationInsights.DataContracts;
     using Microsoft.Bot.Builder;
-    using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Localization;
     using Microsoft.Extensions.Logging;
     using Microsoft.Teams.Apps.RemoteSupport;
@@ -439,38 +439,40 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <summary>
         /// Method mentions user in respective channel of which they are part after modifying experts list.
         /// </summary>
-        /// <param name="onCallExpertsEmails">Collection of on call expert emails.</param>
+        /// <param name="onCallExpertsObjectIds">Collection of on call expert objectIds.</param>
         /// <param name="turnContext">Provides context for a turn of a bot.</param>
         /// <param name="logger">Sends logs to the Application Insights service.</param>
         /// <param name="localizer">The current cultures' string localizer.</param>
+        /// <param name="memoryCache">MemoryCache instance for caching oncallexpert details</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that sends notification in newly created channel and mention its members.</returns>
         internal static async Task<Activity> SendMentionActivityAsync(
-            List<string> onCallExpertsEmails,
+            List<string> onCallExpertsObjectIds,
             ITurnContext<IInvokeActivity> turnContext,
             ILogger logger,
             IStringLocalizer<Strings> localizer,
+            IMemoryCache memoryCache,
             CancellationToken cancellationToken)
         {
             try
             {
                 var mentionText = new StringBuilder();
                 var entities = new List<Entity>();
-                var teamsDetails = turnContext.Activity.TeamsGetTeamInfo();
-                var channelMembers = await TeamsInfo.GetTeamMembersAsync(turnContext, teamsDetails.Id, cancellationToken);
+                var expertDetail = new OnCallSMEDetail();
 
-                var onCallExpertDetails = channelMembers.Where(member => onCallExpertsEmails.Contains(member.Email)).Select(member => new ChannelAccount { Id = member.Id, Name = member.Name });
-
-                foreach (var onCallExpert in onCallExpertDetails)
+                foreach (var expertId in onCallExpertsObjectIds)
                 {
+                    var onCallExpert = await TeamMemberCacheHelper.GetMemberInfoAsync(memoryCache, turnContext, expertId, null, cancellationToken);
+                    expertDetail = new OnCallSMEDetail { Id = onCallExpert.Id, Name = onCallExpert.Name, Email = onCallExpert.Email };
+
                     var mention = new Mention
                     {
                         Mentioned = new ChannelAccount()
                         {
-                            Id = onCallExpert.Id,
-                            Name = onCallExpert.Name,
+                            Id = expertDetail.Id,
+                            Name = expertDetail.Name,
                         },
-                        Text = $"<at>{XmlConvert.EncodeName(onCallExpert.Name)}</at>",
+                        Text = $"<at>{HttpUtility.HtmlEncode(expertDetail.Name)}</at>",
                     };
                     entities.Add(mention);
                     mentionText = string.IsNullOrEmpty(mentionText.ToString()) ? mentionText.Append(mention.Text) : mentionText.Append(", ").Append(mention.Text);
@@ -482,9 +484,9 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 await turnContext.SendActivityAsync(replyActivity, cancellationToken);
                 return null;
             }
-            #pragma warning disable CA1031 // Do not catch general exception types
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception ex)
-            #pragma warning restore CA1031 // Do not catch general exception types
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 logger.LogError(ex, $"Error while mentioning channel member in respective channels.");
                 return null;

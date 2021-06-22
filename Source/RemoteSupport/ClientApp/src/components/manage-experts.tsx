@@ -287,13 +287,13 @@ class ManageExperts extends React.Component<{}, IState>
         if (expertListResponse.status === 200) {
 
             let allMembers = this.state.allMembers;
-            let OnCallExpertsList: Array<any> = [];
+            let onCallExpertsList: Array<string> = [];
             this.state.onCallExperts.forEach((onCallExpertsDetail) => {
                 let member = allMembers.find(element => element.aadobjectid == onCallExpertsDetail.key);
-                OnCallExpertsList.push(member.content);
+                onCallExpertsList.push(member.aadobjectid);
             });
 
-            let toBot = { Command: Constants.updateExpertListCommand, OnCallExpertsList: OnCallExpertsList, OnCallSupportCardActivityId: this.activityId, OnCallSupportId: expertListResponse.data };
+            let toBot = { Command: Constants.updateExpertListCommand, OnCallExpertsList: onCallExpertsList, OnCallSupportCardActivityId: this.activityId, OnCallSupportId: expertListResponse.data };
 
             microsoftTeams.getContext((context) => {
                 microsoftTeams.tasks.submitTask(toBot);

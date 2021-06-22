@@ -52,17 +52,9 @@
     <Folder Include="Models\" />
     <Folder Include="Properties\" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Teams.Apps.RemoteSupport.Common\Microsoft.Teams.Apps.RemoteSupport.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources\Strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
+    <ProjectReference Include="..\RemoteSupport.Common\Microsoft.Teams.Apps.RemoteSupport.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
