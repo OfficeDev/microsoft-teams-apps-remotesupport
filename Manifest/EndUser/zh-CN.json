@@ -11,5 +11,6 @@
   "composeExtensions[0].commands[0].parameters[0].description": "搜索请求",
   "composeExtensions[0].commands[1].title": "已关闭",
   "composeExtensions[0].commands[1].description": "搜索已关闭的请求",
+  "composeExtensions[0].commands[1].parameters[0].title": "搜索",
   "composeExtensions[0].commands[1].parameters[0].description": "搜索请求"
 }

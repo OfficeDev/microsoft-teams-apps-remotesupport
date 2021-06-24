@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "원격 지원 - 전문가",
+  "description.short": "팀 봇이 사용자 요청을 처리하고 통화 전문가를 설정합니다.",
+  "description.full": "지원 요청을 관리하고 팀의 상담 전문가에 대해 설정합니다. 전문가 팀의 긴급, 할당 및 할당되지 않은 요청을 바로 검색합니다.",
+  "bots[0].commandLists[0].commands[0].title": "전문가 목록",
+  "bots[0].commandLists[0].commands[0].description": "전화 전문가 목록",
+  "composeExtensions[0].commands[0].title": "긴급",
+  "composeExtensions[0].commands[0].description": "긴급 요청 검색",
+  "composeExtensions[0].commands[0].parameters[0].title": "검색",
+  "composeExtensions[0].commands[0].parameters[0].description": "검색 요청",
+  "composeExtensions[0].commands[1].title": "할당됨",
+  "composeExtensions[0].commands[1].description": "전문가에게 할당된 검색 요청",
+  "composeExtensions[0].commands[1].parameters[0].title": "검색",
+  "composeExtensions[0].commands[1].parameters[0].description": "검색 요청",
+  "composeExtensions[0].commands[2].title": "할당 해제됨",
+  "composeExtensions[0].commands[2].description": "검색되지 않은 요청이 전문가에 아직 할당되지 않았습니다.",
+  "composeExtensions[0].commands[2].parameters[0].title": "검색",
+  "composeExtensions[0].commands[2].parameters[0].description": "검색 요청"
+}

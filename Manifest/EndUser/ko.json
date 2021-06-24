@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "원격 지원",
+  "description.short": "지원을 요청하고 전문가와 빠르게 연결할 수 있도록 지원",
+  "description.full": "원격 지원을 빠르게 요청할 수 있하도록 요청합니다. 긴급 요청에 대한 그룹 채팅을 통해 통화 전문가로 검색 요청 및 검색 요청에 에스컬레이션합니다.",
+  "bots[0].commandLists[0].commands[0].title": "새 요청",
+  "bots[0].commandLists[0].commands[0].description": "대기 중인 팀에 요청",
+  "composeExtensions[0].commands[0].title": "활성",
+  "composeExtensions[0].commands[0].description": "활성 요청 검색",
+  "composeExtensions[0].commands[0].parameters[0].title": "검색",
+  "composeExtensions[0].commands[0].parameters[0].description": "검색 요청",
+  "composeExtensions[0].commands[1].title": "닫힘",
+  "composeExtensions[0].commands[1].description": "닫힌 요청 검색",
+  "composeExtensions[0].commands[1].parameters[0].title": "검색",
+  "composeExtensions[0].commands[1].parameters[0].description": "검색 요청"
+}

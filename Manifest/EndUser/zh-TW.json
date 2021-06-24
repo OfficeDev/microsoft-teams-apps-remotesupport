@@ -11,5 +11,6 @@
   "composeExtensions[0].commands[0].parameters[0].description": "搜尋要求",
   "composeExtensions[0].commands[1].title": "已關閉",
   "composeExtensions[0].commands[1].description": "搜尋已關閉的要求",
+  "composeExtensions[0].commands[1].parameters[0].title": "搜尋",
   "composeExtensions[0].commands[1].parameters[0].description": "搜尋要求"
 }

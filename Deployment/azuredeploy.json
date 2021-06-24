@@ -75,22 +75,22 @@
     "defaultCulture": {
       "type": "string",
       "allowedValues": [
-        "ar-SA",
-        "de-DE",
-        "es-ES",
-        "en-US",
-        "fr-FR",
-        "he-IL",
-        "ja-JP",
-        "ko-KR",
+        "en",
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "he",
+        "ja",
+        "ko",
         "pt-BR",
-        "ru-RU",
+        "ru",
         "zh-CN",
         "zh-TW"
       ],
-      "defaultValue": "en-US",
+      "defaultValue": "en",
       "metadata": {
-        "description": "Default culture to be used by application."
+        "description": "Default localization for app."
       }
     },
     "sku": {
@@ -284,11 +284,11 @@
             },
             {
               "name": "i18n:DefaultCulture",
-              "value": "en"
+              "value": "[parameters('defaultCulture')]"
             },
             {
               "name": "i18n:SupportedCultures",
-              "value": "en-US,ar-SA,de-DE,es-ES,fr-FR,he-IL,ja-JP,ko-KR,pt-BR,ru-RU,zh-CN,zh-TW"
+              "value": "en,ar,de,es,fr,he,ja,ko,pt-BR,ru,zh-CN,zh-TW"
             },
             {
               "name": "Search:SearchServiceName",

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "Soporte remoto",
+  "description.short": "Ayude a solicitar soporte técnico y a conectarse con los expertos rápidamente",
+  "description.full": "Solicite asistencia remota rápidamente. Busque solicitudes y escale a expertos en llamadas a través de chat grupal para solicitudes urgentes.",
+  "bots[0].commandLists[0].commands[0].title": "Nueva solicitud",
+  "bots[0].commandLists[0].commands[0].description": "Realizar una solicitud al equipo de la llamada",
+  "composeExtensions[0].commands[0].title": "Activo",
+  "composeExtensions[0].commands[0].description": "Buscar solicitudes activas",
+  "composeExtensions[0].commands[0].parameters[0].title": "Buscar",
+  "composeExtensions[0].commands[0].parameters[0].description": "Solicitudes de búsqueda",
+  "composeExtensions[0].commands[1].title": "Cerrado",
+  "composeExtensions[0].commands[1].description": "Búsqueda de solicitudes cerradas",
+  "composeExtensions[0].commands[1].parameters[0].title": "Buscar",
+  "composeExtensions[0].commands[1].parameters[0].description": "Solicitudes de búsqueda"
+}

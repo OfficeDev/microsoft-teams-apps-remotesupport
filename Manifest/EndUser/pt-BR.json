@@ -11,5 +11,6 @@
   "composeExtensions[0].commands[0].parameters[0].description": "Pedidos de pesquisa",
   "composeExtensions[0].commands[1].title": "Fechado",
   "composeExtensions[0].commands[1].description": "Pesquisar pedidos fechados",
+  "composeExtensions[0].commands[1].parameters[0].title": "Pesquisar",
   "composeExtensions[0].commands[1].parameters[0].description": "Pedidos de pesquisa"
 }

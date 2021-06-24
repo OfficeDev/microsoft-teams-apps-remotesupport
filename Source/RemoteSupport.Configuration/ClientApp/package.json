@@ -1,0 +1,46 @@
+{
+  "name": "incidentreporter",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@fluentui/react": "^0.43.2",
+    "@microsoft/applicationinsights-react-js": "^2.3.1",
+    "@microsoft/teams-js": "^1.5.2",
+    "axios": "^0.21.1",
+    "classnames": "^2.2.6",
+    "react": "^16.10.2",
+    "react-adal": "^0.5.0",
+    "react-appinsights": "^3.0.0-rc.6",
+    "react-dom": "^16.10.2",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^4.0.3",
+    "typescript": "^3.6.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "16.9.6",
+    "@types/react-dom": "16.9.2",
+    "@types/react-router-dom": "^5.1.0"
+  }
+}

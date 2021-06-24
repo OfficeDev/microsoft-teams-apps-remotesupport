@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "Remotesupport – Experte",
+  "description.short": "Expertenteam-Bot für Benutzeranfragen und zum Setzen von Experten auf Abruf.",
+  "description.full": "Verwalten Sie Supportanfragen und legen Sie Rufbereitschaftsexperten im Team fest. Suchen Sie dringende, zugewiesene und nicht zugewiesene Anfragen direkt vom Expertenteam.",
+  "bots[0].commandLists[0].commands[0].title": "Experten-Liste",
+  "bots[0].commandLists[0].commands[0].description": "Liste der Rufbereitschaftsexperten",
+  "composeExtensions[0].commands[0].title": "Dringend",
+  "composeExtensions[0].commands[0].description": "Dringende Anforderungen durchsuchen",
+  "composeExtensions[0].commands[0].parameters[0].title": "Suchen",
+  "composeExtensions[0].commands[0].parameters[0].description": "Suchanforderungen",
+  "composeExtensions[0].commands[1].title": "Zugewiesen",
+  "composeExtensions[0].commands[1].description": "Einem Experten zugewiesene Suchanforderungen",
+  "composeExtensions[0].commands[1].parameters[0].title": "Suchen",
+  "composeExtensions[0].commands[1].parameters[0].description": "Suchanforderungen",
+  "composeExtensions[0].commands[2].title": "Nicht zugeordnet",
+  "composeExtensions[0].commands[2].description": "Nicht zugewiesene Suchanforderungen suchen, die noch nicht einem Experten zugewiesen sind",
+  "composeExtensions[0].commands[2].parameters[0].title": "Suchen",
+  "composeExtensions[0].commands[2].parameters[0].description": "Suchanforderungen"
+}

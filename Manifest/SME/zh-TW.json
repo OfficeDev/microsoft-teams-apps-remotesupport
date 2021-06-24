@@ -15,6 +15,6 @@
   "composeExtensions[0].commands[1].parameters[0].description": "搜尋要求",
   "composeExtensions[0].commands[2].title": "未指派",
   "composeExtensions[0].commands[2].description": "搜尋尚未指派給專家的未指派要求",
-  "composeExtensions[0].commands[2].parameters[0].title": "搜尋"
+  "composeExtensions[0].commands[2].parameters[0].title": "搜尋",
   "composeExtensions[0].commands[2].parameters[0].description": "搜尋要求"
 }

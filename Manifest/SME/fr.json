@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "Support à distance – expert",
+  "description.short": "Bot d’experts traitant les requêtes d’utilisateurs et les experts de garde.",
+  "description.full": "Gérez la demande de support et établissez les experts disponibles dans l’équipe. Recherchez parmi les demandes urgentes, affectées et non affectées directement à partir de l’équipe d’experts.",
+  "bots[0].commandLists[0].commands[0].title": "Liste d’experts",
+  "bots[0].commandLists[0].commands[0].description": "Liste des experts disponibles",
+  "composeExtensions[0].commands[0].title": "Urgentes",
+  "composeExtensions[0].commands[0].description": "Recherchez parmi les demandes urgentes",
+  "composeExtensions[0].commands[0].parameters[0].title": "Rechercher",
+  "composeExtensions[0].commands[0].parameters[0].description": "Recherchez parmi les demandes",
+  "composeExtensions[0].commands[1].title": "Affectées",
+  "composeExtensions[0].commands[1].description": "Recherchez parmi les demandes affectées à un expert",
+  "composeExtensions[0].commands[1].parameters[0].title": "Rechercher",
+  "composeExtensions[0].commands[1].parameters[0].description": "Recherchez parmi les demandes",
+  "composeExtensions[0].commands[2].title": "Non affectées",
+  "composeExtensions[0].commands[2].description": "Recherchez parmi les demandes qui ne sont pas encore affectées à un expert",
+  "composeExtensions[0].commands[2].parameters[0].title": "Rechercher",
+  "composeExtensions[0].commands[2].parameters[0].description": "Recherchez parmi les demandes"
+}

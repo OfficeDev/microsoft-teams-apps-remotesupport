@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreatedOnText" xml:space="preserve">
+    <value>Дата создания</value>
+    <comment>Text to show in ME Thumbnail card</comment>
+  </data>
+  <data name="EditRequestTitle" xml:space="preserve">
+    <value>Изменить запрос</value>
+    <comment>Text to show on button</comment>
+  </data>
+  <data name="EditTicketActionText" xml:space="preserve">
+    <value>Изменить</value>
+    <comment>Text to show for edit in ticket detail card in 1:1 chat.</comment>
+  </data>
+  <data name="GoToOriginalThreadButtonText" xml:space="preserve">
+    <value>Просмотреть сведения</value>
+    <comment>Text to show on button in End User ME .</comment>
+  </data>
+  <data name="InvalidTenantText" xml:space="preserve">
+    <value>Обнаружен недопустимый клиент</value>
+    <comment>Text to show if invalid tenant.</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+    <comment>Text to show in confirmation card.</comment>
+  </data>
+  <data name="NormalText" xml:space="preserve">
+    <value>Обычный</value>
+    <comment>Text to show on the radio button when selected normal.</comment>
+  </data>
+  <data name="RequestSubmittedContent" xml:space="preserve">
+    <value>Для справки, вот что я сообщил службе поддержки.</value>
+    <comment>Text to show on request submitted card.</comment>
+  </data>
+  <data name="RequestSubmittedText" xml:space="preserve">
+    <value>Запрос отправлен</value>
+    <comment>Text to show as tiltle of ticket detail card send in 1:1 chat with bot.</comment>
+  </data>
+  <data name="UpdateActionText" xml:space="preserve">
+    <value>Обновить</value>
+    <comment>Text to show on the update button in adaptive card.</comment>
+  </data>
+  <data name="UrgentText" xml:space="preserve">
+    <value>Срочная</value>
+    <comment>Text to show on the radio button when selected urgent.</comment>
+  </data>
+  <data name="WithdrawConfirmation" xml:space="preserve">
+    <value>Вы действительно хотите отменить этот запрос?</value>
+    <comment>Text to show on withdraw request action in ticket detail card in 1:1 chat.</comment>
+  </data>
+  <data name="WithdrawRequestActionText" xml:space="preserve">
+    <value>Отозвать</value>
+    <comment>Text to show on withdraw button in Request submitted card.</comment>
+  </data>
+  <data name="WithdrawText" xml:space="preserve">
+    <value>Ваш запрос # {0} отозван. Если проблема сопоставляется, создайте новый запрос. </value>
+    <comment>Text to show End User Notification when requets is submitted.</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+    <comment>Text to show yes in confirmation card.</comment>
+  </data>
+  <data name="ContentText" xml:space="preserve">
+    <value>Начать сейчас...</value>
+    <comment>Text to show in EndUser welcome card.</comment>
+  </data>
+  <data name="NewRequestBulletPoint" xml:space="preserve">
+    <value>* Нажмите кнопку * * Создать запрос * * или введите * * создать запрос * * в этом чате.</value>
+    <comment>Text to show command in a welcome card.</comment>
+  </data>
+  <data name="NewRequestButtonText" xml:space="preserve">
+    <value>Новый запрос</value>
+    <comment>Text to show in Edit task module,new request card.</comment>
+  </data>
+  <data name="WelcomeCardContent" xml:space="preserve">
+    <value>Столкнулись с проблемой? Я могу попросить дежурную команду заняться ей.</value>
+    <comment>Text to show bot description in welcome card for EndUser.</comment>
+  </data>
+  <data name="WelcomeCardTitle" xml:space="preserve">
+    <value>Добро пожаловать!</value>
+    <comment>Text to show in welcome card.</comment>
+  </data>
+  <data name="WelcomeSubHeaderText" xml:space="preserve">
+    <value>Вот как это работает:</value>
+    <comment>Text to show as a sub header in welcome card.</comment>
+  </data>
+  <data name="AssignToMeActionChoiceTitle" xml:space="preserve">
+    <value>Назначить мне</value>
+    <comment>Text to assign a ticket to himself.</comment>
+  </data>
+  <data name="ChangeStatusButtonText" xml:space="preserve">
+    <value>Изменить статус</value>
+    <comment>Text to show change status on button.</comment>
+  </data>
+  <data name="ChatTextButton" xml:space="preserve">
+    <value>Чат</value>
+    <comment>Text to show chat button for EndUser.</comment>
+  </data>
+  <data name="CloseActionChoiceTitle" xml:space="preserve">
+    <value>Закрыть</value>
+    <comment>Text to show Close action in Change status section.</comment>
+  </data>
+  <data name="FirstObservedText" xml:space="preserve">
+    <value>Впервые замечен в</value>
+    <comment>Text to shown title for First observed in ticket card.</comment>
+  </data>
+  <data name="ReopenActionChoiceTitle" xml:space="preserve">
+    <value>Открыть заново</value>
+    <comment>Text to show in change status section in SME request details card.</comment>
+  </data>
+  <data name="ReopenAssignToMeActionChoiceTitle" xml:space="preserve">
+    <value>Повторно открыть и назначить мне.</value>
+    <comment>Text to show in change status section in SME request details card.</comment>
+  </data>
+  <data name="RequestDetailsText" xml:space="preserve">
+    <value>Сведения о запросе</value>
+    <comment>Text to show in Request details card for Expert Team</comment>
+  </data>
+  <data name="SeverityButtonText" xml:space="preserve">
+    <value>Изменить серьезность</value>
+    <comment>Text to show severity on button in request details card.</comment>
+  </data>
+  <data name="SmeRequestDetailText" xml:space="preserve">
+    <value>{0} запрашивает поддержку.</value>
+    <comment>Text to show under request submitted card to SME.</comment>
+  </data>
+  <data name="SmeUserChatMessage" xml:space="preserve">
+    <value>RE: Запрос в службу поддержки {0}.</value>
+    <comment>Text to show when SME user try to chat with Enduser.</comment>
+  </data>
+  <data name="UnassignActionChoiceTitle" xml:space="preserve">
+    <value>Отменить назначение</value>
+    <comment>Text to show in change status dropdown choice in request details card.</comment>
+  </data>
+  <data name="EndUserNotificationText" xml:space="preserve">
+    <value>Группа поддержки получила ваш запрос # {0}.</value>
+    <comment>Text to show EndUser notification when request is submitted.</comment>
+  </data>
+  <data name="SmeAssignedStatus" xml:space="preserve">
+    <value>Теперь этот запрос назначен пользователю {0}.</value>
+    <comment>Text to show notification as assigned request is closed to SME Users.</comment>
+  </data>
+  <data name="SmeClosedStatus" xml:space="preserve">
+    <value>Состояние изменено на "Разрешено" пользователем {0}.</value>
+    <comment>Text to show notification as request is closed to SME Users.</comment>
+  </data>
+  <data name="SmeSeverityStatus" xml:space="preserve">
+    <value>Степень важности изменена на {0} пользователем {1}.</value>
+    <comment>Text to show notification when request changes severity from SME Users.</comment>
+  </data>
+  <data name="SmeUnassignedStatus" xml:space="preserve">
+    <value>Состояние изменено на "не назначено" пользователем {0}.</value>
+    <comment>Text to show notification when request is unassigned to SME Users.</comment>
+  </data>
+  <data name="ManageExpertsActionText" xml:space="preserve">
+    <value>Управление</value>
+    <comment>Text to show on button</comment>
+  </data>
+  <data name="OnCallSMEDetailCardText" xml:space="preserve">
+    <value>Вот текущая дежурная команда. Нажмите кнопку **Управление**, чтобы изменить специалистов, входящих в команду.</value>
+    <comment>On call SME detail card text.</comment>
+  </data>
+  <data name="UpdateHistoryActionText" xml:space="preserve">
+    <value>Просмотреть журнал</value>
+    <comment>Text to show on button</comment>
+  </data>
+  <data name="DatetimeTitleText" xml:space="preserve">
+    <value>Последнее обновление</value>
+    <comment>Text to show on update history card title</comment>
+  </data>
+  <data name="NameTitleText" xml:space="preserve">
+    <value>Имя</value>
+    <comment>Text to show on update history card title</comment>
+  </data>
+  <data name="NoOnCallExpertsConfiguredText" xml:space="preserve">
+    <value>Сейчас никто не дежурит. Выберите **Управление**, чтобы добавить специалистов в дежурную команду.</value>
+    <comment>Text to show when no on call support experts are configured</comment>
+  </data>
+  <data name="ManageExpertsTitle" xml:space="preserve">
+    <value>Управление списком дежурных экспертов</value>
+    <comment>Text to show in manage experts page shown in task module </comment>
+  </data>
+  <data name="NoUpdateHistoryText" xml:space="preserve">
+    <value>История дежурств недоступна.</value>
+    <comment>Text to show when no update history is available.</comment>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Произошла ошибка. Повторите попытку через несколько минут.</value>
+    <comment>Generic error message.</comment>
+  </data>
+  <data name="AssignedTicketUserNotification" xml:space="preserve">
+    <value>Группа поддержки выбрала ваш запрос # {0}. Адвокат свяжется с вами в ближайшее время.</value>
+    <comment>Text to show notification for user when ticket is assigned to expert team.</comment>
+  </data>
+  <data name="ClosedTicketUserNotification" xml:space="preserve">
+    <value>Запрос с номером # {0} разрешен. Создайте новый запрос, если вам все еще нужна помощь.</value>
+    <comment>Text to show user notification message when ticket is closed by Expert Team.</comment>
+  </data>
+  <data name="EscalateButtonText" xml:space="preserve">
+    <value>Эскалировать</value>
+    <comment>Text to show on button in EndUser ME.</comment>
+  </data>
+  <data name="ReopenedTicketUserNotification" xml:space="preserve">
+    <value>Мы передадим ваш запрос другому специалисту. Мы скоро сообщим вам об этом.</value>
+    <comment>Text to show user when status of ticket is reopened by Expert team member.</comment>
+  </data>
+  <data name="RequestActionTicketUserNotification" xml:space="preserve">
+    <value>Группа поддержки изменила уровень серьезности для запроса # {0}.</value>
+    <comment>Text to show user when severity of ticket is changed by Expert team member.</comment>
+  </data>
+  <data name="DateValidationText" xml:space="preserve">
+    <value>Выбранная дата должна быть в прошлом</value>
+    <comment>Text to show if issue date is greater than enter date of is empty.</comment>
+  </data>
+  <data name="DescriptionValidationText" xml:space="preserve">
+    <value>Требуется описание</value>
+    <comment>Text to show if description field is empty.</comment>
+  </data>
+  <data name="TitleValidationText" xml:space="preserve">
+    <value>Требуется ввод данных</value>
+    <comment>Text to show if title field is empty.</comment>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Запрос № {0} - требуется внимание</value>
+    <comment>Text to use as a group name when group is created.</comment>
+  </data>
+  <data name="MessageContent" xml:space="preserve">
+    <value>Здравствуйте! Мне нужна срочная помощь с запросом, созданным пользователем {0}. Вы можете мне помочь?</value>
+    <comment>Text to show when user clicks on chat button.</comment>
+  </data>
+  <data name="InvalidTeamText" xml:space="preserve">
+    <value>Этот бот не был добавлен для этой команды</value>
+    <comment>Text to show validation in ME when it is not a valid team to open request.</comment>
+  </data>
+  <data name="ExpertNameTitle" xml:space="preserve">
+    <value>Выбрать специалиста</value>
+    <comment>Text to show on manage experts page</comment>
+  </data>
+  <data name="AddButtonText" xml:space="preserve">
+    <value>Добавить</value>
+    <comment>Text to show on add button.</comment>
+  </data>
+  <data name="ExpertListPlaceHolderText" xml:space="preserve">
+    <value>Введите одно или несколько имен или адресов электронной почты</value>
+    <comment>Text to show in expert list dropdown placeholder.</comment>
+  </data>
+  <data name="ExpertList" xml:space="preserve">
+    <value>Список экспертов</value>
+    <comment>Text to show on list of experts from command list.</comment>
+  </data>
+  <data name="ExpertListTitle" xml:space="preserve">
+    <value>Текущая дежурная команда</value>
+    <comment>Text to show on manage experts page.</comment>
+  </data>
+  <data name="NoMatchesFoundText" xml:space="preserve">
+    <value>Не удалось найти совпадения.</value>
+    <comment>Text to show when there are no matches to condition.</comment>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Сохранить</value>
+    <comment>Text to show on save button.</comment>
+  </data>
+  <data name="OnCallExpertMentionText" xml:space="preserve">
+    <value>Список экспертов для звонков был изменен. {0} добавлены.</value>
+    <comment>Text to show when on call expert list is modified.</comment>
+  </data>
+  <data name="MaxOnCallExpertsAllowedText" xml:space="preserve">
+    <value>В список можно добавить не более 15 пользователей, минимальное количество - 0</value>
+    <comment>Text to show for validation message when on call experts selected are more than 15.</comment>
+  </data>
+  <data name="ExperListBulletPoint" xml:space="preserve">
+    <value>* Попаданий * * Current On-Call * * для настройки экспертов звонков из этой команды.</value>
+    <comment>Text to show command in a welcome Team card.</comment>
+  </data>
+  <data name="SmeEditNotificationText" xml:space="preserve">
+    <value>Запрос был изменен пользователем {0}.</value>
+    <comment>Text to show when user edits the request.</comment>
+  </data>
+  <data name="SmeWithdrawNotificationText" xml:space="preserve">
+    <value>Этот запрос отменен пользователем {0}.</value>
+    <comment>Text to show for SME user when withdrawn.</comment>
+  </data>
+  <data name="RequestUpdatedText" xml:space="preserve">
+    <value>Запрос обновлен</value>
+    <comment>Text to show as title of ticket edited card send in 1:1 chat with bot.</comment>
+  </data>
+  <data name="WelcomeTeamCardContent" xml:space="preserve">
+    <value>Здравствуйте! Я могу помочь вам предоставить поддержку пользователям, которые взаимодействуют со мной и нуждаются в дополнительной помощи.</value>
+    <comment>Text to show bot description in welcome card for Sme.</comment>
+  </data>
+  <data name="ClosedErrorMessage" xml:space="preserve">
+    <value>Этот запрос закрыт и не может быть изменен</value>
+    <comment>Text to show when user want to edit closed request.</comment>
+  </data>
+  <data name="DescriptionText" xml:space="preserve">
+    <value>Сведения</value>
+    <comment>Text to show description in request submitted card.</comment>
+  </data>
+  <data name="RequestNumberText" xml:space="preserve">
+    <value>Номер запроса</value>
+    <comment>Text to show as request number in new request card.</comment>
+  </data>
+  <data name="RequestTypeText" xml:space="preserve">
+    <value>Тип запроса</value>
+    <comment>Text to show request type in request submitted card.</comment>
+  </data>
+  <data name="TitleDisplayText" xml:space="preserve">
+    <value>Что случилось?</value>
+    <comment>Text to show as title text in new request card.</comment>
+  </data>
+  <data name="WithdrawErrorMessage" xml:space="preserve">
+    <value>Только активные запросы могут быть отозваны.</value>
+    <comment>Text to show when user want to withdraw closed request.</comment>
+  </data>
+  <data name="StatusCheckBulletPoint" xml:space="preserve">
+    <value>* Чтобы проверить состояние, нажмите на маленькое изображение моей иконки рядом с параметрами форматирования вашего сообщения.</value>
+    <comment>Text to show in welcome card for know user how this bot hepls.</comment>
+  </data>
+  <data name="AzureStorageErrorText" xml:space="preserve">
+    <value>При сохранении запроса произошла ошибка. Повторите попытку через несколько минут.</value>
+    <comment>Text to show error when the request is not save in the azure storage.</comment>
+  </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Отмена</value>
+    <comment>Text to show for button action.</comment>
+  </data>
+  <data name="DesciptionPlaceHolderText" xml:space="preserve">
+    <value>Опишите проблему</value>
+    <comment>Text to show in desciption place holder.</comment>
+  </data>
+  <data name="NewRequestTitle" xml:space="preserve">
+    <value>Новый запрос</value>
+    <comment>Text to show in new request card.</comment>
+  </data>
+  <data name="SendRequestButtonText" xml:space="preserve">
+    <value>Отправить запрос</value>
+    <comment>Text to show for button action.</comment>
+  </data>
+  <data name="TellUsAboutProblemText" xml:space="preserve">
+    <value>Расскажите нам о проблеме</value>
+    <comment>Text to show in card.</comment>
+  </data>
+  <data name="TitlePlaceHolderText" xml:space="preserve">
+    <value>Введите текст…</value>
+    <comment>Text to show in title place holder.</comment>
+  </data>
+  <data name="SessionExpired" xml:space="preserve">
+    <value>Время сеанса истекло. Для продолжения войдите еще раз.</value>
+    <comment>Text to show when user session is expired.</comment>
+  </data>
+  <data name="UnauthorizedAccess" xml:space="preserve">
+    <value>Несанкционированный доступ</value>
+    <comment>Text to show when user is not authenticated.</comment>
+  </data>
+  <data name="OnCallListUpdateMessage" xml:space="preserve">
+    <value>Список дежурных экспертов был изменен.</value>
+  </data>
+  <data name="RequestStatusText" xml:space="preserve">
+    <value>Состояние</value>
+    <comment>Text to show ticket current status.</comment>
+  </data>
+  <data name="TeamRequestBulletPoint" xml:space="preserve">
+    <value>* Чтобы проверить назначения запросов, нажмите на маленькое изображение моей иконки рядом с параметрами форматирования вашего сообщения.</value>
+    <comment>Text to show as a bullet point in team welcome card.</comment>
+  </data>
+  <data name="BotCommandExpertList" xml:space="preserve">
+    <value>Список экспертов</value>
+    <comment>Bot command Expert list. This needs to be matched with manifest's command "Expert list" in translated json file.</comment>
+  </data>
+  <data name="BotCommandNewRequest" xml:space="preserve">
+    <value>Новый запрос</value>
+    <comment>Bot command New request. This needs to be matched with manifest's command "New request" in translated json file.</comment>
+  </data>
+  <data name="WithdrawnText" xml:space="preserve">
+    <value>Отозвано</value>
+    <comment>Text to show withdrawn status of ticket.</comment>
+  </data>
+  <data name="AssignedText" xml:space="preserve">
+    <value>Назначено</value>
+    <comment>Text to show status as assigned.</comment>
+  </data>
+  <data name="ClosedText" xml:space="preserve">
+    <value>Закрыто</value>
+    <comment>Text to show status as closed.</comment>
+  </data>
+  <data name="UnassignedText" xml:space="preserve">
+    <value>Не назначено</value>
+    <comment>Text to show status as unassigned.</comment>
+  </data>
+</root>

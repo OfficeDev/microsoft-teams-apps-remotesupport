@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "Remote Support - Expert",
+  "description.short": "Expert team bot to handle user requests and set on call experts.",
+  "description.full": "Manage support request and set up on call experts in team. Search urgent, assigned and unassigned requests right from expert team.",
+  "bots[0].commandLists[0].commands[0].title": "Expert list",
+  "bots[0].commandLists[0].commands[0].description": "List of on call experts",
+  "composeExtensions[0].commands[0].title": "Urgent",
+  "composeExtensions[0].commands[0].description": "Search urgent requests",
+  "composeExtensions[0].commands[0].parameters[0].title": "Search",
+  "composeExtensions[0].commands[0].parameters[0].description": "Search requests",
+  "composeExtensions[0].commands[1].title": "Assigned",
+  "composeExtensions[0].commands[1].description": "Search requests assigned to an expert",
+  "composeExtensions[0].commands[1].parameters[0].title": "Search",
+  "composeExtensions[0].commands[1].parameters[0].description": "Search requests",
+  "composeExtensions[0].commands[2].title": "Unassigned",
+  "composeExtensions[0].commands[2].description": "Search unassigned requests not yet assigned to an expert",
+  "composeExtensions[0].commands[2].parameters[0].title": "Search",
+  "composeExtensions[0].commands[2].parameters[0].description": "Search requests"
+}

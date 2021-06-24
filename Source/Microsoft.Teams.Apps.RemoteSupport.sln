@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.RemoteSupport", "Microsoft.Teams.Apps.RemoteSupport\Microsoft.Teams.Apps.RemoteSupport.csproj", "{90AA7097-ABD6-4D38-9EA2-D9E613146E1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.RemoteSupport", "RemoteSupport\Microsoft.Teams.Apps.RemoteSupport.csproj", "{90AA7097-ABD6-4D38-9EA2-D9E613146E1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.RemoteSupport.Common", "Microsoft.Teams.Apps.RemoteSupport.Common\Microsoft.Teams.Apps.RemoteSupport.Common.csproj", "{70491F0E-05FA-4438-B026-7084868BA8C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.RemoteSupport.Common", "RemoteSupport.Common\Microsoft.Teams.Apps.RemoteSupport.Common.csproj", "{70491F0E-05FA-4438-B026-7084868BA8C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.RemoteSupport.Configuration", "Microsoft.Teams.Apps.RemoteSupport.Configuration\Microsoft.Teams.Apps.RemoteSupport.Configuration.csproj", "{7A229EB9-602D-452D-A736-F7CFB19DFDFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.RemoteSupport.Configuration", "RemoteSupport.Configuration\Microsoft.Teams.Apps.RemoteSupport.Configuration.csproj", "{7A229EB9-602D-452D-A736-F7CFB19DFDFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

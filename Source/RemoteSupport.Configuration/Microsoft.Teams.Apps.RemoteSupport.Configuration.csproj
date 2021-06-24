@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>d3daa5ef-9b6e-4f84-a74d-d37dcce5048e</UserSecretsId>
+    <LangVersion>latest</LangVersion>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptBuildMode>true</TypeScriptBuildMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.13.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\components\error-page.tsx" />
+    <None Remove="ClientApp\src\components\error-page.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Build\stylecop.json" Link="stylecop.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .gitignore))\Build\Analyzer.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\$(Configuration)\$(Platform)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteSupport.Common\Microsoft.Teams.Apps.RemoteSupport.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings.resx">
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>Microsoft.Teams.Apps.RemoteSupport.Configuration</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+  
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec Condition=" '$(KuduDeployment)' == '' " WorkingDirectory="$(SpaRoot)" Command="npm install --no-audit" />
+    <Message Importance="high" Text="Building the client app using 'npm'. This may take several minutes..." />
+    <Exec Condition=" '$(KuduDeployment)' == '' " WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+    <Message Importance="high" Text="Finished building the client app" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)build\**; $(SpaRoot)build-ssr\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>

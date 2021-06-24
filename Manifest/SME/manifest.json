@@ -15,46 +15,50 @@
     "additionalLanguages": [
       {
         "languageTag": "de",
-        "file": "de-DE.json"
+        "file": "de.json"
+      },
+      {
+        "languageTag": "en",
+        "file": "en.json"
       },
       {
         "languageTag": "fr",
-        "file": "fr-FR.json"
+        "file": "fr.json"
       },
       {
         "languageTag": "ar",
-        "file": "ar-SA.json"
+        "file": "ar.json"
       },
       {
         "languageTag": "ja",
-        "file": "ja-JP.json"
+        "file": "ja.json"
       },
       {
         "languageTag": "es",
-        "file": "es-ES.json"
+        "file": "es.json"
       },
       {
         "languageTag": "he",
-        "file": "he-IL.json"
+        "file": "he.json"
       },
       {
         "languageTag": "ko",
-        "file": "ko-KR.json"
+        "file": "ko.json"
       },
       {
-        "languageTag": "pt",
+        "languageTag": "pt-BR",
         "file": "pt-BR.json"
       },
       {
         "languageTag": "ru",
-        "file": "ru-Ru.json"
+        "file": "ru.json"
       },
       {
-        "languageTag": "zh",
+        "languageTag": "zh-CN",
         "file": "zh-CN.json"
       },
       {
-        "languageTag": "zh",
+        "languageTag": "zh-TW",
         "file": "zh-TW.json"
       }
     ]

@@ -15,6 +15,6 @@
   "composeExtensions[0].commands[1].parameters[0].description": "搜索请求",
   "composeExtensions[0].commands[2].title": "未分配",
   "composeExtensions[0].commands[2].description": "搜索尚未分配给专家的未分配请求",
-  "composeExtensions[0].commands[2].parameters[0].title": "搜索"
+  "composeExtensions[0].commands[2].parameters[0].title": "搜索",
   "composeExtensions[0].commands[2].parameters[0].description": "搜索请求"
 }

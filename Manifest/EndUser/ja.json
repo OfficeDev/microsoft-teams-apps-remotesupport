@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "リモート サポート",
+  "description.short": "サポート要求をし、すばやくエキスパートに連絡するのに役立ちます",
+  "description.full": "リモートサポートをすばやく要求します。リクエストを検索し、緊急対応のためにグループ チャットで通話のエキスパートにエスカレートします。",
+  "bots[0].commandLists[0].commands[0].title": "新しい要求",
+  "bots[0].commandLists[0].commands[0].description": "通話チームへの要求の作成",
+  "composeExtensions[0].commands[0].title": "アクティブ",
+  "composeExtensions[0].commands[0].description": "アクティブな要求の検索",
+  "composeExtensions[0].commands[0].parameters[0].title": "検索",
+  "composeExtensions[0].commands[0].parameters[0].description": "要求の検索",
+  "composeExtensions[0].commands[1].title": "終了",
+  "composeExtensions[0].commands[1].description": "終了した要求の検索",
+  "composeExtensions[0].commands[1].parameters[0].title": "検索",
+  "composeExtensions[0].commands[1].parameters[0].description": "要求の検索"
+}
