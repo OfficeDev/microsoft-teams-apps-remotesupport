@@ -35,7 +35,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             {
                 return false;
             }
-            else if (existingTicketDetail != null && DateTimeOffset.Compare(existingTicketDetail.IssueOccurredOn, ConvertToDateTimeoffset(updatedTicketDetail.IssueOccurredOn, turnContext.Activity.LocalTimestamp.Value.Offset)) < 0)
+            else if (existingTicketDetail != null && DateTimeOffset.Compare(existingTicketDetail.IssueOccurredOn, ConvertToDateTimeoffset(updatedTicketDetail.IssueOccurredOn, turnContext.Activity.Timestamp.Value.Offset)) < 0)
             {
                 return false;
             }
@@ -56,17 +56,17 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
             if (ticketDetail.IssueOccurredOn == DateTimeOffset.MinValue || taskModuleResponseValues?.IssueOccurredOn == DateTimeOffset.MinValue)
             {
-                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.Timestamp.Value.Offset);
             }
             else
             {
-                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(taskModuleResponseValues.IssueOccurredOn, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(taskModuleResponseValues.IssueOccurredOn, turnContext.Activity.Timestamp.Value.Offset);
             }
 
             ticketDetail.Description = taskModuleResponseValues?.Description;
             ticketDetail.Title = taskModuleResponseValues.Title;
             ticketDetail.Severity = (int)(TicketSeverity)Enum.Parse(typeof(TicketSeverity), taskModuleResponseValues.RequestType ?? TicketSeverity.Normal.ToString());
-            ticketDetail.LastModifiedOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
+            ticketDetail.LastModifiedOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.Timestamp.Value.Offset);
             ticketDetail.LastModifiedByName = turnContext.Activity.From.Name;
             ticketDetail.LastModifiedByObjectId = turnContext.Activity.From.AadObjectId;
             ticketDetail.RequestType = taskModuleResponseValues.RequestType ?? TicketSeverity.Normal.ToString();
@@ -87,14 +87,14 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
             ticketDetail = ticketDetail ?? throw new ArgumentNullException(nameof(ticketDetail));
 
-            ticketDetail.CreatedOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
+            ticketDetail.CreatedOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.Timestamp.Value.Offset);
             if (ticketDetail.IssueOccurredOn == DateTimeOffset.MinValue)
             {
-                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(DateTime.Now, turnContext.Activity.Timestamp.Value.Offset);
             }
             else
             {
-                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(ticketDetail.IssueOccurredOn, turnContext.Activity.LocalTimestamp.Value.Offset);
+                ticketDetail.IssueOccurredOn = ConvertToDateTimeoffset(ticketDetail.IssueOccurredOn, turnContext.Activity.Timestamp.Value.Offset);
             }
 
             ticketDetail.CreatedByObjectId = turnContext.Activity.From.AadObjectId;
@@ -106,7 +106,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
             ticketDetail.SmeTicketActivityId = null;
             ticketDetail.TicketStatus = (int)TicketState.Unassigned;
             ticketDetail.Severity = (int)(TicketSeverity)Enum.Parse(typeof(TicketSeverity), ticketDetail.RequestType ?? TicketSeverity.Normal.ToString());
-            ticketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(ticketAdditionalDetails, turnContext.Activity.LocalTimestamp.Value.Offset);
+            ticketDetail.AdditionalProperties = CardHelper.ValidateAdditionalTicketDetails(ticketAdditionalDetails, turnContext.Activity.Timestamp.Value.Offset);
             ticketDetail.CardId = cardId;
             ticketDetail.AssignedToName = string.Empty;
             ticketDetail.AssignedToObjectId = string.Empty;

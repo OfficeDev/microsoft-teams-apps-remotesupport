@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreatedOnText" xml:space="preserve">
+    <value>创建时间 </value>
+    <comment>Text to show in ME Thumbnail card</comment>
+  </data>
+  <data name="EditRequestTitle" xml:space="preserve">
+    <value>编辑请求</value>
+    <comment>Text to show on button</comment>
+  </data>
+  <data name="EditTicketActionText" xml:space="preserve">
+    <value>编辑</value>
+    <comment>Text to show for edit in ticket detail card in 1:1 chat.</comment>
+  </data>
+  <data name="GoToOriginalThreadButtonText" xml:space="preserve">
+    <value>查看详细信息</value>
+    <comment>Text to show on button in End User ME .</comment>
+  </data>
+  <data name="InvalidTenantText" xml:space="preserve">
+    <value>检测到无效的租户</value>
+    <comment>Text to show if invalid tenant.</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+    <comment>Text to show in confirmation card.</comment>
+  </data>
+  <data name="NormalText" xml:space="preserve">
+    <value>正常</value>
+    <comment>Text to show on the radio button when selected normal.</comment>
+  </data>
+  <data name="RequestSubmittedContent" xml:space="preserve">
+    <value>这是我与待命团队共享的内容，可供参考。</value>
+    <comment>Text to show on request submitted card.</comment>
+  </data>
+  <data name="RequestSubmittedText" xml:space="preserve">
+    <value>请求已发送</value>
+    <comment>Text to show as tiltle of ticket detail card send in 1:1 chat with bot.</comment>
+  </data>
+  <data name="UpdateActionText" xml:space="preserve">
+    <value>更新</value>
+    <comment>Text to show on the update button in adaptive card.</comment>
+  </data>
+  <data name="UrgentText" xml:space="preserve">
+    <value>紧急</value>
+    <comment>Text to show on the radio button when selected urgent.</comment>
+  </data>
+  <data name="WithdrawConfirmation" xml:space="preserve">
+    <value>是否确定要撤销此请求?</value>
+    <comment>Text to show on withdraw request action in ticket detail card in 1:1 chat.</comment>
+  </data>
+  <data name="WithdrawRequestActionText" xml:space="preserve">
+    <value>撤销</value>
+    <comment>Text to show on withdraw button in Request submitted card.</comment>
+  </data>
+  <data name="WithdrawText" xml:space="preserve">
+    <value>已撤销您的请求 {0}。如果出现其他问题，请发出新的请求。</value>
+    <comment>Text to show End User Notification when requets is submitted.</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+    <comment>Text to show yes in confirmation card.</comment>
+  </data>
+  <data name="ContentText" xml:space="preserve">
+    <value>立即开始使用...</value>
+    <comment>Text to show in EndUser welcome card.</comment>
+  </data>
+  <data name="NewRequestBulletPoint" xml:space="preserve">
+    <value>* 点击此聊天中的 **新请求** 按钮或键入 **新请求**。</value>
+    <comment>Text to show command in a welcome card.</comment>
+  </data>
+  <data name="NewRequestButtonText" xml:space="preserve">
+    <value>新建请求</value>
+    <comment>Text to show in Edit task module,new request card.</comment>
+  </data>
+  <data name="WelcomeCardContent" xml:space="preserve">
+    <value>遇到问题? 我可以请求待命团队进行调查。</value>
+    <comment>Text to show bot description in welcome card for EndUser.</comment>
+  </data>
+  <data name="WelcomeCardTitle" xml:space="preserve">
+    <value>欢迎!</value>
+    <comment>Text to show in welcome card.</comment>
+  </data>
+  <data name="WelcomeSubHeaderText" xml:space="preserve">
+    <value>工作方式如下:</value>
+    <comment>Text to show as a sub header in welcome card.</comment>
+  </data>
+  <data name="AssignToMeActionChoiceTitle" xml:space="preserve">
+    <value>分配给我</value>
+    <comment>Text to assign a ticket to himself.</comment>
+  </data>
+  <data name="ChangeStatusButtonText" xml:space="preserve">
+    <value>更改状态</value>
+    <comment>Text to show change status on button.</comment>
+  </data>
+  <data name="ChatTextButton" xml:space="preserve">
+    <value>聊天</value>
+    <comment>Text to show chat button for EndUser.</comment>
+  </data>
+  <data name="CloseActionChoiceTitle" xml:space="preserve">
+    <value>关闭</value>
+    <comment>Text to show Close action in Change status section.</comment>
+  </data>
+  <data name="FirstObservedText" xml:space="preserve">
+    <value>首次观测时间</value>
+    <comment>Text to shown title for First observed in ticket card.</comment>
+  </data>
+  <data name="ReopenActionChoiceTitle" xml:space="preserve">
+    <value>重新打开</value>
+    <comment>Text to show in change status section in SME request details card.</comment>
+  </data>
+  <data name="ReopenAssignToMeActionChoiceTitle" xml:space="preserve">
+    <value>重新打开并分配给我。</value>
+    <comment>Text to show in change status section in SME request details card.</comment>
+  </data>
+  <data name="RequestDetailsText" xml:space="preserve">
+    <value>请求详细信息</value>
+    <comment>Text to show in Request details card for Expert Team</comment>
+  </data>
+  <data name="SeverityButtonText" xml:space="preserve">
+    <value>更改严重级别</value>
+    <comment>Text to show severity on button in request details card.</comment>
+  </data>
+  <data name="SmeRequestDetailText" xml:space="preserve">
+    <value>{0} 正在请求支持。</value>
+    <comment>Text to show under request submitted card to SME.</comment>
+  </data>
+  <data name="SmeUserChatMessage" xml:space="preserve">
+    <value>回复: 支持请求 {0}。</value>
+    <comment>Text to show when SME user try to chat with Enduser.</comment>
+  </data>
+  <data name="UnassignActionChoiceTitle" xml:space="preserve">
+    <value>取消分配</value>
+    <comment>Text to show in change status dropdown choice in request details card.</comment>
+  </data>
+  <data name="EndUserNotificationText" xml:space="preserve">
+    <value>支持团队已收到你的请求 # {0}。</value>
+    <comment>Text to show EndUser notification when request is submitted.</comment>
+  </data>
+  <data name="SmeAssignedStatus" xml:space="preserve">
+    <value>此请求现在已分配给 {0}。</value>
+    <comment>Text to show notification as assigned request is closed to SME Users.</comment>
+  </data>
+  <data name="SmeClosedStatus" xml:space="preserve">
+    <value>状态已由 {0} 更改为已解决。</value>
+    <comment>Text to show notification as request is closed to SME Users.</comment>
+  </data>
+  <data name="SmeSeverityStatus" xml:space="preserve">
+    <value>严重程度已由 {1} 更改为 {0}。</value>
+    <comment>Text to show notification when request changes severity from SME Users.</comment>
+  </data>
+  <data name="SmeUnassignedStatus" xml:space="preserve">
+    <value>状态已由 {0} 更改为未分配。</value>
+    <comment>Text to show notification when request is unassigned to SME Users.</comment>
+  </data>
+  <data name="ManageExpertsActionText" xml:space="preserve">
+    <value>管理</value>
+    <comment>Text to show on button</comment>
+  </data>
+  <data name="OnCallSMEDetailCardText" xml:space="preserve">
+    <value>这是当前通话的团队。单击 * * 管理 * * 以更改团队中的专家。</value>
+    <comment>On call SME detail card text.</comment>
+  </data>
+  <data name="UpdateHistoryActionText" xml:space="preserve">
+    <value>查看历史记录</value>
+    <comment>Text to show on button</comment>
+  </data>
+  <data name="DatetimeTitleText" xml:space="preserve">
+    <value>上次更新时间</value>
+    <comment>Text to show on update history card title</comment>
+  </data>
+  <data name="NameTitleText" xml:space="preserve">
+    <value>名称</value>
+    <comment>Text to show on update history card title</comment>
+  </data>
+  <data name="NoOnCallExpertsConfiguredText" xml:space="preserve">
+    <value>当前没有人在通话中。选择 **管理** 以向待命团队添加专家。</value>
+    <comment>Text to show when no on call support experts are configured</comment>
+  </data>
+  <data name="ManageExpertsTitle" xml:space="preserve">
+    <value>在此处管理待命专家列表</value>
+    <comment>Text to show in manage experts page shown in task module </comment>
+  </data>
+  <data name="NoUpdateHistoryText" xml:space="preserve">
+    <value>没有待命历史记录可用。</value>
+    <comment>Text to show when no update history is available.</comment>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>出现错误。请几分钟后重试。</value>
+    <comment>Generic error message.</comment>
+  </data>
+  <data name="AssignedTicketUserNotification" xml:space="preserve">
+    <value>支持团队已收到您的请求 #{0}。专家将很快与你联系。</value>
+    <comment>Text to show notification for user when ticket is assigned to expert team.</comment>
+  </data>
+  <data name="ClosedTicketUserNotification" xml:space="preserve">
+    <value>已解决此具有票证编号 {0} 的请求。如果仍然需要帮助，请发出新的请求。</value>
+    <comment>Text to show user notification message when ticket is closed by Expert Team.</comment>
+  </data>
+  <data name="EscalateButtonText" xml:space="preserve">
+    <value>呈报</value>
+    <comment>Text to show on button in EndUser ME.</comment>
+  </data>
+  <data name="ReopenedTicketUserNotification" xml:space="preserve">
+    <value>我们正在更改处理你的请求的人员。我们将尽快通知你。</value>
+    <comment>Text to show user when status of ticket is reopened by Expert team member.</comment>
+  </data>
+  <data name="RequestActionTicketUserNotification" xml:space="preserve">
+    <value>支持团队更改了请求的严重级别 {0}。</value>
+    <comment>Text to show user when severity of ticket is changed by Expert team member.</comment>
+  </data>
+  <data name="DateValidationText" xml:space="preserve">
+    <value>所选日期必须在过去</value>
+    <comment>Text to show if issue date is greater than enter date of is empty.</comment>
+  </data>
+  <data name="DescriptionValidationText" xml:space="preserve">
+    <value>说明为必填项</value>
+    <comment>Text to show if description field is empty.</comment>
+  </data>
+  <data name="TitleValidationText" xml:space="preserve">
+    <value>必须进行输入</value>
+    <comment>Text to show if title field is empty.</comment>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>请求无 {0} - 需要注意</value>
+    <comment>Text to use as a group name when group is created.</comment>
+  </data>
+  <data name="MessageContent" xml:space="preserve">
+    <value>你好，团队，我需要立即支持 {0} 创建的请求。你能提供帮助吗?</value>
+    <comment>Text to show when user clicks on chat button.</comment>
+  </data>
+  <data name="InvalidTeamText" xml:space="preserve">
+    <value>尚未为此团队添加此聊天机器人</value>
+    <comment>Text to show validation in ME when it is not a valid team to open request.</comment>
+  </data>
+  <data name="ExpertNameTitle" xml:space="preserve">
+    <value>选择专家</value>
+    <comment>Text to show on manage experts page</comment>
+  </data>
+  <data name="AddButtonText" xml:space="preserve">
+    <value>添加</value>
+    <comment>Text to show on add button.</comment>
+  </data>
+  <data name="ExpertListPlaceHolderText" xml:space="preserve">
+    <value>输入一个或多个姓名或电子邮件</value>
+    <comment>Text to show in expert list dropdown placeholder.</comment>
+  </data>
+  <data name="ExpertList" xml:space="preserve">
+    <value>专家列表</value>
+    <comment>Text to show on list of experts from command list.</comment>
+  </data>
+  <data name="ExpertListTitle" xml:space="preserve">
+    <value>当前待命团队</value>
+    <comment>Text to show on manage experts page.</comment>
+  </data>
+  <data name="NoMatchesFoundText" xml:space="preserve">
+    <value>找不到任何匹配项。</value>
+    <comment>Text to show when there are no matches to condition.</comment>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>保存</value>
+    <comment>Text to show on save button.</comment>
+  </data>
+  <data name="OnCallExpertMentionText" xml:space="preserve">
+    <value>通话专家列表已被修改。已添加 {0}。</value>
+    <comment>Text to show when on call expert list is modified.</comment>
+  </data>
+  <data name="MaxOnCallExpertsAllowedText" xml:space="preserve">
+    <value>最多可将15人添加到列表中，最小值为 0</value>
+    <comment>Text to show for validation message when on call experts selected are more than 15.</comment>
+  </data>
+  <data name="ExperListBulletPoint" xml:space="preserve">
+    <value>* 点击 **当前待命团队** 按钮以设置此团队的待命专家。</value>
+    <comment>Text to show command in a welcome Team card.</comment>
+  </data>
+  <data name="SmeEditNotificationText" xml:space="preserve">
+    <value>此请求已由 {0} 修改。</value>
+    <comment>Text to show when user edits the request.</comment>
+  </data>
+  <data name="SmeWithdrawNotificationText" xml:space="preserve">
+    <value>此请求已由 {0} 撤销。</value>
+    <comment>Text to show for SME user when withdrawn.</comment>
+  </data>
+  <data name="RequestUpdatedText" xml:space="preserve">
+    <value>已更新请求</value>
+    <comment>Text to show as title of ticket edited card send in 1:1 chat with bot.</comment>
+  </data>
+  <data name="WelcomeTeamCardContent" xml:space="preserve">
+    <value>你好，我可以帮助你向与我交互并需要更多帮助的人提供支持。</value>
+    <comment>Text to show bot description in welcome card for Sme.</comment>
+  </data>
+  <data name="ClosedErrorMessage" xml:space="preserve">
+    <value>此请求已关闭，无法对其进行编辑</value>
+    <comment>Text to show when user want to edit closed request.</comment>
+  </data>
+  <data name="DescriptionText" xml:space="preserve">
+    <value>详细信息</value>
+    <comment>Text to show description in request submitted card.</comment>
+  </data>
+  <data name="RequestNumberText" xml:space="preserve">
+    <value>请求编号</value>
+    <comment>Text to show as request number in new request card.</comment>
+  </data>
+  <data name="RequestTypeText" xml:space="preserve">
+    <value>请求类型</value>
+    <comment>Text to show request type in request submitted card.</comment>
+  </data>
+  <data name="TitleDisplayText" xml:space="preserve">
+    <value>这是什么?</value>
+    <comment>Text to show as title text in new request card.</comment>
+  </data>
+  <data name="WithdrawErrorMessage" xml:space="preserve">
+    <value>仅可以撤消活动请求。</value>
+    <comment>Text to show when user want to withdraw closed request.</comment>
+  </data>
+  <data name="StatusCheckBulletPoint" xml:space="preserve">
+    <value>* 若要检查状态，请单击邮件格式选项旁边的小版本的图标。</value>
+    <comment>Text to show in welcome card for know user how this bot hepls.</comment>
+  </data>
+  <data name="AzureStorageErrorText" xml:space="preserve">
+    <value>保存你的请求时出现问题。请几分钟后重试。</value>
+    <comment>Text to show error when the request is not save in the azure storage.</comment>
+  </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>取消</value>
+    <comment>Text to show for button action.</comment>
+  </data>
+  <data name="DesciptionPlaceHolderText" xml:space="preserve">
+    <value>请描述问题</value>
+    <comment>Text to show in desciption place holder.</comment>
+  </data>
+  <data name="NewRequestTitle" xml:space="preserve">
+    <value>新建请求</value>
+    <comment>Text to show in new request card.</comment>
+  </data>
+  <data name="SendRequestButtonText" xml:space="preserve">
+    <value>发送请求</value>
+    <comment>Text to show for button action.</comment>
+  </data>
+  <data name="TellUsAboutProblemText" xml:space="preserve">
+    <value>请将问题告诉我们</value>
+    <comment>Text to show in card.</comment>
+  </data>
+  <data name="TitlePlaceHolderText" xml:space="preserve">
+    <value>在此处键入...</value>
+    <comment>Text to show in title place holder.</comment>
+  </data>
+  <data name="SessionExpired" xml:space="preserve">
+    <value>你的会话已过期。请重新登录以继续。</value>
+    <comment>Text to show when user session is expired.</comment>
+  </data>
+  <data name="UnauthorizedAccess" xml:space="preserve">
+    <value>未授权访问</value>
+    <comment>Text to show when user is not authenticated.</comment>
+  </data>
+  <data name="OnCallListUpdateMessage" xml:space="preserve">
+    <value>已修改待命专家列表。</value>
+  </data>
+  <data name="RequestStatusText" xml:space="preserve">
+    <value>状态</value>
+    <comment>Text to show ticket current status.</comment>
+  </data>
+  <data name="TeamRequestBulletPoint" xml:space="preserve">
+    <value>* 要检查请求 assignements，请单击邮件格式选项旁边的小版本的图标。</value>
+    <comment>Text to show as a bullet point in team welcome card.</comment>
+  </data>
+  <data name="BotCommandExpertList" xml:space="preserve">
+    <value>专家列表</value>
+    <comment>Bot command Expert list. This needs to be matched with manifest's command "Expert list" in translated json file.</comment>
+  </data>
+  <data name="BotCommandNewRequest" xml:space="preserve">
+    <value>新建请求</value>
+    <comment>Bot command New request. This needs to be matched with manifest's command "New request" in translated json file.</comment>
+  </data>
+  <data name="WithdrawnText" xml:space="preserve">
+    <value>撤消</value>
+    <comment>Text to show withdrawn status of ticket.</comment>
+  </data>
+  <data name="AssignedText" xml:space="preserve">
+    <value>已分配</value>
+    <comment>Text to show status as assigned.</comment>
+  </data>
+  <data name="ClosedText" xml:space="preserve">
+    <value>已关闭</value>
+    <comment>Text to show status as closed.</comment>
+  </data>
+  <data name="UnassignedText" xml:space="preserve">
+    <value>未分配</value>
+    <comment>Text to show status as unassigned.</comment>
+  </data>
+</root>

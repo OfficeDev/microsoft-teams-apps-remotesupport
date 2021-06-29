@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "遠端支援 - 專家",
+  "description.short": "可處理使用者要求並設定待命專家的專家小組 Bot。",
+  "description.full": "管理支援要求，並設定小組中的待命專家。直接從專家小組搜尋緊急、已指派及未指派的要求。",
+  "bots[0].commandLists[0].commands[0].title": "專家清單",
+  "bots[0].commandLists[0].commands[0].description": "待命專家清單",
+  "composeExtensions[0].commands[0].title": "緊急",
+  "composeExtensions[0].commands[0].description": "搜尋緊急要求",
+  "composeExtensions[0].commands[0].parameters[0].title": "搜尋",
+  "composeExtensions[0].commands[0].parameters[0].description": "搜尋要求",
+  "composeExtensions[0].commands[1].title": "已指派",
+  "composeExtensions[0].commands[1].description": "搜尋已指派給專家的要求",
+  "composeExtensions[0].commands[1].parameters[0].title": "搜尋",
+  "composeExtensions[0].commands[1].parameters[0].description": "搜尋要求",
+  "composeExtensions[0].commands[2].title": "未指派",
+  "composeExtensions[0].commands[2].description": "搜尋尚未指派給專家的未指派要求",
+  "composeExtensions[0].commands[2].parameters[0].title": "搜尋",
+  "composeExtensions[0].commands[2].parameters[0].description": "搜尋要求"
+}

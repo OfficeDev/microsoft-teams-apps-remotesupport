@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "תמיכה מרחוק",
+  "description.short": "עוזר לבקש תמיכה ולהתחבר במהירות למומחים",
+  "description.full": "בקש תמיכה מרחוק במהירות. חפש בבקשות והפנה את בקשתך למומחים הזמינים באמצעות צ'אט קבוצתי המשמש לבקשות דחופות.",
+  "bots[0].commandLists[0].commands[0].title": "בקשה חדשה",
+  "bots[0].commandLists[0].commands[0].description": "צור בקשה לצוות הזמין",
+  "composeExtensions[0].commands[0].title": "פעיל",
+  "composeExtensions[0].commands[0].description": "חפש בקשות פעילות",
+  "composeExtensions[0].commands[0].parameters[0].title": "חפש",
+  "composeExtensions[0].commands[0].parameters[0].description": "חיפוש בקשות",
+  "composeExtensions[0].commands[1].title": "סגור",
+  "composeExtensions[0].commands[1].description": "חיפוש בקשות שנסגרו",
+  "composeExtensions[0].commands[1].parameters[0].title": "חפש",
+  "composeExtensions[0].commands[1].parameters[0].description": "חיפוש בקשות"
+}

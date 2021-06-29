@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "遠端支援",
+  "description.short": "協助要求支援並儘快與專家連線",
+  "description.full": "快速要求遠端支援。搜尋要求，並透過群組聊天進行緊急要求，向待命專家呈報。",
+  "bots[0].commandLists[0].commands[0].title": "新增要求",
+  "bots[0].commandLists[0].commands[0].description": "向待命小組提出要求",
+  "composeExtensions[0].commands[0].title": "使用中",
+  "composeExtensions[0].commands[0].description": "搜尋使用中的要求",
+  "composeExtensions[0].commands[0].parameters[0].title": "搜尋",
+  "composeExtensions[0].commands[0].parameters[0].description": "搜尋要求",
+  "composeExtensions[0].commands[1].title": "已關閉",
+  "composeExtensions[0].commands[1].description": "搜尋已關閉的要求",
+  "composeExtensions[0].commands[1].parameters[0].title": "搜尋",
+  "composeExtensions[0].commands[1].parameters[0].description": "搜尋要求"
+}

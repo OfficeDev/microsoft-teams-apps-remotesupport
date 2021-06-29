@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "دعم عن بعد - خبير",
+  "description.short": "روبوت فريق الخبراء يعالج طلبات المستخدمين ويعين خبراء متوفرين عند الطلب.",
+  "description.full": "يمكنك إدارة طلب الدعم وتعيين الخبراء المتوفرين عند الطلب في الفريق كما يمكنك البحث في الطلبات العاجلة والمعينة وغير المعينة مباشرةً من فريق الخبراء.",
+  "bots[0].commandLists[0].commands[0].title": "قائمة الخبراء",
+  "bots[0].commandLists[0].commands[0].description": "قائمة الخبراء المتوفرين عند الطلب",
+  "composeExtensions[0].commands[0].title": "العاجلة",
+  "composeExtensions[0].commands[0].description": "بحث في الطلبات العاجلة",
+  "composeExtensions[0].commands[0].parameters[0].title": "بحث",
+  "composeExtensions[0].commands[0].parameters[0].description": "بحث في الطلبات",
+  "composeExtensions[0].commands[1].title": "المعينة",
+  "composeExtensions[0].commands[1].description": "بحث في الطلبات المعينة إلى خبير",
+  "composeExtensions[0].commands[1].parameters[0].title": "بحث",
+  "composeExtensions[0].commands[1].parameters[0].description": "بحث في الطلبات",
+  "composeExtensions[0].commands[2].title": "غير المعينة",
+  "composeExtensions[0].commands[2].description": "بحث في الطلبات غير المعينة بعد إلى خبير",
+  "composeExtensions[0].commands[2].parameters[0].title": "بحث",
+  "composeExtensions[0].commands[2].parameters[0].description": "بحث في الطلبات"
+}

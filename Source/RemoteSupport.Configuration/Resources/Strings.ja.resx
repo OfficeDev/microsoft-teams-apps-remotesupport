@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnAddComponent" xml:space="preserve">
+    <value>コンポーネントの追加</value>
+  </data>
+  <data name="btnBuildForm" xml:space="preserve">
+    <value>フォームの構築</value>
+  </data>
+  <data name="btnLogout" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="checkBox" xml:space="preserve">
+    <value>チェック ボックス</value>
+  </data>
+  <data name="checkBoxOptions" xml:space="preserve">
+    <value>チェック ボックスのオプションの選択</value>
+  </data>
+  <data name="componentDropdown" xml:space="preserve">
+    <value>コンポーネントを選択してください</value>
+  </data>
+  <data name="descriptionPlaceholderText" xml:space="preserve">
+    <value>この問題を説明してください</value>
+  </data>
+  <data name="descriptionText" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="displayName" xml:space="preserve">
+    <value>表示名 (最大 50 文字)</value>
+  </data>
+  <data name="displayNamePlaceholder" xml:space="preserve">
+    <value>ここに名前を入力します</value>
+  </data>
+  <data name="dropDown" xml:space="preserve">
+    <value>ドロップダウン リスト</value>
+  </data>
+  <data name="dropdownOptions" xml:space="preserve">
+    <value>ドロップダウン オプション</value>
+  </data>
+  <data name="duplicateItem" xml:space="preserve">
+    <value>アイテム テキストは重複できません</value>
+  </data>
+  <data name="emptyTeamLink" xml:space="preserve">
+    <value>チームの URL は空白にできません。</value>
+  </data>
+  <data name="genericError" xml:space="preserve">
+    <value>エラーが発生しました</value>
+  </data>
+  <data name="headerTitle" xml:space="preserve">
+    <value>フォームの作成</value>
+  </data>
+  <data name="inputDate" xml:space="preserve">
+    <value>日付を入力</value>
+  </data>
+  <data name="inputText" xml:space="preserve">
+    <value>テキストの入力</value>
+  </data>
+  <data name="invalidTeamLink" xml:space="preserve">
+    <value>無効なチーム URL です。</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>読み込んでいます。しばらくお待ちください。</value>
+  </data>
+  <data name="mainHeader" xml:space="preserve">
+    <value>カードの構成</value>
+  </data>
+  <data name="maxCheckBoxChoices" xml:space="preserve">
+    <value>4 個以上の選択肢を追加することはできません</value>
+  </data>
+  <data name="maxComponents" xml:space="preserve">
+    <value>プレビューに追加できるコンポーネントは 4 つまでです</value>
+  </data>
+  <data name="maxDropdownChoices" xml:space="preserve">
+    <value>10 個以上の選択肢を追加することはできません</value>
+  </data>
+  <data name="maxLengthDisplayName" xml:space="preserve">
+    <value>表示名は 50 文字以内である必要があります</value>
+  </data>
+  <data name="maxRadioChoices" xml:space="preserve">
+    <value>3 個以上の選択肢を追加することはできません</value>
+  </data>
+  <data name="minimumItems" xml:space="preserve">
+    <value>2 個以上のアイテムが必要です</value>
+  </data>
+  <data name="nonEmptyItem" xml:space="preserve">
+    <value>アイテム テキストは空白にできません</value>
+  </data>
+  <data name="normalSeverity" xml:space="preserve">
+    <value>標準</value>
+  </data>
+  <data name="notAuthorized" xml:space="preserve">
+    <value>アプリケーションへのアクセスが許可されていません</value>
+  </data>
+  <data name="notEmptyDisplayName" xml:space="preserve">
+    <value>表示名は空白にできません</value>
+  </data>
+  <data name="placeholder" xml:space="preserve">
+    <value>プレースホルダー (最大 50 文字)</value>
+  </data>
+  <data name="placeholderText" xml:space="preserve">
+    <value>プレースホルダー テキストをここに入力してください</value>
+  </data>
+  <data name="previewTitle" xml:space="preserve">
+    <value>プレビュー</value>
+  </data>
+  <data name="radioButton" xml:space="preserve">
+    <value>ラジオ ボタン</value>
+  </data>
+  <data name="radioOptions" xml:space="preserve">
+    <value>ラジオ ボタンのオプションの選択</value>
+  </data>
+  <data name="staticDropdown" xml:space="preserve">
+    <value>要求の種類</value>
+  </data>
+  <data name="staticDropdownPlaceholder" xml:space="preserve">
+    <value>要求の種類の選択</value>
+  </data>
+  <data name="successPublish" xml:space="preserve">
+    <value>データが正常に保存されました</value>
+  </data>
+  <data name="teamLink" xml:space="preserve">
+    <value>チーム リンク</value>
+  </data>
+  <data name="titleText" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="uniqueDisplayName" xml:space="preserve">
+    <value>表示名は一意である必要があります</value>
+  </data>
+  <data name="urgentSeverity" xml:space="preserve">
+    <value>緊急</value>
+  </data>
+</root>

@@ -70,6 +70,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned.
+        /// </summary>
+        public static string AssignedText {
+            get {
+                return ResourceManager.GetString("AssignedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The support team picked up your request #{0}. A specialist will contact you soon..
         /// </summary>
         public static string AssignedTicketUserNotification {
@@ -93,6 +102,24 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string AzureStorageErrorText {
             get {
                 return ResourceManager.GetString("AzureStorageErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expert list.
+        /// </summary>
+        public static string BotCommandExpertList {
+            get {
+                return ResourceManager.GetString("BotCommandExpertList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New request.
+        /// </summary>
+        public static string BotCommandNewRequest {
+            get {
+                return ResourceManager.GetString("BotCommandNewRequest", resourceCulture);
             }
         }
         
@@ -138,6 +165,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string ClosedErrorMessage {
             get {
                 return ResourceManager.GetString("ClosedErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        public static string ClosedText {
+            get {
+                return ResourceManager.GetString("ClosedText", resourceCulture);
             }
         }
         
@@ -264,6 +300,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string ExperListBulletPoint {
             get {
                 return ResourceManager.GetString("ExperListBulletPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expert List.
+        /// </summary>
+        public static string ExpertList {
+            get {
+                return ResourceManager.GetString("ExpertList", resourceCulture);
             }
         }
         
@@ -754,6 +799,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unassigned.
+        /// </summary>
+        public static string UnassignedText {
+            get {
+                return ResourceManager.GetString("UnassignedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unauthorized access.
         /// </summary>
         public static string UnauthorizedAccess {
@@ -840,6 +894,15 @@ namespace Microsoft.Teams.Apps.RemoteSupport {
         public static string WithdrawErrorMessage {
             get {
                 return ResourceManager.GetString("WithdrawErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Withdrawn.
+        /// </summary>
+        public static string WithdrawnText {
+            get {
+                return ResourceManager.GetString("WithdrawnText", resourceCulture);
             }
         }
         

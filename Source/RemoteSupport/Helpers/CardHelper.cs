@@ -19,6 +19,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
     using Microsoft.Extensions.Localization;
     using Microsoft.Extensions.Logging;
     using Microsoft.Teams.Apps.RemoteSupport.Cards;
+    using Microsoft.Teams.Apps.RemoteSupport.Common;
     using Microsoft.Teams.Apps.RemoteSupport.Common.Models;
     using Microsoft.Teams.Apps.RemoteSupport.Common.Providers;
     using Microsoft.Teams.Apps.RemoteSupport.Models;
@@ -525,7 +526,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// <returns>Adaptive card supported date time format else return sting as-is.</returns>
         public static string AdaptiveTextParseWithDateTime(string inputText)
         {
-            if (DateTime.TryParse(inputText, out DateTime inputDateTime))
+            if (DateTime.TryParse(inputText, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime inputDateTime))
             {
                 return "{{DATE(" + inputDateTime.ToUniversalTime().ToString(CardConstants.Rfc3339DateTimeFormat, CultureInfo.InvariantCulture) + ", SHORT)}}";
             }
@@ -574,9 +575,32 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
         /// </summary>
         /// <param name="title">Column title.</param>
         /// <param name="value">Column value.</param>
+        /// <param name="localizer">The current cultures' string localizer.</param>
         /// <returns>AdaptiveColumnSet.</returns>
-        public static AdaptiveColumnSet GetAdaptiveCardColumnSet(string title, string value)
+        public static AdaptiveColumnSet GetAdaptiveCardColumnSet(string title, string value, IStringLocalizer<Strings> localizer)
         {
+            switch (value)
+            {
+                case Constants.UrgentString:
+                    value = localizer.GetString("UrgentText");
+                    break;
+                case Constants.NormalString:
+                    value = localizer.GetString("NormalText");
+                    break;
+                case Constants.AssignedString:
+                    value = localizer.GetString("AssignedText");
+                    break;
+                case Constants.UnassignedString:
+                    value = localizer.GetString("UnassignedText");
+                    break;
+                case Constants.ClosedString:
+                    value = localizer.GetString("ClosedText");
+                    break;
+                case Constants.WithdrawnString:
+                    value = localizer.GetString("WithdrawnText");
+                    break;
+            }
+
             return new AdaptiveColumnSet
             {
                 Columns = new List<AdaptiveColumn>

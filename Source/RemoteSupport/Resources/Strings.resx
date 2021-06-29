@@ -361,6 +361,10 @@
     <value>Enter one or more names or emails</value>
     <comment>Text to show in expert list dropdown placeholder.</comment>
   </data>
+  <data name="ExpertList" xml:space="preserve">
+    <value>Expert List</value>
+    <comment>Text to show on list of experts from command list.</comment>
+  </data>
   <data name="ExpertListTitle" xml:space="preserve">
     <value>Current on-call team</value>
     <comment>Text to show on manage experts page.</comment>
@@ -475,5 +479,29 @@
   <data name="TeamRequestBulletPoint" xml:space="preserve">
     <value>* To check requests assignements, click the small version of my icon near your message formatting options.</value>
     <comment>Text to show as a bullet point in team welcome card.</comment>
+  </data>
+  <data name="BotCommandExpertList" xml:space="preserve">
+    <value>Expert list</value>
+    <comment>Bot command Expert list. This needs to be matched with manifest's command "Expert list" in translated json file.</comment>
+  </data>
+  <data name="BotCommandNewRequest" xml:space="preserve">
+    <value>New request</value>
+    <comment>Bot command New request. This needs to be matched with manifest's command "New request" in translated json file.</comment>
+  </data>
+  <data name="WithdrawnText" xml:space="preserve">
+    <value>Withdrawn</value>
+    <comment>Text to show withdrawn status of ticket.</comment>
+  </data>
+  <data name="AssignedText" xml:space="preserve">
+    <value>Assigned</value>
+    <comment>Text to show status as assigned.</comment>
+  </data>
+  <data name="ClosedText" xml:space="preserve">
+    <value>Closed</value>
+    <comment>Text to show status as closed.</comment>
+  </data>
+  <data name="UnassignedText" xml:space="preserve">
+    <value>Unassigned</value>
+    <comment>Text to show status as unassigned.</comment>
   </data>
 </root>

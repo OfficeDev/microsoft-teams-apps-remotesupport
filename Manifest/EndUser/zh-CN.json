@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "远程支持",
+  "description.short": "帮助请求支持并快速与专家联系",
+  "description.full": "快速请求远程支持。搜索请求并通过群组聊天对紧急请求上报给呼叫专家。",
+  "bots[0].commandLists[0].commands[0].title": "新建请求",
+  "bots[0].commandLists[0].commands[0].description": "向呼叫团队提出请求",
+  "composeExtensions[0].commands[0].title": "待处理",
+  "composeExtensions[0].commands[0].description": "搜索活动请求",
+  "composeExtensions[0].commands[0].parameters[0].title": "搜索",
+  "composeExtensions[0].commands[0].parameters[0].description": "搜索请求",
+  "composeExtensions[0].commands[1].title": "已关闭",
+  "composeExtensions[0].commands[1].description": "搜索已关闭的请求",
+  "composeExtensions[0].commands[1].parameters[0].title": "搜索",
+  "composeExtensions[0].commands[1].parameters[0].description": "搜索请求"
+}

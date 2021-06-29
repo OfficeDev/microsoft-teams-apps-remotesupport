@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "תמיכה מרוחקת – מומחה",
+  "description.short": "בוט של צוות מומחים לטיפול בבקשות המשתמשים ולהגדרת מומחים זמינים.",
+  "description.full": "נהל בקשת תמיכה והגדר מומחים זמינים בצוות. חפש בקשות דחופות, מוקצות ולא מוקצות, ישירות מצוות המומחים.",
+  "bots[0].commandLists[0].commands[0].title": "רשימת מומחים",
+  "bots[0].commandLists[0].commands[0].description": "רשימת מומחים זמינים",
+  "composeExtensions[0].commands[0].title": "דחוף",
+  "composeExtensions[0].commands[0].description": "חפש בקשות דחופות",
+  "composeExtensions[0].commands[0].parameters[0].title": "חפש",
+  "composeExtensions[0].commands[0].parameters[0].description": "חיפוש בקשות",
+  "composeExtensions[0].commands[1].title": "הוקצה",
+  "composeExtensions[0].commands[1].description": "חפש בקשות שהוקצו למומחה",
+  "composeExtensions[0].commands[1].parameters[0].title": "חפש",
+  "composeExtensions[0].commands[1].parameters[0].description": "חיפוש בקשות",
+  "composeExtensions[0].commands[2].title": "לא הוקצה",
+  "composeExtensions[0].commands[2].description": "חפש בקשות שלא הוקצו עדיין לא הוקצו למומחים",
+  "composeExtensions[0].commands[2].parameters[0].title": "חפש",
+  "composeExtensions[0].commands[2].parameters[0].description": "חיפוש בקשות"
+}

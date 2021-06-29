@@ -138,16 +138,16 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                         new AdaptiveChoice
                         {
                             Title = localizer.GetString("NormalText"),
-                            Value = localizer.GetString("NormalText"),
+                            Value = Constants.NormalString,
                         },
                         new AdaptiveChoice
                         {
                             Title = localizer.GetString("UrgentText"),
-                            Value = localizer.GetString("UrgentText"),
+                            Value = Constants.UrgentString,
                         },
                     },
                     Id = "RequestType",
-                    Value = !string.IsNullOrEmpty(ticketDetail?.RequestType) ? ticketDetail?.RequestType : localizer.GetString("NormalText"),
+                    Value = !string.IsNullOrEmpty(ticketDetail?.RequestType) ? ticketDetail?.RequestType : Constants.NormalString,
                     Style = AdaptiveChoiceInputStyle.Expanded,
                 },
             });
@@ -208,7 +208,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                     key = localizer.GetString("FirstObservedText");
                 }
 
-                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(cardElementMapping.ContainsKey(key) ? cardElementMapping[key] : key, item.Value));
+                ticketAdditionalFields.Add(CardHelper.GetAdaptiveCardColumnSet(cardElementMapping.ContainsKey(key) ? cardElementMapping[key] : key, item.Value, localizer));
             }
 
             dynamicElements.AddRange(new List<AdaptiveElement>
@@ -225,12 +225,12 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                     Wrap = true,
                     Spacing = AdaptiveSpacing.None,
                 },
-                CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("RequestNumberText"), $"#{ticketDetail.RowKey}"),
-                CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("RequestTypeText"), ticketDetail.RequestType),
-                CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("TitleDisplayText"), ticketDetail.Title),
+                CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("RequestNumberText"), $"#{ticketDetail.RowKey}", localizer),
+                CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("RequestTypeText"), ticketDetail.RequestType, localizer),
+                CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("TitleDisplayText"), ticketDetail.Title, localizer),
             });
             dynamicElements.AddRange(ticketAdditionalFields);
-            dynamicElements.Add(CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("DescriptionText"), ticketDetail.Description));
+            dynamicElements.Add(CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("DescriptionText"), ticketDetail.Description, localizer));
 
             AdaptiveCard ticketDetailsPersonalChatCard = new AdaptiveCard(Constants.AdaptiveCardVersion)
             {
@@ -263,7 +263,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Cards
                             MsteamsCardAction = new CardAction
                             {
                                 Type = Constants.MessageBackActionType,
-                                Text = Constants.NewRequestAction,
+                                Text = localizer.GetString("NewRequestButtonText"),
                             },
                         },
                     },

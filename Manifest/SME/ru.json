@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "Удаленная поддержка — эксперт",
+  "description.short": "Бот команды экспертов для обработки запросов и подготовки дежурных экспертов.",
+  "description.full": "Управляйте запросом в службу поддержки и подготовьте дежурных экспертов в команде. Находите срочные, назначенные и неназначенные запросы непосредственно с помощью команды экспертов.",
+  "bots[0].commandLists[0].commands[0].title": "Список экспертов",
+  "bots[0].commandLists[0].commands[0].description": "Список дежурных экспертов",
+  "composeExtensions[0].commands[0].title": "Срочно",
+  "composeExtensions[0].commands[0].description": "Поиск срочных запросов",
+  "composeExtensions[0].commands[0].parameters[0].title": "Поиск",
+  "composeExtensions[0].commands[0].parameters[0].description": "Поиск запросов",
+  "composeExtensions[0].commands[1].title": "Назначено",
+  "composeExtensions[0].commands[1].description": "Поиск запросов, назначенных эксперту",
+  "composeExtensions[0].commands[1].parameters[0].title": "Поиск",
+  "composeExtensions[0].commands[1].parameters[0].description": "Поиск запросов",
+  "composeExtensions[0].commands[2].title": "Не назначено",
+  "composeExtensions[0].commands[2].description": "Поиск запросов, не назначенных эксперту",
+  "composeExtensions[0].commands[2].parameters[0].title": "Поиск",
+  "composeExtensions[0].commands[2].parameters[0].description": "Поиск запросов"
+}

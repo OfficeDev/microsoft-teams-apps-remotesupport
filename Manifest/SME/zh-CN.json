@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "远程支持 - 专家",
+  "description.short": "专业团队自动程序，可处理用户请求并安排呼叫专家。",
+  "description.full": "管理支持请求，并设置团队中的呼叫专家。请专家团队立即搜索紧急、已分配和未分配的请求。",
+  "bots[0].commandLists[0].commands[0].title": "专家列表",
+  "bots[0].commandLists[0].commands[0].description": "呼叫专家列表",
+  "composeExtensions[0].commands[0].title": "紧急",
+  "composeExtensions[0].commands[0].description": "搜索紧急请求",
+  "composeExtensions[0].commands[0].parameters[0].title": "搜索",
+  "composeExtensions[0].commands[0].parameters[0].description": "搜索请求",
+  "composeExtensions[0].commands[1].title": "已分配",
+  "composeExtensions[0].commands[1].description": "分配给专家的搜索请求",
+  "composeExtensions[0].commands[1].parameters[0].title": "搜索",
+  "composeExtensions[0].commands[1].parameters[0].description": "搜索请求",
+  "composeExtensions[0].commands[2].title": "未分配",
+  "composeExtensions[0].commands[2].description": "搜索尚未分配给专家的未分配请求",
+  "composeExtensions[0].commands[2].parameters[0].title": "搜索",
+  "composeExtensions[0].commands[2].parameters[0].description": "搜索请求"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "リモート サポート - エキスパート",
+  "description.short": "ユーザー要求を処理し、通話のエキスパートを設定するためのエキスパート チーム ボットです。",
+  "description.full": "サポート要求を管理し、チームの通話のエキスパートを設定します。エキスパート チームから直接、緊急、割り当て済み、未割り当ての要求を検索します。",
+  "bots[0].commandLists[0].commands[0].title": "エキスパートのリスト",
+  "bots[0].commandLists[0].commands[0].description": "通話のエキスパートのリスト",
+  "composeExtensions[0].commands[0].title": "緊急",
+  "composeExtensions[0].commands[0].description": "緊急の要求の検索",
+  "composeExtensions[0].commands[0].parameters[0].title": "検索",
+  "composeExtensions[0].commands[0].parameters[0].description": "要求の検索",
+  "composeExtensions[0].commands[1].title": "割り当て済み",
+  "composeExtensions[0].commands[1].description": "エキスパートに割り当てられた要求を検索",
+  "composeExtensions[0].commands[1].parameters[0].title": "検索",
+  "composeExtensions[0].commands[1].parameters[0].description": "要求の検索",
+  "composeExtensions[0].commands[2].title": "未割り当て",
+  "composeExtensions[0].commands[2].description": "エキスパートにまだ割り当てられていない未割り当ての要求を検索する",
+  "composeExtensions[0].commands[2].parameters[0].title": "検索",
+  "composeExtensions[0].commands[2].parameters[0].description": "要求の検索"
+}

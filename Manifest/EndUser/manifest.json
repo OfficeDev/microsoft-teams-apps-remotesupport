@@ -2,41 +2,94 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
   "version": "1.0.0",
-  "id": "78f1b2b2-d7d8-4e10-ba68-7ad587d3a56e",
-  "packageName": "com.microsoft.teams.remotesupport.experts",
+  "id": "91687436-afbb-4856-ab94-ca88fd5e2590",
+  "packageName": "com.microsoft.teams.remotesupport.users",
   "developer": {
     "name": "<<Developer name>>",
     "websiteUrl": "<<WebsiteUrl>>",
     "privacyUrl": "<<PrivacyUrl>>",
     "termsOfUseUrl": "<<TermsOfUseUrl>>"
   },
+  "localizationInfo": {
+    "defaultLanguageTag": "en",
+    "additionalLanguages": [
+      {
+        "languageTag": "de",
+        "file": "de.json"
+      },
+      {
+        "languageTag": "en",
+        "file": "en.json"
+      },
+      {
+        "languageTag": "fr",
+        "file": "fr.json"
+      },
+      {
+        "languageTag": "ar",
+        "file": "ar.json"
+      },
+      {
+        "languageTag": "ja",
+        "file": "ja.json"
+      },
+      {
+        "languageTag": "es",
+        "file": "es.json"
+      },
+      {
+        "languageTag": "he",
+        "file": "he.json"
+      },
+      {
+        "languageTag": "ko",
+        "file": "ko.json"
+      },
+      {
+        "languageTag": "pt-BR",
+        "file": "pt-BR.json"
+      },
+      {
+        "languageTag": "ru",
+        "file": "ru.json"
+      },
+      {
+        "languageTag": "zh-CN",
+        "file": "zh-CN.json"
+      },
+      {
+        "languageTag": "zh-TW",
+        "file": "zh-TW.json"
+      }
+    ]
+  },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Remote Support - Expert"
+    "short": "Remote Support"
   },
   "description": {
-    "short": "Expert team bot to handle user requests and set on call experts.",
-    "full": "Manage support request and set up on call experts in team. Search urgent, assigned and unassigned requests right from expert team."
+    "short": "Helps request support and connect with experts quickly",
+    "full": "Request remote support quickly. Search requests and escalate to on call experts via group chat for urgent requests."
   },
   "accentColor": "#64A2CC",
   "bots": [
     {
       "botId": "<<Bot id>>",
       "scopes": [
-        "team"
+        "personal"
       ],
       "commandLists": [
         {
           "scopes": [
-            "team"
+            "personal"
           ],
           "commands": [
             {
-              "title": "Expert list",
-              "description": "List of on call experts"
+              "title": "New request",
+              "description": "Make a request to the on-call team"
             }
           ]
         }
@@ -51,10 +104,10 @@
       "canUpdateConfiguration": false,
       "commands": [
         {
-          "id": "urgentrequests",
+          "id": "activerequests",
           "type": "query",
-          "title": "Urgent",
-          "description": "Search urgent requests",
+          "title": "Active",
+          "description": "Search active requests",
           "parameters": [
             {
               "name": "searchText",
@@ -69,28 +122,10 @@
           "initialRun": true
         },
         {
-          "id": "assignedrequests",
+          "id": "closedrequests",
           "type": "query",
-          "title": "Assigned",
-          "description": "Search requests assigned to an expert",
-          "parameters": [
-            {
-              "name": "searchText",
-              "title": "Search",
-              "description": "Search requests"
-            }
-          ],
-          "context": [
-            "compose",
-            "commandBox"
-          ],
-          "initialRun": true
-        },
-        {
-          "id": "unassignedrequests",
-          "type": "query",
-          "title": "Unassigned",
-          "description": "Search unassigned requests not yet assigned to an expert",
+          "title": "Closed",
+          "description": "Search closed requests",
           "parameters": [
             {
               "name": "searchText",

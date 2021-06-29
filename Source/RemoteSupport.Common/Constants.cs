@@ -15,6 +15,11 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common
         public const string NewRequestAction = "NEW REQUEST";
 
         /// <summary>
+        /// Normal request type text.
+        /// </summary>
+        public const string NormalString = "Normal";
+
+        /// <summary>
         /// Send request action.
         /// </summary>
         public const string SendRequestAction = "SEND REQUEST";
@@ -138,5 +143,25 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Common
         /// Closed requests command id in the manifest file.
         /// </summary>
         public const string ClosedCommandId = "closedrequests";
+
+        /// <summary>
+        /// Assigned request type text.
+        /// </summary>
+        public const string AssignedString = "Assigned";
+
+        /// <summary>
+        /// Unassigned request type text.
+        /// </summary>
+        public const string UnassignedString = "Unassigned";
+
+        /// <summary>
+        /// Closed request type text.
+        /// </summary>
+        public const string ClosedString = "Closed";
+
+        /// <summary>
+        /// Withdrawn request type text.
+        /// </summary>
+        public const string WithdrawnString = "Withdrawn";
     }
 }

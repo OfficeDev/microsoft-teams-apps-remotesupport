@@ -1,0 +1,170 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0.0",
+  "id": "78f1b2b2-d7d8-4e10-ba68-7ad587d3a56e",
+  "packageName": "com.microsoft.teams.remotesupport.experts",
+  "developer": {
+    "name": "<<Developer name>>",
+    "websiteUrl": "<<WebsiteUrl>>",
+    "privacyUrl": "<<PrivacyUrl>>",
+    "termsOfUseUrl": "<<TermsOfUseUrl>>"
+  },
+  "localizationInfo": {
+    "defaultLanguageTag": "en",
+    "additionalLanguages": [
+      {
+        "languageTag": "de",
+        "file": "de.json"
+      },
+      {
+        "languageTag": "en",
+        "file": "en.json"
+      },
+      {
+        "languageTag": "fr",
+        "file": "fr.json"
+      },
+      {
+        "languageTag": "ar",
+        "file": "ar.json"
+      },
+      {
+        "languageTag": "ja",
+        "file": "ja.json"
+      },
+      {
+        "languageTag": "es",
+        "file": "es.json"
+      },
+      {
+        "languageTag": "he",
+        "file": "he.json"
+      },
+      {
+        "languageTag": "ko",
+        "file": "ko.json"
+      },
+      {
+        "languageTag": "pt-BR",
+        "file": "pt-BR.json"
+      },
+      {
+        "languageTag": "ru",
+        "file": "ru.json"
+      },
+      {
+        "languageTag": "zh-CN",
+        "file": "zh-CN.json"
+      },
+      {
+        "languageTag": "zh-TW",
+        "file": "zh-TW.json"
+      }
+    ]
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Remote Support - Expert"
+  },
+  "description": {
+    "short": "Expert team bot to handle user requests and set on call experts.",
+    "full": "Manage support request and set up on call experts in team. Search urgent, assigned and unassigned requests right from expert team."
+  },
+  "accentColor": "#64A2CC",
+  "bots": [
+    {
+      "botId": "<<Bot id>>",
+      "scopes": [
+        "team"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "Expert list",
+              "description": "List of on call experts"
+            }
+          ]
+        }
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<Bot id>>",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "urgentrequests",
+          "type": "query",
+          "title": "Urgent",
+          "description": "Search urgent requests",
+          "parameters": [
+            {
+              "name": "searchText",
+              "title": "Search",
+              "description": "Search requests"
+            }
+          ],
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "initialRun": true
+        },
+        {
+          "id": "assignedrequests",
+          "type": "query",
+          "title": "Assigned",
+          "description": "Search requests assigned to an expert",
+          "parameters": [
+            {
+              "name": "searchText",
+              "title": "Search",
+              "description": "Search requests"
+            }
+          ],
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "initialRun": true
+        },
+        {
+          "id": "unassignedrequests",
+          "type": "query",
+          "title": "Unassigned",
+          "description": "Search unassigned requests not yet assigned to an expert",
+          "parameters": [
+            {
+              "name": "searchText",
+              "title": "Search",
+              "description": "Search requests"
+            }
+          ],
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "initialRun": true
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<valid domains>>"
+  ]
+}

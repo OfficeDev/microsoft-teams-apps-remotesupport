@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "دعم عن بعد",
+  "description.short": "يساعد على طلب الدعم والتواصل مع الخبراء سريعاً",
+  "description.full": "يمكنك طلب دعم عن بعد سريعاً والبحث في الطلبات وتصعيد الطلبات إلى الخبراء المتوفرين عند الطلب عبر الدردشة الجماعية للطلبات العاجلة.",
+  "bots[0].commandLists[0].commands[0].title": "طلب جديد",
+  "bots[0].commandLists[0].commands[0].description": "إنشاء طلب وإرساله إلى الفريق المتوفر عند الطلب",
+  "composeExtensions[0].commands[0].title": "النشطة",
+  "composeExtensions[0].commands[0].description": "بحث في الطلبات النشطة",
+  "composeExtensions[0].commands[0].parameters[0].title": "بحث",
+  "composeExtensions[0].commands[0].parameters[0].description": "بحث في الطلبات",
+  "composeExtensions[0].commands[1].title": "المغلقة",
+  "composeExtensions[0].commands[1].description": "بحث في الطلبات المغلقة",
+  "composeExtensions[0].commands[1].parameters[0].title": "بحث",
+  "composeExtensions[0].commands[1].parameters[0].description": "بحث في الطلبات"
+}

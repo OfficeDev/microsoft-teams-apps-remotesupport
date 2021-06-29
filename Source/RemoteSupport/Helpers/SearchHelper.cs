@@ -144,10 +144,10 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
                 {
                     var dynamicElements = new List<AdaptiveElement>
                     {
-                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("RequestNumberText"), $"#{ticket.TicketId}"),
-                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("TitleDisplayText"), ticket.Title),
-                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("DescriptionText"), ticket.Description),
-                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("CreatedOnText"), ticket.CreatedOn.ToString(CultureInfo.InvariantCulture)),
+                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("RequestNumberText"), $"#{ticket.TicketId}", localizer),
+                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("TitleDisplayText"), ticket.Title, localizer),
+                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("DescriptionText"), ticket.Description, localizer),
+                        CardHelper.GetAdaptiveCardColumnSet(localizer.GetString("CreatedOnText"), ticket.CreatedOn.ToString(CultureInfo.InvariantCulture), localizer),
                     };
 
                     AdaptiveCard commandIdCard = new AdaptiveCard(Constants.AdaptiveCardVersion)
@@ -177,7 +177,7 @@ namespace Microsoft.Teams.Apps.RemoteSupport.Helpers
 
                     ThumbnailCard previewCard = new ThumbnailCard
                     {
-                        Title = $"<b>{HttpUtility.HtmlEncode(ticket.Title)} | {HttpUtility.HtmlEncode(ticket.Severity == (int)TicketSeverity.Urgent ? localizer.GetString("Urgent") : localizer.GetString("NormalText"))}</b>",
+                        Title = $"<b>{HttpUtility.HtmlEncode(ticket.Title)} | {HttpUtility.HtmlEncode(ticket.Severity == (int)TicketSeverity.Urgent ? localizer.GetString("UrgentText") : localizer.GetString("NormalText"))}</b>",
                         Subtitle = ticket.Description.Length <= TruncateDescriptionLength ? HttpUtility.HtmlEncode(ticket.Description) : HttpUtility.HtmlEncode(ticket.Description.Substring(0, 45)) + Ellipsis,
                         Text = ticket.RequesterName,
                     };

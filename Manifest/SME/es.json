@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "name.short": "Soporte remoto: experto",
+  "description.short": "Bot experto para manejar peticiones usuarios y configurar expertos llamadas.",
+  "description.full": "Administre la solicitud de soporte técnico y configure a expertos de llamada en equipo. Busque solicitudes urgentes, asignadas y sin asignar directamente desde un equipo experto.",
+  "bots[0].commandLists[0].commands[0].title": "Lista de expertos",
+  "bots[0].commandLists[0].commands[0].description": "Lista de expertos en llamada",
+  "composeExtensions[0].commands[0].title": "Urgente",
+  "composeExtensions[0].commands[0].description": "Buscar solicitudes urgentes",
+  "composeExtensions[0].commands[0].parameters[0].title": "Buscar",
+  "composeExtensions[0].commands[0].parameters[0].description": "Solicitudes de búsqueda",
+  "composeExtensions[0].commands[1].title": "Asignado",
+  "composeExtensions[0].commands[1].description": "Buscar solicitudes asignadas a un experto",
+  "composeExtensions[0].commands[1].parameters[0].title": "Buscar",
+  "composeExtensions[0].commands[1].parameters[0].description": "Solicitudes de búsqueda",
+  "composeExtensions[0].commands[2].title": "Sin asignar",
+  "composeExtensions[0].commands[2].description": "Buscar solicitudes sin asignar aún no asignadas a un experto",
+  "composeExtensions[0].commands[2].parameters[0].title": "Buscar",
+  "composeExtensions[0].commands[2].parameters[0].description": "Solicitudes de búsqueda"
+}
